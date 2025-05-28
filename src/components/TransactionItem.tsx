@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { cn } from '@/lib/utils';
+import CategorySelector from './CategorySelector';
 
 interface Transaction {
   id: string;
@@ -16,9 +17,11 @@ interface Transaction {
 interface TransactionItemProps {
   transaction: Transaction;
   onCategorize: (id: string, category: string) => void;
+  isFirst?: boolean;
+  isLast?: boolean;
 }
 
-const TransactionItem = ({ transaction, onCategorize }: TransactionItemProps) => {
+const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: TransactionItemProps) => {
   const formatAmount = (amount: number, type: 'income' | 'expense') => {
     const sign = type === 'income' ? '+' : '-';
     return `${sign}$${Math.abs(amount).toFixed(2)}`;
@@ -29,19 +32,19 @@ const TransactionItem = ({ transaction, onCategorize }: TransactionItemProps) =>
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
   };
 
-  const getCategoryColor = (category?: string) => {
-    const colors: Record<string, string> = {
-      'Meals & Entertainment': 'bg-orange-100 text-orange-800',
-      'Transportation': 'bg-blue-100 text-blue-800',
-      'Shopping': 'bg-purple-100 text-purple-800',
-      'Bills & Utilities': 'bg-gray-100 text-gray-800',
-      'Income': 'bg-green-100 text-green-800',
-    };
-    return colors[category || ''] || 'bg-gray-100 text-gray-600';
+  const handleCategoryChange = (category: string) => {
+    onCategorize(transaction.id, category);
+  };
+
+  const getBorderRadius = () => {
+    if (isFirst && isLast) return 'rounded-xl';
+    if (isFirst) return 'rounded-t-xl';
+    if (isLast) return 'rounded-b-xl';
+    return '';
   };
 
   return (
-    <div className="bg-white rounded-xl p-4 mb-3 shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200">
+    <div className={`bg-white p-4 shadow-sm border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-all duration-200 ${getBorderRadius()}`}>
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-2">
@@ -61,21 +64,10 @@ const TransactionItem = ({ transaction, onCategorize }: TransactionItemProps) =>
               <span className="text-xs text-gray-500">{transaction.paymentMethod}</span>
             </div>
             
-            {transaction.category ? (
-              <span className={cn(
-                "px-2 py-1 rounded-full text-xs font-medium",
-                getCategoryColor(transaction.category)
-              )}>
-                {transaction.category}
-              </span>
-            ) : (
-              <button
-                onClick={() => onCategorize(transaction.id, 'Meals & Entertainment')}
-                className="px-2 py-1 rounded-full text-xs font-medium bg-blue-50 text-blue-600 hover:bg-blue-100 transition-colors"
-              >
-                Categorize
-              </button>
-            )}
+            <CategorySelector
+              currentCategory={transaction.category}
+              onCategoryChange={handleCategoryChange}
+            />
           </div>
           
           {transaction.isAISuggested && (
