@@ -29,7 +29,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
     <div className="text-center mb-6">
       <Select value={selectedAccount} onValueChange={onAccountChange}>
         <SelectTrigger className="w-auto min-w-[200px] mx-auto border-0 bg-transparent text-2xl font-bold text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0">
-          <SelectValue />
+          <SelectValue placeholder="Select account" />
         </SelectTrigger>
         <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
           {accounts.map((account) => (
