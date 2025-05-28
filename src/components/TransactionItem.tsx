@@ -12,6 +12,7 @@ interface Transaction {
   type: 'income' | 'expense';
   paymentMethod: string;
   isAISuggested?: boolean;
+  aiSuggestedCategory?: string;
 }
 
 interface TransactionItemProps {
@@ -43,6 +44,10 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
     return '';
   };
 
+  // Show AI suggested label only if the current category matches the AI suggested category
+  const showAISuggestedLabel = transaction.isAISuggested && 
+    transaction.category === transaction.aiSuggestedCategory;
+
   return (
     <div className={`bg-white p-4 shadow-sm border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-all duration-200 ${getBorderRadius()}`}>
       <div className="flex items-center justify-between">
@@ -67,10 +72,11 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
             <CategorySelector
               currentCategory={transaction.category}
               onCategoryChange={handleCategoryChange}
+              aiSuggestedCategory={transaction.aiSuggestedCategory}
             />
           </div>
           
-          {transaction.isAISuggested && (
+          {showAISuggestedLabel && (
             <div className="mt-2 text-xs text-blue-600 flex items-center">
               <div className="w-1 h-1 bg-blue-600 rounded-full mr-1"></div>
               AI suggested category

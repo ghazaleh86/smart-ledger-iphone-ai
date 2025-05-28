@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import TransactionItem from '@/components/TransactionItem';
 import AIAssistant from '@/components/AIAssistant';
@@ -17,6 +16,7 @@ interface Transaction {
   paymentMethod: string;
   isAISuggested?: boolean;
   accountId: string;
+  aiSuggestedCategory?: string;
 }
 
 interface Account {
@@ -49,6 +49,7 @@ const Index = () => {
       type: 'expense',
       paymentMethod: 'RBC VISA',
       accountId: 'credit',
+      aiSuggestedCategory: 'Home & Garden',
     },
     {
       id: '2',
@@ -60,6 +61,7 @@ const Index = () => {
       paymentMethod: 'Cash and Bank',
       isAISuggested: true,
       accountId: 'checking',
+      aiSuggestedCategory: 'Transportation',
     },
     {
       id: '3',
@@ -71,6 +73,7 @@ const Index = () => {
       paymentMethod: 'Savings',
       isAISuggested: true,
       accountId: 'savings',
+      aiSuggestedCategory: 'Meals & Entertainment',
     },
     {
       id: '4',
@@ -133,11 +136,19 @@ const Index = () => {
 
   const handleCategorize = (id: string, category: string) => {
     setTransactions(prev => 
-      prev.map(t => 
-        t.id === id 
-          ? { ...t, category, isAISuggested: true }
-          : t
-      )
+      prev.map(t => {
+        if (t.id === id) {
+          // If user selects the AI suggested category, keep the AI suggested flag
+          // If user selects a different category, remove the AI suggested flag
+          const isSelectingAISuggested = category === t.aiSuggestedCategory;
+          return { 
+            ...t, 
+            category, 
+            isAISuggested: isSelectingAISuggested 
+          };
+        }
+        return t;
+      })
     );
     
     toast({
