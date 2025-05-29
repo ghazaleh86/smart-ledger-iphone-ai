@@ -8,10 +8,10 @@ const SpendingInsights = () => {
   const barChartRef = useRef<SVGSVGElement>(null);
 
   const categoryData = [
-    { name: 'Meals & Entertainment', value: 680, color: '#3b82f6' },
+    { name: 'Meals & Entertainment', value: 680, color: '#f59e0b' },
     { name: 'Transportation', value: 420, color: '#10b981' },
-    { name: 'Shopping', value: 380, color: '#f59e0b' },
-    { name: 'Bills & Utilities', value: 320, color: '#8b5cf6' },
+    { name: 'Shopping', value: 380, color: '#f97316' },
+    { name: 'Bills & Utilities', value: 320, color: '#a855f7' },
     { name: 'Other', value: 540, color: '#ef4444' },
   ];
 
@@ -180,61 +180,61 @@ const SpendingInsights = () => {
   }, []);
 
   return (
-    <div className="bg-white rounded-lg p-8 mb-8 shadow-sm border border-gray-200">
-      <h3 className="text-xl font-semibold text-gray-900 mb-8">This Month's Insights</h3>
+    <div className="bg-white rounded-lg p-8 mb-8 shadow-sm border border-gray-100">
+      <h3 className="text-xl font-semibold text-gray-800 mb-8">This Month's Insights</h3>
       
       {/* Main Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gray-50 rounded-lg p-6 border-0">
+        <div className="bg-amber-50 rounded-lg p-6 border-0">
           <div className="flex items-center space-x-3 mb-4">
-            <DollarSign className="w-5 h-5 text-gray-600" />
-            <div className="text-2xl font-semibold text-gray-900">$2,340</div>
+            <DollarSign className="w-5 h-5 text-amber-600" />
+            <div className="text-2xl font-semibold text-gray-800">$2,340</div>
           </div>
           <div className="text-sm text-gray-600 mb-2">Total Spent</div>
-          <div className="flex items-center text-xs text-red-600 font-medium">
+          <div className="flex items-center text-xs text-orange-600 font-medium">
             <TrendingDown className="w-3 h-3 mr-1" />
             12% less than last month
           </div>
         </div>
         
-        <div className="bg-gray-50 rounded-lg p-6 border-0">
+        <div className="bg-emerald-50 rounded-lg p-6 border-0">
           <div className="flex items-center space-x-3 mb-4">
-            <TrendingUp className="w-5 h-5 text-gray-600" />
-            <div className="text-2xl font-semibold text-gray-900">$4,820</div>
+            <TrendingUp className="w-5 h-5 text-emerald-600" />
+            <div className="text-2xl font-semibold text-gray-800">$4,820</div>
           </div>
           <div className="text-sm text-gray-600 mb-2">Total Income</div>
-          <div className="text-xs text-green-600 font-medium">On track for goals</div>
+          <div className="text-xs text-emerald-600 font-medium">On track for goals</div>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-6 border-0 hidden lg:block">
+        <div className="bg-blue-50 rounded-lg p-6 border-0 hidden lg:block">
           <div className="flex items-center space-x-3 mb-4">
-            <Target className="w-5 h-5 text-gray-600" />
-            <div className="text-2xl font-semibold text-gray-900">$2,480</div>
+            <Target className="w-5 h-5 text-blue-600" />
+            <div className="text-2xl font-semibold text-gray-800">$2,480</div>
           </div>
           <div className="text-sm text-gray-600 mb-2">Net Savings</div>
-          <div className="text-xs text-green-600 font-medium">+5.2% from last month</div>
+          <div className="text-xs text-emerald-600 font-medium">+5.2% from last month</div>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-6 border-0 hidden lg:block">
-          <div className="text-2xl font-semibold text-gray-900 mb-2">73%</div>
+        <div className="bg-purple-50 rounded-lg p-6 border-0 hidden lg:block">
+          <div className="text-2xl font-semibold text-gray-800 mb-2">73%</div>
           <div className="text-sm text-gray-600 mb-4">Budget Used</div>
           <div className="w-full bg-gray-200 rounded-full h-2">
-            <div className="bg-blue-500 h-2 rounded-full" style={{ width: '73%' }}></div>
+            <div className="bg-orange-400 h-2 rounded-full" style={{ width: '73%' }}></div>
           </div>
         </div>
       </div>
 
       {/* Desktop Charts */}
       <div className="hidden lg:grid lg:grid-cols-2 gap-8 mb-8">
-        <div className="bg-gray-50 rounded-lg p-6 border-0">
-          <h4 className="font-semibold text-gray-900 mb-6">Spending by Category</h4>
+        <div className="bg-orange-50 rounded-lg p-6 border-0">
+          <h4 className="font-semibold text-gray-800 mb-6">Spending by Category</h4>
           <div className="flex justify-center">
             <svg ref={pieChartRef}></svg>
           </div>
         </div>
 
-        <div className="bg-gray-50 rounded-lg p-6 border-0">
-          <h4 className="font-semibold text-gray-900 mb-6">Weekly Spending Trend</h4>
+        <div className="bg-emerald-50 rounded-lg p-6 border-0">
+          <h4 className="font-semibold text-gray-800 mb-6">Weekly Spending Trend</h4>
           <div className="flex justify-center">
             <svg ref={barChartRef}></svg>
           </div>
@@ -242,8 +242,8 @@ const SpendingInsights = () => {
       </div>
 
       {/* Top Categories (Always Visible) */}
-      <div className="bg-gray-50 rounded-lg p-6 border-0">
-        <h4 className="font-semibold text-gray-900 mb-6">Top Categories</h4>
+      <div className="bg-slate-50 rounded-lg p-6 border-0">
+        <h4 className="font-semibold text-gray-800 mb-6">Top Categories</h4>
         <div className="space-y-4">
           {categoryData.slice(0, 3).map((category, index) => (
             <div key={category.name} className="flex justify-between items-center">
@@ -254,7 +254,7 @@ const SpendingInsights = () => {
                 ></div>
                 <span className="text-sm text-gray-700">{category.name}</span>
               </div>
-              <span className="text-sm font-semibold text-gray-900">${category.value}</span>
+              <span className="text-sm font-semibold text-gray-800">${category.value}</span>
             </div>
           ))}
         </div>
