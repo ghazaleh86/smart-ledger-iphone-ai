@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useCallback } from 'react';
 import TransactionItem from '@/components/TransactionItem';
 import AIAssistant from '@/components/AIAssistant';
@@ -217,7 +216,64 @@ const Index = () => {
         {/* Transactions List */}
         <div className="space-y-0">
           <h2 className="text-lg font-semibold text-gray-900 mb-4">Recent Transactions</h2>
-          <div className="shadow-sm border border-gray-100 rounded-xl overflow-hidden">
+          
+          {/* Desktop Layout - Similar to uploaded design */}
+          <div className="hidden md:block">
+            <div className="bg-white shadow-sm border border-gray-100 rounded-xl overflow-hidden">
+              {/* Desktop Header */}
+              <div className="bg-gray-50 px-6 py-3 border-b border-gray-100">
+                <div className="grid grid-cols-12 gap-4 text-xs font-medium text-gray-500 uppercase tracking-wide">
+                  <div className="col-span-1">Date</div>
+                  <div className="col-span-4">Description</div>
+                  <div className="col-span-2">Category</div>
+                  <div className="col-span-3">Payment Method</div>
+                  <div className="col-span-2 text-right">Amount</div>
+                </div>
+              </div>
+              
+              {/* Desktop Transaction Rows */}
+              <div className="divide-y divide-gray-100">
+                {visibleTransactions.map((transaction) => (
+                  <div key={transaction.id} className="px-6 py-4 hover:bg-gray-50 transition-colors">
+                    <div className="grid grid-cols-12 gap-4 items-center">
+                      <div className="col-span-1 text-sm text-gray-600">
+                        {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                      </div>
+                      <div className="col-span-4">
+                        <div className="font-medium text-gray-900">{transaction.merchant}</div>
+                        {transaction.isAISuggested && (
+                          <div className="text-xs text-blue-600 flex items-center mt-1">
+                            <div className="w-1 h-1 bg-blue-600 rounded-full mr-1"></div>
+                            AI suggested category
+                          </div>
+                        )}
+                      </div>
+                      <div className="col-span-2">
+                        {transaction.category ? (
+                          <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
+                            {transaction.category}
+                          </span>
+                        ) : (
+                          <span className="text-sm text-gray-400">Uncategorized</span>
+                        )}
+                      </div>
+                      <div className="col-span-3 text-sm text-gray-600">
+                        {transaction.paymentMethod}
+                      </div>
+                      <div className="col-span-2 text-right">
+                        <span className={`font-semibold ${transaction.type === 'income' ? 'text-green-600' : 'text-gray-900'}`}>
+                          {transaction.type === 'income' ? '+' : '-'}${Math.abs(transaction.amount).toFixed(2)}
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Mobile Layout - Keep existing card design */}
+          <div className="md:hidden shadow-sm border border-gray-100 rounded-xl overflow-hidden">
             {visibleTransactions.map((transaction, index) => (
               <TransactionItem
                 key={transaction.id}
