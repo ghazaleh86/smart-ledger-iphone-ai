@@ -29,15 +29,15 @@ const categories = [
 const CategorySelector = ({ currentCategory, onCategoryChange }: CategorySelectorProps) => {
   const getCategoryColor = (category?: string) => {
     const colors: Record<string, string> = {
-      'Meals & Entertainment': 'bg-orange-100 text-orange-800',
-      'Transportation': 'bg-blue-100 text-blue-800',
-      'Shopping': 'bg-purple-100 text-purple-800',
-      'Bills & Utilities': 'bg-gray-100 text-gray-800',
-      'Healthcare': 'bg-red-100 text-red-800',
-      'Education': 'bg-green-100 text-green-800',
-      'Travel': 'bg-indigo-100 text-indigo-800',
-      'Home & Garden': 'bg-emerald-100 text-emerald-800',
-      'Business': 'bg-slate-100 text-slate-800',
+      'Meals & Entertainment': 'bg-orange-100 text-orange-700',
+      'Transportation': 'bg-blue-100 text-blue-700',
+      'Shopping': 'bg-purple-100 text-purple-700',
+      'Bills & Utilities': 'bg-gray-100 text-gray-700',
+      'Healthcare': 'bg-red-100 text-red-700',
+      'Education': 'bg-green-100 text-green-700',
+      'Travel': 'bg-indigo-100 text-indigo-700',
+      'Home & Garden': 'bg-emerald-100 text-emerald-700',
+      'Business': 'bg-slate-100 text-slate-700',
       'Other': 'bg-gray-100 text-gray-600',
     };
     return colors[category || ''] || 'bg-gray-100 text-gray-600';
@@ -45,13 +45,13 @@ const CategorySelector = ({ currentCategory, onCategoryChange }: CategorySelecto
 
   return (
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
-      <SelectTrigger className={`px-2 py-1 rounded-full text-xs font-medium border-0 ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-auto`}>
+      <SelectTrigger className={`px-3 py-1.5 rounded-full text-sm font-normal border-0 ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-gray-300 w-auto font-[system-ui]`}>
         <SelectValue placeholder="Categorize" />
       </SelectTrigger>
-      <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+      <SelectContent className="bg-white border border-gray-200 rounded-2xl shadow-xl z-50">
         {categories.map((category) => (
-          <SelectItem key={category} value={category} className="cursor-pointer">
-            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getCategoryColor(category)}`}>
+          <SelectItem key={category} value={category} className="cursor-pointer rounded-xl mx-2 my-1 hover:bg-gray-50 focus:bg-gray-50">
+            <span className={`px-3 py-1.5 rounded-full text-sm font-normal ${getCategoryColor(category)}`}>
               {category}
             </span>
           </SelectItem>
