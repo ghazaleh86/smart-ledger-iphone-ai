@@ -135,7 +135,7 @@ const Index = () => {
     setTransactions(prev => 
       prev.map(t => 
         t.id === id 
-          ? { ...t, category, isAISuggested: true }
+          ? { ...t, category, isAISuggested: false }
           : t
       )
     );
@@ -175,11 +175,18 @@ const Index = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.innerHeight + document.documentElement.scrollTop !== document.documentElement.offsetHeight) return;
-      loadMoreTransactions();
+      // Improved mobile-friendly scroll detection
+      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+      const windowHeight = window.innerHeight;
+      const documentHeight = document.documentElement.scrollHeight;
+      
+      // Trigger when within 100px of bottom (better for mobile)
+      if (scrollTop + windowHeight >= documentHeight - 100) {
+        loadMoreTransactions();
+      }
     };
 
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, [loadMoreTransactions]);
 
