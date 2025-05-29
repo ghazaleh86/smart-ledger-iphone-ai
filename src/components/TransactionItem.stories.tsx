@@ -7,6 +7,13 @@ const meta: Meta<typeof TransactionItem> = {
   component: TransactionItem,
   parameters: {
     layout: 'padded',
+    backgrounds: {
+      default: 'gray',
+      values: [
+        { name: 'gray', value: '#f9fafb' },
+        { name: 'white', value: '#ffffff' },
+      ],
+    },
   },
   tags: ['autodocs'],
   argTypes: {
@@ -20,10 +27,10 @@ type Story = StoryObj<typeof meta>;
 const mockTransaction = {
   id: '1',
   date: '2024-03-03',
-  merchant: 'HOME HARDWARE #10334',
+  merchant: 'Adobe Creative Suite',
   amount: 113.00,
   type: 'expense' as const,
-  paymentMethod: 'RBC VISA',
+  paymentMethod: 'Ramp Corporate Card',
   accountId: 'credit',
 };
 
@@ -39,7 +46,7 @@ export const WithCategory: Story = {
   args: {
     transaction: {
       ...mockTransaction,
-      category: 'Home & Garden',
+      category: 'Business',
     },
     isFirst: true,
     isLast: true,
@@ -50,6 +57,7 @@ export const AISuggested: Story = {
   args: {
     transaction: {
       ...mockTransaction,
+      merchant: 'Uber',
       category: 'Transportation',
       isAISuggested: true,
     },
@@ -62,10 +70,10 @@ export const Income: Story = {
   args: {
     transaction: {
       ...mockTransaction,
-      merchant: 'PYMT CHQ 3023',
+      merchant: 'Client Payment - Invoice #3023',
       amount: 1850.00,
       type: 'income' as const,
-      paymentMethod: 'Cash and Bank',
+      paymentMethod: 'Bank Transfer',
     },
     isFirst: true,
     isLast: true,

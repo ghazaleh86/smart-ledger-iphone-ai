@@ -7,6 +7,13 @@ const meta: Meta<typeof AccountSelector> = {
   component: AccountSelector,
   parameters: {
     layout: 'padded',
+    backgrounds: {
+      default: 'gray',
+      values: [
+        { name: 'gray', value: '#f9fafb' },
+        { name: 'white', value: '#ffffff' },
+      ],
+    },
   },
   tags: ['autodocs'],
   argTypes: {
@@ -21,7 +28,7 @@ const mockAccounts = [
   { id: 'all', name: 'All Accounts', balance: 5675.86, type: 'Combined' },
   { id: 'checking', name: 'Checking Account', balance: 3210.45, type: 'TD Canada Trust' },
   { id: 'savings', name: 'Savings Account', balance: 2465.41, type: 'TD Canada Trust' },
-  { id: 'credit', name: 'RBC VISA', balance: -1250.00, type: 'Credit Card' },
+  { id: 'credit', name: 'Business Credit Card', balance: -1250.00, type: 'Ramp Corporate Card' },
 ];
 
 export const Default: Story = {

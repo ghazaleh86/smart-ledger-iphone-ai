@@ -7,6 +7,13 @@ const meta: Meta<typeof SpendingInsights> = {
   component: SpendingInsights,
   parameters: {
     layout: 'padded',
+    backgrounds: {
+      default: 'gray',
+      values: [
+        { name: 'gray', value: '#f9fafb' },
+        { name: 'white', value: '#ffffff' },
+      ],
+    },
   },
   tags: ['autodocs'],
 };

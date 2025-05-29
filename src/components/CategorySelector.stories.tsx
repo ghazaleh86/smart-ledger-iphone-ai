@@ -7,6 +7,13 @@ const meta: Meta<typeof CategorySelector> = {
   component: CategorySelector,
   parameters: {
     layout: 'padded',
+    backgrounds: {
+      default: 'gray',
+      values: [
+        { name: 'gray', value: '#f9fafb' },
+        { name: 'white', value: '#ffffff' },
+      ],
+    },
   },
   tags: ['autodocs'],
   argTypes: {
@@ -23,7 +30,7 @@ export const Default: Story = {
 
 export const WithCategory: Story = {
   args: {
-    currentCategory: 'Meals & Entertainment',
+    currentCategory: 'Business',
   },
 };
 

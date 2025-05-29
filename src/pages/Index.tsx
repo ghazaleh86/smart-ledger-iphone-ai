@@ -194,9 +194,9 @@ const Index = () => {
     : accounts.find(acc => acc.id === selectedAccount)?.balance || 0;
 
   return (
-    <div className="min-h-screen bg-gray-50 font-[system-ui]">
+    <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white pt-12 pb-8 px-6 shadow-sm border-b border-gray-100">
+      <div className="bg-white pt-16 pb-12 px-8 shadow-sm border-b border-gray-200">
         <AccountSelector
           accounts={accounts}
           selectedAccount={selectedAccount}
@@ -205,7 +205,7 @@ const Index = () => {
       </div>
 
       {/* Content */}
-      <div className="px-6 py-8 space-y-8">
+      <div className="px-8 py-10 space-y-10">
         <SpendingInsights />
         
         <QuickActions 
@@ -215,14 +215,14 @@ const Index = () => {
 
         {/* Transactions List */}
         <div className="space-y-0">
-          <h2 className="text-xl font-medium text-gray-900 mb-6 font-[system-ui]">Recent Transactions</h2>
+          <h2 className="text-xl font-semibold text-gray-900 mb-8">Recent Transactions</h2>
           
-          {/* Desktop Layout - Table format similar to Wealthsimple */}
+          {/* Desktop Layout - Table format similar to Ramp */}
           <div className="hidden md:block">
-            <div className="bg-white shadow-sm border border-gray-100 rounded-2xl overflow-hidden">
+            <div className="bg-white shadow-sm border border-gray-200 rounded-lg overflow-hidden">
               {/* Desktop Header */}
-              <div className="bg-gray-50 px-6 py-5 border-b border-gray-100">
-                <div className="grid grid-cols-12 gap-4 text-sm font-medium text-gray-600 font-[system-ui]">
+              <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
+                <div className="grid grid-cols-12 gap-6 text-sm font-semibold text-gray-700">
                   <div className="col-span-1">Date</div>
                   <div className="col-span-4">Description</div>
                   <div className="col-span-2">Category</div>
@@ -234,34 +234,34 @@ const Index = () => {
               {/* Desktop Transaction Rows */}
               <div className="divide-y divide-gray-100">
                 {visibleTransactions.map((transaction) => (
-                  <div key={transaction.id} className="px-6 py-5 hover:bg-gray-50 transition-colors duration-150">
-                    <div className="grid grid-cols-12 gap-4 items-center">
-                      <div className="col-span-1 text-sm text-gray-600 font-normal">
+                  <div key={transaction.id} className="px-8 py-6 hover:bg-gray-50 transition-colors duration-150">
+                    <div className="grid grid-cols-12 gap-6 items-center">
+                      <div className="col-span-1 text-sm text-gray-600">
                         {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                       </div>
                       <div className="col-span-4">
-                        <div className="font-medium text-gray-900 font-[system-ui]">{transaction.merchant}</div>
+                        <div className="font-medium text-gray-900">{transaction.merchant}</div>
                         {transaction.isAISuggested && (
-                          <div className="text-xs text-blue-500 flex items-center mt-1 font-normal">
-                            <div className="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                          <div className="text-xs text-blue-600 flex items-center mt-1 font-medium">
+                            <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></div>
                             AI suggested category
                           </div>
                         )}
                       </div>
                       <div className="col-span-2">
                         {transaction.category ? (
-                          <span className="inline-flex items-center px-3 py-1 rounded-full text-sm font-normal bg-gray-100 text-gray-700">
+                          <span className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-50 text-gray-700 border border-gray-200">
                             {transaction.category}
                           </span>
                         ) : (
-                          <span className="text-sm text-gray-400 font-normal">Uncategorized</span>
+                          <span className="text-sm text-gray-400">Uncategorized</span>
                         )}
                       </div>
-                      <div className="col-span-3 text-sm text-gray-600 font-normal">
+                      <div className="col-span-3 text-sm text-gray-600">
                         {transaction.paymentMethod}
                       </div>
                       <div className="col-span-2 text-right">
-                        <span className={`font-medium text-base font-[system-ui] ${transaction.type === 'income' ? 'text-green-500' : 'text-gray-900'}`}>
+                        <span className={`font-semibold text-base ${transaction.type === 'income' ? 'text-green-600' : 'text-gray-900'}`}>
                           {transaction.type === 'income' ? '+' : '-'}${Math.abs(transaction.amount).toFixed(2)}
                         </span>
                       </div>
@@ -272,8 +272,8 @@ const Index = () => {
             </div>
           </div>
 
-          {/* Mobile Layout - Keep existing card design with Wealthsimple styling */}
-          <div className="md:hidden shadow-sm border border-gray-100 rounded-2xl overflow-hidden bg-white">
+          {/* Mobile Layout - Keep existing card design with Ramp styling */}
+          <div className="md:hidden shadow-sm border border-gray-200 rounded-lg overflow-hidden bg-white">
             {visibleTransactions.map((transaction, index) => (
               <TransactionItem
                 key={transaction.id}
@@ -287,13 +287,13 @@ const Index = () => {
           
           {isLoading && (
             <div className="text-center py-8">
-              <div className="text-sm text-gray-500 font-normal">Loading more transactions...</div>
+              <div className="text-sm text-gray-500">Loading more transactions...</div>
             </div>
           )}
           
           {displayedTransactions >= filteredTransactions.length && filteredTransactions.length > 0 && (
             <div className="text-center py-8">
-              <div className="text-sm text-gray-500 font-normal">All transactions loaded</div>
+              <div className="text-sm text-gray-500">All transactions loaded</div>
             </div>
           )}
         </div>
