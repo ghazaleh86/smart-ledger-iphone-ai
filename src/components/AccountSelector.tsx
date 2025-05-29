@@ -30,18 +30,18 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
       {/* Mobile Layout */}
       <div className="block md:hidden text-center">
         <Select value={selectedAccount} onValueChange={onAccountChange}>
-          <SelectTrigger className="w-auto min-w-[200px] mx-auto border-0 bg-transparent text-2xl font-bold text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0">
-            <span className="text-2xl font-bold text-gray-900">
+          <SelectTrigger className="w-auto min-w-[200px] mx-auto border-0 bg-transparent text-2xl font-semibold text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0 justify-center">
+            <span className="text-2xl font-semibold text-gray-900">
               {selectedAccountData?.name || "Select account"}
             </span>
           </SelectTrigger>
-          <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+          <SelectContent className="bg-white border border-gray-200 rounded-xl shadow-xl z-50">
             {accounts.map((account) => (
-              <SelectItem key={account.id} value={account.id} className="cursor-pointer">
+              <SelectItem key={account.id} value={account.id} className="cursor-pointer rounded-lg mx-1 my-0.5">
                 <div className="flex justify-between items-center w-full min-w-[250px]">
                   <div className="text-left">
-                    <div className="font-medium text-gray-900">{account.name}</div>
-                    <div className="text-xs text-gray-500">{account.type}</div>
+                    <div className="font-semibold text-gray-900">{account.name}</div>
+                    <div className="text-xs text-gray-500 font-medium">{account.type}</div>
                   </div>
                   <div className="text-right">
                     <div className="font-bold text-gray-900">
@@ -53,7 +53,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
             ))}
           </SelectContent>
         </Select>
-        <div className="text-sm text-gray-500 mb-1 mt-2">NET BALANCE</div>
+        <div className="text-sm text-gray-500 mb-1 mt-4 font-medium tracking-wide">NET BALANCE</div>
         <div className="text-3xl font-bold text-gray-900">
           ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </div>
@@ -63,18 +63,18 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
       <div className="hidden md:flex md:justify-between md:items-center">
         <div className="flex items-center">
           <Select value={selectedAccount} onValueChange={onAccountChange}>
-            <SelectTrigger className="w-auto min-w-[200px] border-0 bg-transparent text-2xl font-bold text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0">
-              <span className="text-2xl font-bold text-gray-900">
+            <SelectTrigger className="w-auto min-w-[200px] border-0 bg-transparent text-2xl font-semibold text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0">
+              <span className="text-2xl font-semibold text-gray-900">
                 {selectedAccountData?.name || "Select account"}
               </span>
             </SelectTrigger>
-            <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+            <SelectContent className="bg-white border border-gray-200 rounded-xl shadow-xl z-50">
               {accounts.map((account) => (
-                <SelectItem key={account.id} value={account.id} className="cursor-pointer">
+                <SelectItem key={account.id} value={account.id} className="cursor-pointer rounded-lg mx-1 my-0.5">
                   <div className="flex justify-between items-center w-full min-w-[250px]">
                     <div className="text-left">
-                      <div className="font-medium text-gray-900">{account.name}</div>
-                      <div className="text-xs text-gray-500">{account.type}</div>
+                      <div className="font-semibold text-gray-900">{account.name}</div>
+                      <div className="text-xs text-gray-500 font-medium">{account.type}</div>
                     </div>
                     <div className="text-right">
                       <div className="font-bold text-gray-900">
@@ -89,7 +89,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
         </div>
         
         <div className="text-right">
-          <div className="text-sm text-gray-500 mb-1">NET BALANCE</div>
+          <div className="text-sm text-gray-500 mb-1 font-medium tracking-wide">NET BALANCE</div>
           <div className="text-3xl font-bold text-gray-900">
             ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
