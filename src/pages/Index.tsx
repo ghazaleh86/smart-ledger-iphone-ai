@@ -4,6 +4,7 @@ import AIAssistant from '@/components/AIAssistant';
 import SpendingInsights from '@/components/SpendingInsights';
 import QuickActions from '@/components/QuickActions';
 import AccountSelector from '@/components/AccountSelector';
+import CategorySelector from '@/components/CategorySelector';
 import { useToast } from '@/hooks/use-toast';
 
 interface Transaction {
@@ -249,13 +250,10 @@ const Index = () => {
                         )}
                       </div>
                       <div className="col-span-2">
-                        {transaction.category ? (
-                          <span className="inline-flex items-center px-3 py-1 rounded-md text-sm font-medium bg-gray-50 text-gray-700 border border-gray-200">
-                            {transaction.category}
-                          </span>
-                        ) : (
-                          <span className="text-sm text-gray-400">Uncategorized</span>
-                        )}
+                        <CategorySelector
+                          currentCategory={transaction.category}
+                          onCategoryChange={(category) => handleCategorize(transaction.id, category)}
+                        />
                       </div>
                       <div className="col-span-3 text-sm text-gray-600">
                         {transaction.paymentMethod}

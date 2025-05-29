@@ -19,6 +19,34 @@ const SpendingInsights = () => {
     { week: 'Week 4', spent: 690 },
   ];
 
+  const CustomTooltip = ({ active, payload, label }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
+          <p className="text-sm font-medium text-gray-900">{label}</p>
+          <p className="text-sm text-gray-600">
+            Amount: <span className="font-semibold">${payload[0].value}</span>
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
+  const PieTooltip = ({ active, payload }: any) => {
+    if (active && payload && payload.length) {
+      return (
+        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
+          <p className="text-sm font-medium text-gray-900">{payload[0].name}</p>
+          <p className="text-sm text-gray-600">
+            Amount: <span className="font-semibold">${payload[0].value}</span>
+          </p>
+        </div>
+      );
+    }
+    return null;
+  };
+
   return (
     <div className="bg-white rounded-lg p-8 mb-8 shadow-sm border border-gray-200">
       <h3 className="text-xl font-semibold text-gray-900 mb-8">This Month's Insights</h3>
@@ -68,23 +96,24 @@ const SpendingInsights = () => {
       <div className="hidden lg:grid lg:grid-cols-2 gap-8 mb-8">
         <div className="bg-gray-50 rounded-lg p-6 border-0">
           <h4 className="font-semibold text-gray-900 mb-6">Spending by Category</h4>
-          <div className="h-48">
+          <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={categoryData}
                   cx="50%"
                   cy="50%"
-                  innerRadius={40}
-                  outerRadius={80}
+                  innerRadius={50}
+                  outerRadius={100}
                   paddingAngle={2}
                   dataKey="value"
+                  stroke="none"
                 >
                   {categoryData.map((entry, index) => (
                     <Cell key={`cell-${index}`} fill={entry.color} />
                   ))}
                 </Pie>
-                <Tooltip formatter={(value) => [`$${value}`, 'Amount']} />
+                <Tooltip content={<PieTooltip />} />
               </PieChart>
             </ResponsiveContainer>
           </div>
@@ -92,14 +121,26 @@ const SpendingInsights = () => {
 
         <div className="bg-gray-50 rounded-lg p-6 border-0">
           <h4 className="font-semibold text-gray-900 mb-6">Weekly Spending Trend</h4>
-          <div className="h-48">
+          <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
-              <BarChart data={weeklyData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" />
-                <XAxis dataKey="week" stroke="#6b7280" fontSize={12} />
-                <YAxis stroke="#6b7280" fontSize={12} />
-                <Tooltip formatter={(value) => [`$${value}`, 'Spent']} />
-                <Bar dataKey="spent" fill="#3b82f6" radius={[4, 4, 0, 0]} />
+              <BarChart data={weeklyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <CartesianGrid strokeDasharray="3 3" stroke="#e5e7eb" vertical={false} />
+                <XAxis 
+                  dataKey="week" 
+                  stroke="#6b7280" 
+                  fontSize={12} 
+                  axisLine={false}
+                  tickLine={false}
+                />
+                <YAxis 
+                  stroke="#6b7280" 
+                  fontSize={12} 
+                  axisLine={false}
+                  tickLine={false}
+                  tickFormatter={(value) => `$${value}`}
+                />
+                <Tooltip content={<CustomTooltip />} />
+                <Bar dataKey="spent" fill="#3b82f6" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>

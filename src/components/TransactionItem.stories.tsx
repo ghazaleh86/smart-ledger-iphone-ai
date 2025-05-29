@@ -42,7 +42,7 @@ export const Default: Story = {
   },
 };
 
-export const WithCategory: Story = {
+export const WithCategorySelector: Story = {
   args: {
     transaction: {
       ...mockTransaction,
@@ -50,6 +50,13 @@ export const WithCategory: Story = {
     },
     isFirst: true,
     isLast: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Transaction item with category selector dropdown for manual categorization.',
+      },
+    },
   },
 };
 
@@ -77,5 +84,24 @@ export const Income: Story = {
     },
     isFirst: true,
     isLast: true,
+  },
+};
+
+export const UncategorizedWithSelector: Story = {
+  args: {
+    transaction: {
+      ...mockTransaction,
+      merchant: 'Unknown Merchant',
+      category: undefined,
+    },
+    isFirst: true,
+    isLast: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Uncategorized transaction showing the category selector for manual assignment.',
+      },
+    },
   },
 };

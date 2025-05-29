@@ -24,3 +24,14 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
   args: {},
 };
+
+export const WithEnhancedCharts: Story = {
+  args: {},
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows the spending insights with enhanced Recharts visualizations including improved tooltips and styling.',
+      },
+    },
+  },
+};
