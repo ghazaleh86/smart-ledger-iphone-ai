@@ -25,12 +25,12 @@ export const Default: Story = {
   args: {},
 };
 
-export const WithEnhancedCharts: Story = {
+export const WithD3Charts: Story = {
   args: {},
   parameters: {
     docs: {
       description: {
-        story: 'Shows the spending insights with enhanced Recharts visualizations including improved tooltips and styling.',
+        story: 'Shows the spending insights with D3.js visualizations including interactive pie chart and bar chart with custom tooltips.',
       },
     },
   },
