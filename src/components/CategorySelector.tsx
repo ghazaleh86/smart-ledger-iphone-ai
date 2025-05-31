@@ -45,7 +45,7 @@ const CategorySelector = ({ currentCategory, onCategoryChange }: CategorySelecto
 
   return (
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
-      <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-[120px] min-w-[120px] flex-shrink-0 text-left justify-start`}>
+      <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-[120px] min-w-[120px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
         <SelectValue placeholder="Categorize" />
       </SelectTrigger>
       <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
