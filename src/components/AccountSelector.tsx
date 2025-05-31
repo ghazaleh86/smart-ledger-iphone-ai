@@ -68,7 +68,9 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
           ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </div>
         <div className="mt-4 text-sm text-gray-600 font-medium px-4">
-          {randomInsight}
+          <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3 mx-2">
+            {randomInsight}
+          </div>
         </div>
       </div>
 
@@ -102,7 +104,9 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
             </Select>
           </div>
           <div className="text-sm text-gray-600 font-medium max-w-md">
-            {randomInsight}
+            <div className="bg-blue-50 border border-blue-100 rounded-lg px-4 py-3">
+              {randomInsight}
+            </div>
           </div>
         </div>
         
