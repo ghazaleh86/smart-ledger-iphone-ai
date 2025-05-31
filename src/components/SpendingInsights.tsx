@@ -1,15 +1,14 @@
-
 import React from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, Target } from 'lucide-react';
 
 const SpendingInsights = () => {
   const categoryData = [
-    { name: 'Meals & Entertainment', value: 680, color: '#60a5fa' },
-    { name: 'Transportation', value: 420, color: '#34d399' },
-    { name: 'Shopping', value: 380, color: '#fbbf24' },
-    { name: 'Bills & Utilities', value: 320, color: '#a78bfa' },
-    { name: 'Other', value: 540, color: '#fb7185' },
+    { name: 'Meals & Entertainment', value: 680, color: '#93c5fd' },
+    { name: 'Transportation', value: 420, color: '#86efac' },
+    { name: 'Shopping', value: 380, color: '#fde68a' },
+    { name: 'Bills & Utilities', value: 320, color: '#c4b5fd' },
+    { name: 'Other', value: 540, color: '#fda4af' },
   ];
 
   const weeklyData = [
@@ -48,54 +47,54 @@ const SpendingInsights = () => {
   };
 
   return (
-    <div className="bg-gradient-to-br from-blue-50 to-indigo-100 rounded-lg p-8 mb-8 shadow-sm border border-blue-200/50">
-      <h3 className="text-xl font-semibold text-gray-900 mb-8">This Month's Insights</h3>
+    <div className="bg-gradient-to-br from-blue-25 via-slate-25 to-indigo-50 rounded-2xl p-8 mb-8 shadow-sm border border-blue-100/30">
+      <h3 className="text-xl font-medium text-gray-700 mb-8">This Month's Insights</h3>
       
       {/* Main Stats Grid */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-        <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm">
+        <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm">
           <div className="flex items-center space-x-3 mb-4">
-            <DollarSign className="w-5 h-5 text-blue-600" />
-            <div className="text-2xl font-semibold text-gray-900">$2,340</div>
+            <DollarSign className="w-5 h-5 text-blue-400" />
+            <div className="text-2xl font-medium text-gray-700">$2,340</div>
           </div>
-          <div className="text-sm text-gray-700 mb-2">Total Spent</div>
-          <div className="flex items-center text-xs text-red-600 font-medium">
+          <div className="text-sm text-gray-500 mb-2">Total Spent</div>
+          <div className="flex items-center text-xs text-red-400 font-medium">
             <TrendingDown className="w-3 h-3 mr-1" />
             12% less than last month
           </div>
         </div>
         
-        <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm">
+        <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm">
           <div className="flex items-center space-x-3 mb-4">
-            <TrendingUp className="w-5 h-5 text-blue-600" />
-            <div className="text-2xl font-semibold text-gray-900">$4,820</div>
+            <TrendingUp className="w-5 h-5 text-blue-400" />
+            <div className="text-2xl font-medium text-gray-700">$4,820</div>
           </div>
-          <div className="text-sm text-gray-700 mb-2">Total Income</div>
-          <div className="text-xs text-green-600 font-medium">On track for goals</div>
+          <div className="text-sm text-gray-500 mb-2">Total Income</div>
+          <div className="text-xs text-emerald-400 font-medium">On track for goals</div>
         </div>
 
-        <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm hidden lg:block">
+        <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm hidden lg:block">
           <div className="flex items-center space-x-3 mb-4">
-            <Target className="w-5 h-5 text-blue-600" />
-            <div className="text-2xl font-semibold text-gray-900">$2,480</div>
+            <Target className="w-5 h-5 text-blue-400" />
+            <div className="text-2xl font-medium text-gray-700">$2,480</div>
           </div>
-          <div className="text-sm text-gray-700 mb-2">Net Savings</div>
-          <div className="text-xs text-green-600 font-medium">+5.2% from last month</div>
+          <div className="text-sm text-gray-500 mb-2">Net Savings</div>
+          <div className="text-xs text-emerald-400 font-medium">+5.2% from last month</div>
         </div>
 
-        <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm hidden lg:block">
-          <div className="text-2xl font-semibold text-gray-900 mb-2">73%</div>
-          <div className="text-sm text-gray-700 mb-4">Budget Used</div>
-          <div className="w-full bg-blue-100 rounded-full h-2">
-            <div className="bg-blue-500 h-2 rounded-full" style={{ width: '73%' }}></div>
+        <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm hidden lg:block">
+          <div className="text-2xl font-medium text-gray-700 mb-2">73%</div>
+          <div className="text-sm text-gray-500 mb-4">Budget Used</div>
+          <div className="w-full bg-blue-50 rounded-full h-2">
+            <div className="bg-blue-300 h-2 rounded-full" style={{ width: '73%' }}></div>
           </div>
         </div>
       </div>
 
       {/* Desktop Charts */}
       <div className="hidden lg:grid lg:grid-cols-2 gap-8 mb-8">
-        <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm">
-          <h4 className="font-semibold text-gray-900 mb-6">Spending by Category</h4>
+        <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm">
+          <h4 className="font-medium text-gray-600 mb-6">Spending by Category</h4>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -119,28 +118,28 @@ const SpendingInsights = () => {
           </div>
         </div>
 
-        <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm">
-          <h4 className="font-semibold text-gray-900 mb-6">Weekly Spending Trend</h4>
+        <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm">
+          <h4 className="font-medium text-gray-600 mb-6">Weekly Spending Trend</h4>
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={weeklyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#ddd6fe" vertical={false} />
+                <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
                 <XAxis 
                   dataKey="week" 
-                  stroke="#6b7280" 
+                  stroke="#94a3b8" 
                   fontSize={12} 
                   axisLine={false}
                   tickLine={false}
                 />
                 <YAxis 
-                  stroke="#6b7280" 
+                  stroke="#94a3b8" 
                   fontSize={12} 
                   axisLine={false}
                   tickLine={false}
                   tickFormatter={(value) => `$${value}`}
                 />
                 <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="spent" fill="#60a5fa" radius={[6, 6, 0, 0]} />
+                <Bar dataKey="spent" fill="#93c5fd" radius={[6, 6, 0, 0]} />
               </BarChart>
             </ResponsiveContainer>
           </div>
@@ -148,8 +147,8 @@ const SpendingInsights = () => {
       </div>
 
       {/* Top Categories (Always Visible) */}
-      <div className="bg-gradient-to-br from-white to-blue-50/30 rounded-lg p-6 border border-blue-100/50 shadow-sm">
-        <h4 className="font-semibold text-gray-900 mb-6">Top Categories</h4>
+      <div className="bg-gradient-to-br from-white/80 to-blue-25/50 rounded-xl p-6 border border-blue-50/40 shadow-sm backdrop-blur-sm">
+        <h4 className="font-medium text-gray-600 mb-6">Top Categories</h4>
         <div className="space-y-4">
           {categoryData.slice(0, 3).map((category, index) => (
             <div key={category.name} className="flex justify-between items-center">
@@ -158,9 +157,9 @@ const SpendingInsights = () => {
                   className="w-3 h-3 rounded-full" 
                   style={{ backgroundColor: category.color }}
                 ></div>
-                <span className="text-sm text-gray-700">{category.name}</span>
+                <span className="text-sm text-gray-500">{category.name}</span>
               </div>
-              <span className="text-sm font-semibold text-gray-900">${category.value}</span>
+              <span className="text-sm font-medium text-gray-600">${category.value}</span>
             </div>
           ))}
         </div>
