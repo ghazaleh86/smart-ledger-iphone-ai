@@ -27,10 +27,10 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
 
   const insights = [
     "🎯 You're on track to save $500 more than last month!",
-    "☕ Your coffee budget could fund a small country's economy",
-    "🚀 Spending 23% less on takeout - you're crushing it!",
-    "💡 Pro tip: You've got enough for that vacation fund goal",
-    "🎉 Best spending streak this year - keep the momentum!"
+    "💰 Emergency fund goal is 67% complete - keep going!",
+    "📈 Savings rate increased by 15% this quarter",
+    "🏆 You've saved $1,200 toward your vacation goal",
+    "✨ On pace to reach your annual savings target early!"
   ];
 
   const randomInsight = insights[Math.floor(Math.random() * insights.length)];
