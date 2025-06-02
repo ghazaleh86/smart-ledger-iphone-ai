@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import TransactionItem from '@/components/TransactionItem';
 import AIAssistant from '@/components/AIAssistant';
@@ -197,7 +198,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white pt-16 pb-6 px-8 shadow-sm border-b border-gray-200">
+      <div className="bg-white pt-16 pb-4 px-8 shadow-sm border-b border-gray-200">
         <AccountSelector
           accounts={accounts}
           selectedAccount={selectedAccount}
