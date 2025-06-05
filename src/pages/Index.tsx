@@ -1,5 +1,3 @@
-
-
 import React, { useState, useEffect, useCallback } from 'react';
 import TransactionItem from '@/components/TransactionItem';
 import AIAssistant from '@/components/AIAssistant';
@@ -18,6 +16,7 @@ interface Transaction {
   type: 'income' | 'expense';
   paymentMethod: string;
   isAISuggested?: boolean;
+  aiSuggestedCategory?: string;
   accountId: string;
 }
 
@@ -61,6 +60,7 @@ const Index = () => {
       type: 'expense',
       paymentMethod: 'Cash and Bank',
       isAISuggested: true,
+      aiSuggestedCategory: 'Transportation',
       accountId: 'checking',
     },
     {
@@ -72,6 +72,7 @@ const Index = () => {
       type: 'expense',
       paymentMethod: 'Savings',
       isAISuggested: true,
+      aiSuggestedCategory: 'Meals & Entertainment',
       accountId: 'savings',
     },
     {
@@ -111,6 +112,7 @@ const Index = () => {
       type: 'expense',
       paymentMethod: 'Cash and Bank',
       isAISuggested: true,
+      aiSuggestedCategory: 'Meals & Entertainment',
       accountId: 'checking',
     },
     // Additional dummy transactions for infinite scroll testing
@@ -142,10 +144,17 @@ const Index = () => {
       )
     );
     
-    toast({
-      title: "Transaction categorized",
-      description: `Categorized as ${category}`,
-    });
+    if (category === 'AI Suggested') {
+      toast({
+        title: "Reverted to AI suggestion",
+        description: "Category reverted to AI suggested category",
+      });
+    } else {
+      toast({
+        title: "Transaction categorized",
+        description: `Categorized as ${category}`,
+      });
+    }
   };
 
   const handleAIQuery = (query: string) => {
@@ -254,6 +263,8 @@ const Index = () => {
                       <div className="col-span-2">
                         <CategorySelector
                           currentCategory={transaction.category}
+                          aiSuggestedCategory={transaction.aiSuggestedCategory}
+                          isAISuggested={transaction.isAISuggested}
                           onCategoryChange={(category) => handleCategorize(transaction.id, category)}
                         />
                       </div>

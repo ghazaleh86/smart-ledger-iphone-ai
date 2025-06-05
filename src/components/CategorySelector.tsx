@@ -10,6 +10,8 @@ import {
 
 interface CategorySelectorProps {
   currentCategory?: string;
+  aiSuggestedCategory?: string;
+  isAISuggested?: boolean;
   onCategoryChange: (category: string) => void;
 }
 
@@ -26,7 +28,7 @@ const categories = [
   'Other'
 ];
 
-const CategorySelector = ({ currentCategory, onCategoryChange }: CategorySelectorProps) => {
+const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested, onCategoryChange }: CategorySelectorProps) => {
   const getCategoryColor = (category?: string) => {
     const colors: Record<string, string> = {
       'Meals & Entertainment': 'bg-orange-50 text-orange-700 border-orange-200',
@@ -39,9 +41,18 @@ const CategorySelector = ({ currentCategory, onCategoryChange }: CategorySelecto
       'Home & Garden': 'bg-emerald-50 text-emerald-700 border-emerald-200',
       'Business': 'bg-slate-50 text-slate-700 border-slate-200',
       'Other': 'bg-gray-50 text-gray-600 border-gray-200',
+      'AI Suggested': 'bg-blue-50 text-blue-700 border-blue-200',
     };
     return colors[category || ''] || 'bg-gray-50 text-gray-600 border-gray-200';
   };
+
+  // Show available options
+  const availableCategories = [...categories];
+  
+  // Add "AI Suggested" option if there's an AI suggested category and it's not currently selected as AI suggested
+  if (aiSuggestedCategory && !isAISuggested) {
+    availableCategories.unshift('AI Suggested');
+  }
 
   return (
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
@@ -49,10 +60,10 @@ const CategorySelector = ({ currentCategory, onCategoryChange }: CategorySelecto
         <SelectValue placeholder="Categorize" />
       </SelectTrigger>
       <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-        {categories.map((category) => (
+        {availableCategories.map((category) => (
           <SelectItem key={category} value={category} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-gray-50 focus:bg-gray-50">
             <span className={`px-3 py-1.5 rounded-md text-sm font-medium ${getCategoryColor(category)}`}>
-              {category}
+              {category === 'AI Suggested' && aiSuggestedCategory ? `AI Suggested (${aiSuggestedCategory})` : category}
             </span>
           </SelectItem>
         ))}

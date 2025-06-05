@@ -12,6 +12,7 @@ interface Transaction {
   type: 'income' | 'expense';
   paymentMethod: string;
   isAISuggested?: boolean;
+  aiSuggestedCategory?: string;
 }
 
 interface TransactionItemProps {
@@ -66,6 +67,8 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
             
             <CategorySelector
               currentCategory={transaction.category}
+              aiSuggestedCategory={transaction.aiSuggestedCategory}
+              isAISuggested={transaction.isAISuggested}
               onCategoryChange={handleCategoryChange}
             />
           </div>
