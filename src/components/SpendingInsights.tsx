@@ -217,12 +217,9 @@ const SpendingInsights = () => {
                     ${item.spent} / ${item.budget}
                   </span>
                 </div>
-                <div className="w-full bg-gray-100 rounded-full h-1.5">
+                <div className="w-full bg-gray-100 rounded-full h-1">
                   <div 
-                    className={`h-1.5 rounded-full transition-all duration-300 ${
-                      item.percentage > 90 ? 'bg-purple-500' : 
-                      item.percentage > 75 ? 'bg-blue-500' : 'bg-blue-300'
-                    }`}
+                    className="bg-blue-400 h-1 rounded-full transition-all duration-300"
                     style={{ width: `${item.percentage}%` }}
                   ></div>
                 </div>
