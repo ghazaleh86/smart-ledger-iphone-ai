@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, Target } from 'lucide-react';
@@ -47,19 +46,20 @@ const SpendingInsights = () => {
     return null;
   };
 
-  // Custom Bar component with hover effect
+  // Custom Bar component with gradient glow hover effect
   const CustomBar = (props: any) => {
     const [isHovered, setIsHovered] = React.useState(false);
     
     return (
       <rect
         {...props}
-        fill={isHovered ? '#6366f1' : '#93c5fd'}
+        fill={isHovered ? 'url(#barGradient)' : '#93c5fd'}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         style={{ 
-          transition: 'fill 0.2s ease-in-out',
-          cursor: 'pointer'
+          transition: 'all 0.3s ease-in-out',
+          cursor: 'pointer',
+          filter: isHovered ? 'drop-shadow(0 0 8px rgba(99, 102, 241, 0.4))' : 'none'
         }}
       />
     );
@@ -142,6 +142,12 @@ const SpendingInsights = () => {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={weeklyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
+                <defs>
+                  <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0%" stopColor="#6366f1" stopOpacity={1} />
+                    <stop offset="100%" stopColor="#8b5cf6" stopOpacity={0.8} />
+                  </linearGradient>
+                </defs>
                 <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" vertical={false} />
                 <XAxis 
                   dataKey="week" 
