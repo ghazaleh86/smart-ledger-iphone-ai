@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, Target } from 'lucide-react';
@@ -65,6 +66,33 @@ const SpendingInsights = () => {
     );
   };
 
+  // Custom Cell component with gradient glow hover effect for pie chart
+  const CustomCell = ({ cx, cy, midAngle, innerRadius, outerRadius, percent, index, ...props }: any) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+    const category = categoryData[index];
+    
+    const RADIAN = Math.PI / 180;
+    const radius = innerRadius + (outerRadius - innerRadius) * 0.5;
+    const x = cx + radius * Math.cos(-midAngle * RADIAN);
+    const y = cy + radius * Math.sin(-midAngle * RADIAN);
+
+    return (
+      <g>
+        <Cell
+          {...props}
+          fill={isHovered ? `url(#pieGradient${index})` : category.color}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
+          style={{ 
+            transition: 'all 0.3s ease-in-out',
+            cursor: 'pointer',
+            filter: isHovered ? `drop-shadow(0 0 8px ${category.color}80)` : 'none'
+          }}
+        />
+      </g>
+    );
+  };
+
   return (
     <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 rounded-2xl p-4 md:p-8 mb-8 shadow-lg border border-blue-200/50">
       <h3 className="text-xl font-medium text-gray-700 mb-6 md:mb-8">This Month's Insights</h3>
@@ -117,6 +145,14 @@ const SpendingInsights = () => {
           <div className="h-64">
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
+                <defs>
+                  {categoryData.map((category, index) => (
+                    <linearGradient key={`pieGradient${index}`} id={`pieGradient${index}`} x1="0" y1="0" x2="1" y2="1">
+                      <stop offset="0%" stopColor={category.color} stopOpacity={1} />
+                      <stop offset="100%" stopColor={category.color} stopOpacity={0.7} />
+                    </linearGradient>
+                  ))}
+                </defs>
                 <Pie
                   data={categoryData}
                   cx="50%"
@@ -128,7 +164,7 @@ const SpendingInsights = () => {
                   stroke="none"
                 >
                   {categoryData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
+                    <CustomCell key={`cell-${index}`} index={index} />
                   ))}
                 </Pie>
                 <Tooltip content={<PieTooltip />} />
