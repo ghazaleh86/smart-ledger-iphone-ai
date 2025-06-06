@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect, useCallback } from 'react';
 import TransactionItem from '@/components/TransactionItem';
 import AIAssistant from '@/components/AIAssistant';
@@ -219,15 +220,16 @@ const Index = () => {
       {/* Content */}
       <div className="px-8 py-10 space-y-10">
         <SpendingInsights />
-        
-        <QuickActions 
-          onAddTransaction={handleAddTransaction}
-          onOpenAI={() => setIsAIOpen(true)}
-        />
 
         {/* Transactions List */}
         <div className="space-y-0">
-          <h2 className="text-xl font-semibold text-gray-900 mb-8">Recent Transactions</h2>
+          <div className="flex items-center justify-between mb-8">
+            <h2 className="text-xl font-semibold text-gray-900">Recent Transactions</h2>
+            <QuickActions 
+              onAddTransaction={handleAddTransaction}
+              onOpenAI={() => setIsAIOpen(true)}
+            />
+          </div>
           
           {/* Desktop Layout - Table format similar to Ramp */}
           <div className="hidden md:block">
