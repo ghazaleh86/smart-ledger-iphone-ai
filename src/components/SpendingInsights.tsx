@@ -91,7 +91,7 @@ const SpendingInsights = () => {
           </CollapsibleTrigger>
         </div>
         
-        <CollapsibleContent className="animate-accordion-down data-[state=closed]:animate-accordion-up">
+        <CollapsibleContent className="overflow-hidden transition-all duration-500 ease-out data-[state=closed]:animate-[accordion-up_0.5s_ease-out] data-[state=open]:animate-[accordion-down_0.5s_ease-out]">
           {/* Main Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
             <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
