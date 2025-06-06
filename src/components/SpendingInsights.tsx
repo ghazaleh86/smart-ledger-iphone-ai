@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from 'recharts';
 import { TrendingUp, TrendingDown, DollarSign, Target } from 'lucide-react';
@@ -44,6 +45,24 @@ const SpendingInsights = () => {
       );
     }
     return null;
+  };
+
+  // Custom Bar component with hover effect
+  const CustomBar = (props: any) => {
+    const [isHovered, setIsHovered] = React.useState(false);
+    
+    return (
+      <rect
+        {...props}
+        fill={isHovered ? '#6366f1' : '#93c5fd'}
+        onMouseEnter={() => setIsHovered(true)}
+        onMouseLeave={() => setIsHovered(false)}
+        style={{ 
+          transition: 'fill 0.2s ease-in-out',
+          cursor: 'pointer'
+        }}
+      />
+    );
   };
 
   return (
@@ -138,8 +157,16 @@ const SpendingInsights = () => {
                   tickLine={false}
                   tickFormatter={(value) => `$${value}`}
                 />
-                <Tooltip content={<CustomTooltip />} />
-                <Bar dataKey="spent" fill="#93c5fd" radius={[6, 6, 0, 0]} />
+                <Tooltip 
+                  content={<CustomTooltip />}
+                  cursor={false}
+                />
+                <Bar 
+                  dataKey="spent" 
+                  fill="#93c5fd" 
+                  radius={[6, 6, 0, 0]}
+                  shape={<CustomBar />}
+                />
               </BarChart>
             </ResponsiveContainer>
           </div>
