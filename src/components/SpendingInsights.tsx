@@ -18,6 +18,13 @@ const SpendingInsights = () => {
     { week: 'Week 4', spent: 690 },
   ];
 
+  const budgetData = [
+    { category: 'Meals & Entertainment', spent: 680, budget: 800, percentage: 85 },
+    { category: 'Transportation', spent: 420, budget: 500, percentage: 84 },
+    { category: 'Shopping', spent: 380, budget: 400, percentage: 95 },
+    { category: 'Bills & Utilities', spent: 320, budget: 350, percentage: 91 },
+  ];
+
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
@@ -179,22 +186,49 @@ const SpendingInsights = () => {
         </div>
       </div>
 
-      {/* Top Categories (Always Visible) */}
-      <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
-        <h4 className="font-medium text-gray-600 mb-4 md:mb-6">Top Categories</h4>
-        <div className="space-y-4">
-          {categoryData.slice(0, 3).map((category, index) => (
-            <div key={category.name} className="flex justify-between items-center">
-              <div className="flex items-center space-x-3">
-                <div 
-                  className="w-3 h-3 rounded-full" 
-                  style={{ backgroundColor: category.color }}
-                ></div>
-                <span className="text-sm text-gray-500">{category.name}</span>
+      {/* Bottom Grid - Top Categories and Budget Progress */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
+          <h4 className="font-medium text-gray-600 mb-4 md:mb-6">Top Categories</h4>
+          <div className="space-y-4">
+            {categoryData.slice(0, 3).map((category, index) => (
+              <div key={category.name} className="flex justify-between items-center">
+                <div className="flex items-center space-x-3">
+                  <div 
+                    className="w-3 h-3 rounded-full" 
+                    style={{ backgroundColor: category.color }}
+                  ></div>
+                  <span className="text-sm text-gray-500">{category.name}</span>
+                </div>
+                <span className="text-sm font-medium text-gray-600">${category.value}</span>
               </div>
-              <span className="text-sm font-medium text-gray-600">${category.value}</span>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
+          <h4 className="font-medium text-gray-600 mb-4 md:mb-6">Budget Progress</h4>
+          <div className="space-y-4">
+            {budgetData.map((item, index) => (
+              <div key={item.category} className="space-y-2">
+                <div className="flex justify-between items-center">
+                  <span className="text-sm text-gray-500">{item.category}</span>
+                  <span className="text-sm font-medium text-gray-600">
+                    ${item.spent} / ${item.budget}
+                  </span>
+                </div>
+                <div className="w-full bg-gray-100 rounded-full h-2">
+                  <div 
+                    className={`h-2 rounded-full transition-all duration-300 ${
+                      item.percentage > 90 ? 'bg-red-400' : 
+                      item.percentage > 75 ? 'bg-yellow-400' : 'bg-green-400'
+                    }`}
+                    style={{ width: `${item.percentage}%` }}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </div>
