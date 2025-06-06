@@ -1,6 +1,4 @@
-
 import * as React from "react"
-import { Check } from "lucide-react"
 
 import type {
   ToastActionElement,
@@ -151,21 +149,10 @@ function toast({ ...props }: Toast) {
     })
   const dismiss = () => dispatch({ type: "DISMISS_TOAST", toastId: id })
 
-  // Add green checkmark icon for success toasts
-  const enhancedProps = {
-    ...props,
-    title: props.title ? (
-      <div className="flex items-center gap-2">
-        <Check className="h-4 w-4 text-green-600" />
-        {props.title}
-      </div>
-    ) : props.title,
-  }
-
   dispatch({
     type: "ADD_TOAST",
     toast: {
-      ...enhancedProps,
+      ...props,
       id,
       open: true,
       onOpenChange: (open) => {
