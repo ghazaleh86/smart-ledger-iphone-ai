@@ -1,7 +1,6 @@
 
 import React, { useState } from 'react';
 import AIAssistant from '@/components/AIAssistant';
-import SpendingInsights from '@/components/SpendingInsights';
 import QuickActions from '@/components/QuickActions';
 import AccountSelector from '@/components/AccountSelector';
 import TransactionList from '@/components/TransactionList';
@@ -54,8 +53,6 @@ const Index = () => {
 
       {/* Content */}
       <div className="px-8 py-10 space-y-10">
-        <SpendingInsights />
-
         {/* Transactions List */}
         <div className="space-y-0">
           <div className="flex items-center justify-between mb-8">
