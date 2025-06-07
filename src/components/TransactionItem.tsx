@@ -2,7 +2,6 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import CategorySelector from './CategorySelector';
-import { shouldShowAILabel, getAILabelText } from '@/utils/aiLabelUtils';
 
 interface Transaction {
   id: string;
@@ -14,8 +13,6 @@ interface Transaction {
   paymentMethod: string;
   isAISuggested?: boolean;
   aiSuggestedCategory?: string;
-  aiConfidence?: number;
-  categorizedAt?: string;
 }
 
 interface TransactionItemProps {
@@ -47,8 +44,6 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
     return '';
   };
 
-  const showAILabel = shouldShowAILabel(transaction);
-
   return (
     <div className={`bg-white p-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-all duration-150 ${getBorderRadius()}`}>
       <div className="flex items-center justify-between">
@@ -78,10 +73,10 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
             />
           </div>
           
-          {showAILabel && (
+          {transaction.isAISuggested && (
             <div className="mt-3 text-xs text-blue-600 flex items-center font-medium">
               <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></div>
-              {getAILabelText(transaction)}
+              AI suggested category
             </div>
           )}
         </div>
