@@ -115,25 +115,26 @@ export function AppSidebar() {
   const isActive = (path: string) => currentPath === path
 
   return (
-    <Sidebar className="border-r border-gray-200 bg-slate-900 text-white">
-      <SidebarContent className="bg-slate-900">
+    <Sidebar className="border-r border-gray-200 bg-white">
+      <SidebarContent className="bg-white">
         {/* Header */}
-        <div className="p-4 border-b border-slate-700">
+        <div className="p-4 border-b border-gray-100">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-teal-500 rounded-lg flex items-center justify-center">
-              <Home className="w-5 h-5 text-white" />
+            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
+              <Home className="w-4 h-4 text-white" />
             </div>
             {!isCollapsed && (
               <div>
-                <div className="font-semibold text-white">Nautilus Hosting</div>
+                <div className="font-semibold text-gray-900 text-sm">Nautilus Hosting</div>
+                <div className="text-xs text-gray-500">Financial Dashboard</div>
               </div>
             )}
           </div>
         </div>
 
         {/* Main Navigation */}
-        <SidebarGroup className="px-2 py-4">
-          <SidebarMenu>
+        <SidebarGroup className="px-3 py-2">
+          <SidebarMenu className="space-y-1">
             {navigationItems.map((item) => (
               <SidebarMenuItem key={item.title}>
                 {item.submenu ? (
@@ -143,14 +144,14 @@ export function AppSidebar() {
                   >
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton 
-                        className="w-full justify-between text-gray-300 hover:text-white hover:bg-slate-800 data-[state=open]:text-white"
+                        className="w-full justify-between text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors data-[state=open]:text-gray-900 data-[state=open]:bg-gray-50"
                       >
                         <div className="flex items-center gap-3">
-                          <item.icon className="w-4 h-4" />
-                          {!isCollapsed && <span>{item.title}</span>}
+                          <item.icon className="w-4 h-4 text-gray-500" />
+                          {!isCollapsed && <span className="text-sm font-medium">{item.title}</span>}
                         </div>
                         {!isCollapsed && (
-                          <ChevronDown className={`w-4 h-4 transition-transform ${
+                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${
                             openGroups.includes(item.title) ? 'rotate-180' : ''
                           }`} />
                         )}
@@ -158,7 +159,7 @@ export function AppSidebar() {
                     </CollapsibleTrigger>
                     {!isCollapsed && (
                       <CollapsibleContent>
-                        <SidebarMenuSub>
+                        <SidebarMenuSub className="ml-4 mt-1 space-y-1">
                           {item.submenu.map((subItem) => (
                             <SidebarMenuSubItem key={subItem.title}>
                               <SidebarMenuSubButton 
@@ -167,8 +168,10 @@ export function AppSidebar() {
                               >
                                 <NavLink 
                                   to={subItem.url}
-                                  className={`text-gray-400 hover:text-white pl-7 ${
-                                    isActive(subItem.url) ? 'text-teal-400 bg-slate-800' : ''
+                                  className={`block px-3 py-2 text-sm rounded-md transition-colors ${
+                                    isActive(subItem.url) 
+                                      ? 'text-blue-700 bg-blue-50 font-medium' 
+                                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                                   }`}
                                 >
                                   {subItem.title}
@@ -184,12 +187,14 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild isActive={isActive(item.url!)}>
                     <NavLink 
                       to={item.url!}
-                      className={`flex items-center gap-3 text-gray-300 hover:text-white hover:bg-slate-800 ${
-                        isActive(item.url!) ? 'text-white bg-slate-800' : ''
+                      className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
+                        isActive(item.url!) 
+                          ? 'text-blue-700 bg-blue-50 font-medium' 
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                       }`}
                     >
-                      <item.icon className="w-4 h-4" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      <item.icon className="w-4 h-4 text-gray-500" />
+                      {!isCollapsed && <span className="text-sm font-medium">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 )}
@@ -199,20 +204,22 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* Bottom Section */}
-        <div className="mt-auto border-t border-slate-700">
-          <SidebarGroup className="px-2 py-4">
-            <SidebarMenu>
+        <div className="mt-auto border-t border-gray-100">
+          <SidebarGroup className="px-3 py-2">
+            <SidebarMenu className="space-y-1">
               {bottomItems.map((item) => (
                 <SidebarMenuItem key={item.title}>
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink 
                       to={item.url}
-                      className={`flex items-center gap-3 text-gray-300 hover:text-white hover:bg-slate-800 ${
-                        isActive(item.url) ? 'text-white bg-slate-800' : ''
+                      className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
+                        isActive(item.url) 
+                          ? 'text-blue-700 bg-blue-50 font-medium' 
+                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
                       }`}
                     >
-                      <item.icon className="w-4 h-4" />
-                      {!isCollapsed && <span>{item.title}</span>}
+                      <item.icon className="w-4 h-4 text-gray-500" />
+                      {!isCollapsed && <span className="text-sm font-medium">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
