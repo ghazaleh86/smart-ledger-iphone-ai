@@ -7,6 +7,24 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/AppSidebar";
 import Index from "./pages/Index";
+import Dashboard from "./pages/Dashboard";
+import Sales from "./pages/Sales";
+import SalesInvoices from "./pages/SalesInvoices";
+import SalesCustomers from "./pages/SalesCustomers";
+import Purchases from "./pages/Purchases";
+import PurchasesBills from "./pages/PurchasesBills";
+import PurchasesVendors from "./pages/PurchasesVendors";
+import AccountingReconciliation from "./pages/AccountingReconciliation";
+import AccountingChartOfAccounts from "./pages/AccountingChartOfAccounts";
+import BankingAccounts from "./pages/BankingAccounts";
+import BankingTransfers from "./pages/BankingTransfers";
+import BankingStatements from "./pages/BankingStatements";
+import PayrollEmployees from "./pages/PayrollEmployees";
+import PayrollPayRuns from "./pages/PayrollPayRuns";
+import PayrollTimeTracking from "./pages/PayrollTimeTracking";
+import Reports from "./pages/Reports";
+import Settings from "./pages/Settings";
+import Integrations from "./pages/Integrations";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +48,24 @@ const App = () => (
               <div className="flex-1">
                 <Routes>
                   <Route path="/" element={<Index />} />
+                  <Route path="/dashboard" element={<Dashboard />} />
+                  <Route path="/sales" element={<Sales />} />
+                  <Route path="/sales/invoices" element={<SalesInvoices />} />
+                  <Route path="/sales/customers" element={<SalesCustomers />} />
+                  <Route path="/purchases" element={<Purchases />} />
+                  <Route path="/purchases/bills" element={<PurchasesBills />} />
+                  <Route path="/purchases/vendors" element={<PurchasesVendors />} />
+                  <Route path="/accounting/reconciliation" element={<AccountingReconciliation />} />
+                  <Route path="/accounting/chart-of-accounts" element={<AccountingChartOfAccounts />} />
+                  <Route path="/banking/accounts" element={<BankingAccounts />} />
+                  <Route path="/banking/transfers" element={<BankingTransfers />} />
+                  <Route path="/banking/statements" element={<BankingStatements />} />
+                  <Route path="/payroll/employees" element={<PayrollEmployees />} />
+                  <Route path="/payroll/pay-runs" element={<PayrollPayRuns />} />
+                  <Route path="/payroll/time-tracking" element={<PayrollTimeTracking />} />
+                  <Route path="/reports" element={<Reports />} />
+                  <Route path="/settings" element={<Settings />} />
+                  <Route path="/integrations" element={<Integrations />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>

@@ -35,7 +35,7 @@ import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/component
 const navigationItems = [
   { 
     title: "Dashboard", 
-    url: "/", 
+    url: "/dashboard", 
     icon: LayoutDashboard 
   },
   { 
@@ -61,7 +61,7 @@ const navigationItems = [
     icon: Calculator,
     isOpen: true,
     submenu: [
-      { title: "Transactions", url: "/accounting/transactions", isActive: true },
+      { title: "Transactions", url: "/", isActive: true },
       { title: "Reconciliation", url: "/accounting/reconciliation" },
       { title: "Chart of Accounts", url: "/accounting/chart-of-accounts" },
     ]
