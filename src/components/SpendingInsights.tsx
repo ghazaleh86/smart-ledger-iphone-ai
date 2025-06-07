@@ -82,7 +82,7 @@ const SpendingInsights = () => {
         <div className="flex items-center justify-between mb-6 md:mb-8">
           <h3 className="text-xl font-medium text-gray-700">This Month's Insights</h3>
           <CollapsibleTrigger asChild>
-            <button className="flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white/90 transition-colors duration-200 border border-white/40">
+            <button className="flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white/90 transition-colors duration-200 border border-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-transparent">
               {isOpen ? (
                 <ChevronUp className="w-4 h-4 text-gray-600" />
               ) : (
@@ -138,7 +138,7 @@ const SpendingInsights = () => {
           <div className="hidden lg:grid lg:grid-cols-2 gap-8 mb-8">
             <div className="bg-white/90 rounded-xl p-6 border border-white/40 shadow-sm backdrop-blur-sm">
               <h4 className="font-medium text-gray-600 mb-6">Spending by Category</h4>
-              <div className="h-64">
+              <div className="h-64 [&_.recharts-pie-sector]:outline-none [&_.recharts-pie-sector]:focus:outline-none [&_.recharts-pie-sector:focus]:drop-shadow-lg [&_.recharts-pie-sector:focus]:brightness-110">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -163,7 +163,7 @@ const SpendingInsights = () => {
 
             <div className="bg-white/90 rounded-xl p-6 border border-white/40 shadow-sm backdrop-blur-sm">
               <h4 className="font-medium text-gray-600 mb-6">Weekly Spending Trend</h4>
-              <div className="h-64">
+              <div className="h-64 [&_.recharts-bar]:outline-none [&_.recharts-bar]:focus:outline-none">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={weeklyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <defs>
