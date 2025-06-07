@@ -203,7 +203,7 @@ const SpendingInsights = () => {
           </div>
 
           {/* Bottom Grid - Top Categories and Budget Progress */}
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6 md:mb-8">
             <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
               <h4 className="font-medium text-gray-600 mb-4 md:mb-6">Top Categories</h4>
               <div className="space-y-4">
