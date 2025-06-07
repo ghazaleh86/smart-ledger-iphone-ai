@@ -1,13 +1,157 @@
 
-import React from 'react';
-import PlaceholderPage from '@/components/PlaceholderPage';
+import React, { useState } from 'react';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { FileText, Plus, Search, Calendar, AlertCircle, CheckCircle } from 'lucide-react';
 
 const PurchasesBills = () => {
+  const [searchTerm, setSearchTerm] = useState('');
+  const [statusFilter, setStatusFilter] = useState('all');
+
+  const bills = [
+    { id: "BILL-001", vendor: "Office Supplies Co", amount: "$1,240", status: "Paid", date: "2024-06-01", dueDate: "2024-06-15" },
+    { id: "BILL-002", vendor: "Tech Equipment Inc", amount: "$5,800", status: "Pending", date: "2024-06-03", dueDate: "2024-06-17" },
+    { id: "BILL-003", vendor: "Marketing Agency", amount: "$3,200", status: "Overdue", date: "2024-05-20", dueDate: "2024-06-05" },
+    { id: "BILL-004", vendor: "Legal Services", amount: "$2,100", status: "Draft", date: "2024-06-06", dueDate: "2024-06-20" },
+    { id: "BILL-005", vendor: "Cloud Services", amount: "$890", status: "Paid", date: "2024-06-01", dueDate: "2024-06-15" },
+  ];
+
+  const filteredBills = bills.filter(bill => {
+    const matchesSearch = bill.vendor.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                         bill.id.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesStatus = statusFilter === 'all' || bill.status.toLowerCase() === statusFilter;
+    return matchesSearch && matchesStatus;
+  });
+
   return (
-    <PlaceholderPage 
-      title="Bills" 
-      description="Manage and track all your purchase bills and expenses."
-    />
+    <div className="min-h-screen bg-gray-50">
+      {/* Header */}
+      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
+        <div className="flex items-center justify-between">
+          <div>
+            <h1 className="text-2xl font-semibold text-gray-900">Bills</h1>
+            <p className="text-sm text-gray-600 mt-1">Manage and track all your purchase bills and expenses</p>
+          </div>
+          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <Plus className="h-4 w-4" />
+            Add Bill
+          </button>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="px-8 py-8 space-y-6">
+        {/* Summary Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <Card className="bg-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Total Outstanding</p>
+                  <p className="text-2xl font-bold text-gray-900">$11,090</p>
+                </div>
+                <AlertCircle className="h-8 w-8 text-orange-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Overdue Bills</p>
+                  <p className="text-2xl font-bold text-red-600">$3,200</p>
+                </div>
+                <AlertCircle className="h-8 w-8 text-red-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card className="bg-white">
+            <CardContent className="p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-sm text-gray-600">Paid This Month</p>
+                  <p className="text-2xl font-bold text-green-600">$2,130</p>
+                </div>
+                <CheckCircle className="h-8 w-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* Filters */}
+        <Card className="bg-white">
+          <CardContent className="p-6">
+            <div className="flex flex-col sm:flex-row gap-4">
+              <div className="flex-1 relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <input
+                  type="text"
+                  placeholder="Search bills..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                />
+              </div>
+              <select
+                value={statusFilter}
+                onChange={(e) => setStatusFilter(e.target.value)}
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+              >
+                <option value="all">All Status</option>
+                <option value="draft">Draft</option>
+                <option value="pending">Pending</option>
+                <option value="paid">Paid</option>
+                <option value="overdue">Overdue</option>
+              </select>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Bills Table */}
+        <Card className="bg-white">
+          <CardHeader>
+            <CardTitle className="text-lg font-semibold text-gray-900">All Bills</CardTitle>
+            <CardDescription>{filteredBills.length} bills found</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <div className="overflow-x-auto">
+              <table className="w-full">
+                <thead>
+                  <tr className="border-b border-gray-200">
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">Bill ID</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">Vendor</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">Amount</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">Status</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600">Due Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {filteredBills.map((bill) => (
+                    <tr key={bill.id} className="border-b border-gray-100 hover:bg-gray-50">
+                      <td className="py-3 px-4 font-medium text-gray-900">{bill.id}</td>
+                      <td className="py-3 px-4 text-gray-700">{bill.vendor}</td>
+                      <td className="py-3 px-4 font-medium text-gray-900">{bill.amount}</td>
+                      <td className="py-3 px-4">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          bill.status === 'Paid' ? 'bg-green-100 text-green-800' :
+                          bill.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
+                          bill.status === 'Overdue' ? 'bg-red-100 text-red-800' :
+                          'bg-gray-100 text-gray-800'
+                        }`}>
+                          {bill.status}
+                        </span>
+                      </td>
+                      <td className="py-3 px-4 text-gray-600">{bill.dueDate}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
   );
 };
 
