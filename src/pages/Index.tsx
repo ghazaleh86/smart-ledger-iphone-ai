@@ -44,7 +44,7 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white pt-16 pb-2 px-8 shadow-sm border-b border-gray-200">
+      <div className="bg-white py-4 px-8 shadow-sm border-b border-gray-200">
         <AccountSelector
           accounts={accounts}
           selectedAccount={selectedAccount}
