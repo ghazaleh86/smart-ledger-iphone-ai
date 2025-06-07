@@ -138,7 +138,7 @@ const SpendingInsights = () => {
           <div className="hidden lg:grid lg:grid-cols-2 gap-8 mb-8">
             <div className="bg-white/90 rounded-xl p-6 border border-white/40 shadow-sm backdrop-blur-sm">
               <h4 className="font-medium text-gray-600 mb-6">Spending by Category</h4>
-              <div className="h-64 [&_.recharts-pie-sector]:outline-none [&_.recharts-pie-sector]:focus:outline-none [&_.recharts-pie-sector:focus]:drop-shadow-lg [&_.recharts-pie-sector:focus]:brightness-110">
+              <div className="h-64 [&_*]:!outline-none [&_.recharts-pie-sector]:!outline-none [&_.recharts-pie-sector]:!focus:outline-none [&_.recharts-surface]:!outline-none [&_.recharts-layer]:!outline-none">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
                     <Pie
@@ -163,7 +163,7 @@ const SpendingInsights = () => {
 
             <div className="bg-white/90 rounded-xl p-6 border border-white/40 shadow-sm backdrop-blur-sm">
               <h4 className="font-medium text-gray-600 mb-6">Weekly Spending Trend</h4>
-              <div className="h-64 [&_.recharts-bar]:outline-none [&_.recharts-bar]:focus:outline-none">
+              <div className="h-64 [&_*]:!outline-none [&_.recharts-bar]:!outline-none [&_.recharts-bar]:!focus:outline-none [&_.recharts-surface]:!outline-none [&_.recharts-layer]:!outline-none">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={weeklyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                     <defs>
