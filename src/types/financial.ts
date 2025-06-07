@@ -10,6 +10,8 @@ export interface Transaction {
   isAISuggested?: boolean;
   aiSuggestedCategory?: string;
   accountId: string;
+  aiConfidence?: number; // 0-1 scale for AI confidence
+  categorizedAt?: string; // when it was categorized
 }
 
 export interface Account {
