@@ -1,12 +1,27 @@
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Transaction } from '@/types/financial';
 import { allTransactions } from '@/data/mockData';
 import { useToast } from '@/hooks/use-toast';
 
 export const useTransactions = () => {
   const { toast } = useToast();
-  const [transactions, setTransactions] = useState<Transaction[]>(allTransactions);
+  const [transactions, setTransactions] = useState<Transaction[]>([]);
+
+  // Initialize transactions with AI suggestions for first 5 on component mount
+  useEffect(() => {
+    const transactionsWithAI = allTransactions.map((transaction, index) => {
+      if (index < 5) {
+        return {
+          ...transaction,
+          isAISuggested: true,
+          aiSuggestedCategory: transaction.category || 'Business'
+        };
+      }
+      return transaction;
+    });
+    setTransactions(transactionsWithAI);
+  }, []);
 
   const handleCategorize = (id: string, category: string) => {
     setTransactions(prev => 
