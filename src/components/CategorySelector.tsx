@@ -52,7 +52,9 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
   return (
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
       <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-[140px] min-w-[140px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
-        <SelectValue placeholder="Categorize" />
+        <SelectValue placeholder="Categorize">
+          {currentCategory}
+        </SelectValue>
       </SelectTrigger>
       <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
         {categories.map((category) => (
