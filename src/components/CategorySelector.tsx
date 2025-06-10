@@ -25,6 +25,8 @@ const categories = [
   'Travel',
   'Home & Garden',
   'Business',
+  'Business Income',
+  'Payment to Credit Card',
   'Other'
 ];
 
@@ -40,6 +42,8 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
       'Travel': 'bg-indigo-50 text-indigo-700 border-indigo-200',
       'Home & Garden': 'bg-emerald-50 text-emerald-700 border-emerald-200',
       'Business': 'bg-slate-50 text-slate-700 border-slate-200',
+      'Business Income': 'bg-green-50 text-green-700 border-green-200',
+      'Payment to Credit Card': 'bg-blue-50 text-blue-700 border-blue-200',
       'Other': 'bg-gray-50 text-gray-600 border-gray-200',
     };
     return colors[category || ''] || 'bg-gray-50 text-gray-600 border-gray-200';
@@ -47,7 +51,7 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
 
   return (
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
-      <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-[120px] min-w-[120px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
+      <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-[140px] min-w-[140px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
         <SelectValue placeholder="Categorize" />
       </SelectTrigger>
       <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
@@ -55,9 +59,6 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
           <SelectItem key={category} value={category} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-gray-50 focus:bg-gray-50">
             <span className={`px-3 py-1.5 rounded-md text-sm font-medium ${getCategoryColor(category)}`}>
               {category}
-              {aiSuggestedCategory === category && !isAISuggested && (
-                <span className="text-blue-600 ml-1">(AI suggested)</span>
-              )}
             </span>
           </SelectItem>
         ))}
