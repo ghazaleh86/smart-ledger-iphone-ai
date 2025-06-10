@@ -12,7 +12,8 @@ export const useTransactions = () => {
   useEffect(() => {
     const transactionsWithAI = allTransactions.map((transaction, index) => ({
       ...transaction,
-      isAISuggested: index < 5
+      isAISuggested: index < 5,
+      aiSuggestedCategory: transaction.category // Store the original category as AI suggested
     }));
     setTransactions(transactionsWithAI);
   }, []);

@@ -59,6 +59,9 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
           <SelectItem key={category} value={category} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-gray-50 focus:bg-gray-50">
             <span className={`px-3 py-1.5 rounded-md text-sm font-medium ${getCategoryColor(category)}`}>
               {category}
+              {aiSuggestedCategory === category && (
+                <span className="text-blue-600 font-normal"> (AI suggested)</span>
+              )}
             </span>
           </SelectItem>
         ))}
