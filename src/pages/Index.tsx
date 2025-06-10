@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react';
 import AIAssistant from '@/components/AIAssistant';
 import QuickActions from '@/components/QuickActions';
@@ -7,7 +6,7 @@ import TransactionList from '@/components/TransactionList';
 import { useToast } from '@/hooks/use-toast';
 import { useTransactions } from '@/hooks/useTransactions';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
-import { accounts } from '@/data/mockData';
+import { accounts } from '@/data/accounts';
 
 const Index = () => {
   const { toast } = useToast();

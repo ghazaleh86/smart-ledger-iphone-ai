@@ -1,7 +1,7 @@
 
 import { useState } from 'react';
 import { Transaction } from '@/types/financial';
-import { allTransactions } from '@/data/mockData';
+import { allTransactions } from '@/data/transactions';
 import { useToast } from '@/hooks/use-toast';
 
 export const useTransactions = () => {
@@ -12,7 +12,7 @@ export const useTransactions = () => {
     setTransactions(prev => 
       prev.map(t => 
         t.id === id 
-          ? { ...t, category, isAISuggested: false }
+          ? { ...t, category }
           : t
       )
     );
