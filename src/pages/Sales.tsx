@@ -45,33 +45,32 @@ const Sales = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-4 sm:py-6 px-4 sm:px-6 shadow-sm border-b">
-        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-xl sm:text-2xl font-semibold">Sales Overview</h1>
-            <p className="text-sm text-muted-foreground mt-1">Track your sales performance and revenue trends</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Sales Overview</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Track your sales performance and revenue trends</p>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto text-sm">
             <Plus className="h-4 w-4" />
-            <span className="hidden sm:inline">New Invoice</span>
-            <span className="sm:hidden">New Invoice</span>
+            <span>New Invoice</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-4 sm:px-6 py-6 sm:py-8 max-w-7xl mx-auto">
-        <div className="space-y-6">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto">
+        <div className="space-y-4 sm:space-y-6">
           {/* Metrics */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6">
             {salesMetrics.map((metric, index) => (
               <Card key={index}>
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium text-muted-foreground">{metric.title}</CardTitle>
+                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
+                  <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">{metric.title}</CardTitle>
                   <metric.icon className={`h-4 w-4 ${metric.color}`} />
                 </CardHeader>
-                <CardContent>
-                  <div className="text-2xl font-bold">{metric.value}</div>
+                <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
+                  <div className="text-xl sm:text-2xl font-bold">{metric.value}</div>
                   <div className="flex items-center text-xs text-muted-foreground mt-1">
                     <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
                     <span className="text-green-600">{metric.change}</span>
@@ -84,25 +83,25 @@ const Sales = () => {
 
           {/* Recent Invoices */}
           <Card>
-            <CardHeader className="p-4 sm:p-6">
-              <CardTitle className="text-lg font-semibold">Recent Invoices</CardTitle>
-              <CardDescription>Latest invoicing activity</CardDescription>
+            <CardHeader className="p-3 sm:p-6">
+              <CardTitle className="text-base sm:text-lg font-semibold">Recent Invoices</CardTitle>
+              <CardDescription className="text-xs sm:text-sm">Latest invoicing activity</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
               {/* Mobile Card View */}
               <div className="block sm:hidden">
                 <div className="divide-y divide-border">
                   {recentInvoices.map((invoice) => (
-                    <div key={invoice.id} className="p-4 space-y-3">
+                    <div key={invoice.id} className="p-3 space-y-2">
                       <div className="flex items-start justify-between">
-                        <div>
-                          <div className="font-medium">{invoice.id}</div>
-                          <div className="text-sm text-muted-foreground">{invoice.customer}</div>
-                          <div className="text-sm text-muted-foreground">{invoice.date}</div>
+                        <div className="space-y-1">
+                          <div className="text-sm font-medium">{invoice.id}</div>
+                          <div className="text-xs text-muted-foreground">{invoice.customer}</div>
+                          <div className="text-xs text-muted-foreground">{invoice.date}</div>
                         </div>
-                        <div className="text-right">
-                          <div className="font-medium">{invoice.amount}</div>
-                          <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-1 ${
+                        <div className="text-right space-y-1">
+                          <div className="text-sm font-medium">{invoice.amount}</div>
+                          <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
                             invoice.status === 'Paid' ? 'bg-green-100 text-green-800' :
                             invoice.status === 'Outstanding' ? 'bg-orange-100 text-orange-800' :
                             'bg-gray-100 text-gray-800'
