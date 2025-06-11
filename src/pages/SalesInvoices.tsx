@@ -24,41 +24,41 @@ const SalesInvoices = () => {
   });
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Invoices</h1>
-            <p className="text-sm text-gray-600 mt-1">Manage and track all your sales invoices</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Invoices</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage and track all your sales invoices</p>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto text-sm">
             <Plus className="h-4 w-4" />
-            Create Invoice
+            <span>Create Invoice</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-6">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Filters */}
-        <Card className="bg-white">
-          <CardContent className="p-6">
-            <div className="flex flex-col sm:flex-row gap-4">
+        <Card>
+          <CardContent className="p-3 sm:p-6">
+            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
                 <input
                   type="text"
                   placeholder="Search invoices..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-sm"
                 />
               </div>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent bg-background text-sm min-w-[140px]"
               >
                 <option value="all">All Status</option>
                 <option value="draft">Draft</option>
@@ -70,33 +70,27 @@ const SalesInvoices = () => {
           </CardContent>
         </Card>
 
-        {/* Invoices Table */}
-        <Card className="bg-white">
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold text-gray-900">All Invoices</CardTitle>
-            <CardDescription>{filteredInvoices.length} invoices found</CardDescription>
+        {/* Invoices */}
+        <Card>
+          <CardHeader className="p-3 sm:p-6">
+            <CardTitle className="text-base sm:text-lg font-semibold">All Invoices</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">{filteredInvoices.length} invoices found</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Invoice</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Customer</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Amount</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Status</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Due Date</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredInvoices.map((invoice) => (
-                    <tr key={invoice.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 font-medium text-gray-900">{invoice.id}</td>
-                      <td className="py-3 px-4 text-gray-700">{invoice.customer}</td>
-                      <td className="py-3 px-4 font-medium text-gray-900">{invoice.amount}</td>
-                      <td className="py-3 px-4">
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+          <CardContent className="p-0">
+            {/* Mobile Card View */}
+            <div className="block sm:hidden">
+              <div className="divide-y divide-border">
+                {filteredInvoices.map((invoice) => (
+                  <div key={invoice.id} className="p-3 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-1">
+                        <div className="text-sm font-medium">{invoice.id}</div>
+                        <div className="text-xs text-muted-foreground">{invoice.customer}</div>
+                        <div className="text-xs text-muted-foreground">Due: {invoice.dueDate}</div>
+                      </div>
+                      <div className="text-right space-y-1">
+                        <div className="text-sm font-medium">{invoice.amount}</div>
+                        <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium ${
                           invoice.status === 'Paid' ? 'bg-green-100 text-green-800' :
                           invoice.status === 'Outstanding' ? 'bg-orange-100 text-orange-800' :
                           invoice.status === 'Overdue' ? 'bg-red-100 text-red-800' :
@@ -104,30 +98,83 @@ const SalesInvoices = () => {
                         }`}>
                           {invoice.status}
                         </span>
-                      </td>
-                      <td className="py-3 px-4 text-gray-600">{invoice.dueDate}</td>
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
-                          <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Eye className="h-4 w-4" />
-                          </button>
-                          <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Edit className="h-4 w-4" />
-                          </button>
-                          <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Download className="h-4 w-4" />
-                          </button>
-                          {invoice.status === 'Draft' && (
-                            <button className="p-1 text-blue-500 hover:text-blue-700 transition-colors">
-                              <Send className="h-4 w-4" />
-                            </button>
-                          )}
-                        </div>
-                      </td>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3 pt-2 border-t border-border">
+                      <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <Eye className="h-4 w-4" />
+                      </button>
+                      <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <Edit className="h-4 w-4" />
+                      </button>
+                      <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                        <Download className="h-4 w-4" />
+                      </button>
+                      {invoice.status === 'Draft' && (
+                        <button className="p-1 text-primary hover:text-primary/80 transition-colors">
+                          <Send className="h-4 w-4" />
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden sm:block">
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Invoice</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Customer</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Amount</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Status</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Due Date</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Actions</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {filteredInvoices.map((invoice) => (
+                      <tr key={invoice.id} className="border-b border-border/50 hover:bg-muted/50">
+                        <td className="py-3 px-4 font-medium">{invoice.id}</td>
+                        <td className="py-3 px-4">{invoice.customer}</td>
+                        <td className="py-3 px-4 font-medium">{invoice.amount}</td>
+                        <td className="py-3 px-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            invoice.status === 'Paid' ? 'bg-green-100 text-green-800' :
+                            invoice.status === 'Outstanding' ? 'bg-orange-100 text-orange-800' :
+                            invoice.status === 'Overdue' ? 'bg-red-100 text-red-800' :
+                            'bg-gray-100 text-gray-800'
+                          }`}>
+                            {invoice.status}
+                          </span>
+                        </td>
+                        <td className="py-3 px-4 text-muted-foreground">{invoice.dueDate}</td>
+                        <td className="py-3 px-4">
+                          <div className="flex items-center gap-2">
+                            <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                              <Eye className="h-4 w-4" />
+                            </button>
+                            <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                              <Edit className="h-4 w-4" />
+                            </button>
+                            <button className="p-1 text-muted-foreground hover:text-foreground transition-colors">
+                              <Download className="h-4 w-4" />
+                            </button>
+                            {invoice.status === 'Draft' && (
+                              <button className="p-1 text-primary hover:text-primary/80 transition-colors">
+                                <Send className="h-4 w-4" />
+                              </button>
+                            )}
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </CardContent>
         </Card>
