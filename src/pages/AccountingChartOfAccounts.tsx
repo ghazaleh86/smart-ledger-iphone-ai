@@ -134,55 +134,92 @@ const AccountingChartOfAccounts = () => {
             </CardContent>
           </Card>
 
-          {/* Accounts Table */}
+          {/* Accounts Table - Mobile Cards on small screens */}
           <Card>
             <CardHeader className="p-4 sm:p-6">
               <CardTitle className="text-lg font-semibold">Accounts</CardTitle>
               <CardDescription>{filteredAccounts.length} accounts found</CardDescription>
             </CardHeader>
             <CardContent className="p-0">
-              <div className="overflow-x-auto">
-                <Table>
-                  <TableHeader>
-                    <TableRow>
-                      <TableHead className="whitespace-nowrap px-4">Code</TableHead>
-                      <TableHead className="whitespace-nowrap px-4">Account Name</TableHead>
-                      <TableHead className="whitespace-nowrap px-4">Type</TableHead>
-                      <TableHead className="whitespace-nowrap px-4">Balance</TableHead>
-                      <TableHead className="whitespace-nowrap px-4">Actions</TableHead>
-                    </TableRow>
-                  </TableHeader>
-                  <TableBody>
-                    {filteredAccounts.map((account) => (
-                      <TableRow key={account.id}>
-                        <TableCell className="font-mono text-sm px-4">{account.code}</TableCell>
-                        <TableCell className="px-4">
-                          <div className="font-medium text-sm">{account.name}</div>
-                          <div className="text-xs text-muted-foreground">{account.status}</div>
-                        </TableCell>
-                        <TableCell className="px-4">
-                          <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getAccountTypeColor(account.type)}`}>
+              {/* Mobile Card View */}
+              <div className="block sm:hidden">
+                <div className="divide-y divide-border">
+                  {filteredAccounts.map((account) => (
+                    <div key={account.id} className="p-4 space-y-3">
+                      <div className="flex items-start justify-between">
+                        <div>
+                          <div className="font-medium">{account.name}</div>
+                          <div className="text-sm text-muted-foreground">Code: {account.code}</div>
+                          <div className="text-sm text-muted-foreground">{account.status}</div>
+                        </div>
+                        <div className="text-right">
+                          <div className="font-medium">{account.balance}</div>
+                          <span className={`inline-block px-2 py-1 rounded-full text-xs font-medium mt-1 ${getAccountTypeColor(account.type)}`}>
                             {account.type}
                           </span>
-                        </TableCell>
-                        <TableCell className="font-medium text-sm px-4 whitespace-nowrap">{account.balance}</TableCell>
-                        <TableCell className="px-4">
-                          <div className="flex items-center gap-1">
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                              <Eye className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                              <Edit className="h-4 w-4" />
-                            </Button>
-                            <Button variant="ghost" size="icon" className="h-8 w-8">
-                              <Trash2 className="h-4 w-4" />
-                            </Button>
-                          </div>
-                        </TableCell>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-1 pt-2 border-t border-border">
+                        <Button variant="ghost" size="sm" className="h-8">
+                          <Eye className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="h-8">
+                          <Edit className="h-4 w-4" />
+                        </Button>
+                        <Button variant="ghost" size="sm" className="h-8">
+                          <Trash2 className="h-4 w-4" />
+                        </Button>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Desktop Table View */}
+              <div className="hidden sm:block">
+                <div className="overflow-x-auto">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead className="w-20">Code</TableHead>
+                        <TableHead className="min-w-48">Account Name</TableHead>
+                        <TableHead className="w-24">Type</TableHead>
+                        <TableHead className="w-32">Balance</TableHead>
+                        <TableHead className="w-32">Actions</TableHead>
                       </TableRow>
-                    ))}
-                  </TableBody>
-                </Table>
+                    </TableHeader>
+                    <TableBody>
+                      {filteredAccounts.map((account) => (
+                        <TableRow key={account.id}>
+                          <TableCell className="font-mono text-sm">{account.code}</TableCell>
+                          <TableCell>
+                            <div className="font-medium text-sm">{account.name}</div>
+                            <div className="text-xs text-muted-foreground">{account.status}</div>
+                          </TableCell>
+                          <TableCell>
+                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAccountTypeColor(account.type)}`}>
+                              {account.type}
+                            </span>
+                          </TableCell>
+                          <TableCell className="font-medium text-sm">{account.balance}</TableCell>
+                          <TableCell>
+                            <div className="flex items-center gap-1">
+                              <Button variant="ghost" size="icon" className="h-8 w-8">
+                                <Eye className="h-4 w-4" />
+                              </Button>
+                              <Button variant="ghost" size="icon" className="h-8 w-8">
+                                <Edit className="h-4 w-4" />
+                              </Button>
+                              <Button variant="ghost" size="icon" className="h-8 w-8">
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </TableCell>
+                        </TableRow>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </div>
               </div>
             </CardContent>
           </Card>
