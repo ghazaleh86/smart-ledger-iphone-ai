@@ -99,10 +99,10 @@ const AccountingChartOfAccounts = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background w-full overflow-x-hidden">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-4 sm:py-6 px-4 sm:px-8 shadow-sm border-b">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+      <div className="bg-card py-4 sm:py-6 px-4 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
             <h1 className="text-xl sm:text-2xl font-semibold">Chart of Accounts</h1>
             <p className="text-sm text-muted-foreground mt-1">Manage your company's account structure</p>
@@ -116,125 +116,127 @@ const AccountingChartOfAccounts = () => {
       </div>
 
       {/* Content */}
-      <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-6 w-full">
-        {/* Search */}
-        <Card>
-          <CardContent className="p-4 sm:p-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <input
-                type="text"
-                placeholder="Search accounts..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
-              />
-            </div>
-          </CardContent>
-        </Card>
+      <div className="px-4 sm:px-6 py-6 sm:py-8 max-w-7xl mx-auto">
+        <div className="space-y-6">
+          {/* Search */}
+          <Card>
+            <CardContent className="p-4 sm:p-6">
+              <div className="relative">
+                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+                <input
+                  type="text"
+                  placeholder="Search accounts..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                />
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Accounts Table */}
-        <Card className="w-full">
-          <CardHeader className="p-4 sm:p-6">
-            <CardTitle className="text-lg font-semibold">Accounts</CardTitle>
-            <CardDescription>{filteredAccounts.length} accounts found</CardDescription>
-          </CardHeader>
-          <CardContent className="p-0">
-            <div className="w-full overflow-x-auto">
-              <Table>
-                <TableHeader>
-                  <TableRow>
-                    <TableHead className="w-20 sm:w-24">Code</TableHead>
-                    <TableHead className="min-w-[120px]">Account Name</TableHead>
-                    <TableHead className="w-16 sm:w-20">Type</TableHead>
-                    <TableHead className="w-24 sm:w-28">Balance</TableHead>
-                    <TableHead className="w-24 sm:w-28">Actions</TableHead>
-                  </TableRow>
-                </TableHeader>
-                <TableBody>
-                  {filteredAccounts.map((account) => (
-                    <TableRow key={account.id}>
-                      <TableCell className="font-mono text-xs sm:text-sm">{account.code}</TableCell>
-                      <TableCell>
-                        <div className="font-medium text-xs sm:text-sm">{account.name}</div>
-                        <div className="text-xs text-muted-foreground">{account.status}</div>
-                      </TableCell>
-                      <TableCell>
-                        <span className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${getAccountTypeColor(account.type)}`}>
-                          {account.type}
-                        </span>
-                      </TableCell>
-                      <TableCell className="font-medium text-xs sm:text-sm">{account.balance}</TableCell>
-                      <TableCell>
-                        <div className="flex items-center gap-0.5 sm:gap-1">
-                          <Button variant="ghost" size="icon" className="h-6 w-6 sm:h-8 sm:w-8">
-                            <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon" className="h-6 w-6 sm:h-8 sm:w-8">
-                            <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
-                          </Button>
-                          <Button variant="ghost" size="icon" className="h-6 w-6 sm:h-8 sm:w-8">
-                            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
-                          </Button>
-                        </div>
-                      </TableCell>
+          {/* Accounts Table */}
+          <Card>
+            <CardHeader className="p-4 sm:p-6">
+              <CardTitle className="text-lg font-semibold">Accounts</CardTitle>
+              <CardDescription>{filteredAccounts.length} accounts found</CardDescription>
+            </CardHeader>
+            <CardContent className="p-0">
+              <div className="overflow-x-auto">
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead className="whitespace-nowrap px-4">Code</TableHead>
+                      <TableHead className="whitespace-nowrap px-4">Account Name</TableHead>
+                      <TableHead className="whitespace-nowrap px-4">Type</TableHead>
+                      <TableHead className="whitespace-nowrap px-4">Balance</TableHead>
+                      <TableHead className="whitespace-nowrap px-4">Actions</TableHead>
                     </TableRow>
-                  ))}
-                </TableBody>
-              </Table>
-            </div>
-          </CardContent>
-        </Card>
+                  </TableHeader>
+                  <TableBody>
+                    {filteredAccounts.map((account) => (
+                      <TableRow key={account.id}>
+                        <TableCell className="font-mono text-sm px-4">{account.code}</TableCell>
+                        <TableCell className="px-4">
+                          <div className="font-medium text-sm">{account.name}</div>
+                          <div className="text-xs text-muted-foreground">{account.status}</div>
+                        </TableCell>
+                        <TableCell className="px-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium whitespace-nowrap ${getAccountTypeColor(account.type)}`}>
+                            {account.type}
+                          </span>
+                        </TableCell>
+                        <TableCell className="font-medium text-sm px-4 whitespace-nowrap">{account.balance}</TableCell>
+                        <TableCell className="px-4">
+                          <div className="flex items-center gap-1">
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <Eye className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <Edit className="h-4 w-4" />
+                            </Button>
+                            <Button variant="ghost" size="icon" className="h-8 w-8">
+                              <Trash2 className="h-4 w-4" />
+                            </Button>
+                          </div>
+                        </TableCell>
+                      </TableRow>
+                    ))}
+                  </TableBody>
+                </Table>
+              </div>
+            </CardContent>
+          </Card>
 
-        {/* Summary Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 w-full">
-          <Card>
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Assets</p>
-                  <p className="text-lg sm:text-xl font-bold text-green-600">$89,361</p>
+          {/* Summary Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <Card>
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Total Assets</p>
+                    <p className="text-xl font-bold text-green-600">$89,361</p>
+                  </div>
+                  <BookOpen className="h-8 w-8 text-primary" />
                 </div>
-                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Liabilities</p>
-                  <p className="text-lg sm:text-xl font-bold text-red-600">$20,841</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Total Liabilities</p>
+                    <p className="text-xl font-bold text-red-600">$20,841</p>
+                  </div>
+                  <BookOpen className="h-8 w-8 text-red-500" />
                 </div>
-                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Equity</p>
-                  <p className="text-lg sm:text-xl font-bold text-purple-600">$75,000</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Total Equity</p>
+                    <p className="text-xl font-bold text-purple-600">$75,000</p>
+                  </div>
+                  <BookOpen className="h-8 w-8 text-purple-500" />
                 </div>
-                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-4 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Net Income</p>
-                  <p className="text-lg sm:text-xl font-bold text-green-600">$83,280</p>
+              </CardContent>
+            </Card>
+            
+            <Card>
+              <CardContent className="p-4 sm:p-6">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-sm text-muted-foreground">Net Income</p>
+                    <p className="text-xl font-bold text-green-600">$83,280</p>
+                  </div>
+                  <BookOpen className="h-8 w-8 text-green-500" />
                 </div>
-                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
-              </div>
-            </CardContent>
-          </Card>
+              </CardContent>
+            </Card>
+          </div>
         </div>
       </div>
     </div>
