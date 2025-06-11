@@ -1,77 +1,112 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Calculator, Plus, Search, FolderOpen, Eye, Edit, Trash2 } from 'lucide-react';
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { BookOpen, Plus, Search, Eye, Edit, Trash2 } from 'lucide-react';
 
 const AccountingChartOfAccounts = () => {
   const [searchTerm, setSearchTerm] = useState('');
-  const [accountTypeFilter, setAccountTypeFilter] = useState('all');
 
-  const chartOfAccounts = [
-    // Assets
-    { id: 1001, name: "Cash", type: "Assets", subtype: "Current Assets", description: "Petty cash and cash on hand", balance: "$5,280.50" },
-    { id: 1010, name: "Business Checking", type: "Assets", subtype: "Current Assets", description: "Primary business bank account", balance: "$45,280.50" },
-    { id: 1020, name: "Business Savings", type: "Assets", subtype: "Current Assets", description: "Business savings account", balance: "$125,670.25" },
-    { id: 1200, name: "Accounts Receivable", type: "Assets", subtype: "Current Assets", description: "Money owed by customers", balance: "$28,940.00" },
-    { id: 1500, name: "Office Equipment", type: "Assets", subtype: "Fixed Assets", description: "Computers, furniture, and equipment", balance: "$15,500.00" },
-    
-    // Liabilities
-    { id: 2000, name: "Accounts Payable", type: "Liabilities", subtype: "Current Liabilities", description: "Money owed to vendors", balance: "$11,090.00" },
-    { id: 2100, name: "Credit Card", type: "Liabilities", subtype: "Current Liabilities", description: "Business credit card balance", balance: "$5,230.75" },
-    { id: 2500, name: "Payroll Liabilities", type: "Liabilities", subtype: "Current Liabilities", description: "Wages and taxes payable", balance: "$8,750.00" },
-    
-    // Equity
-    { id: 3000, name: "Owner's Equity", type: "Equity", subtype: "Owner's Equity", description: "Owner's investment in the business", balance: "$100,000.00" },
-    { id: 3200, name: "Retained Earnings", type: "Equity", subtype: "Retained Earnings", description: "Accumulated business profits", balance: "$75,420.50" },
-    
-    // Revenue
-    { id: 4000, name: "Sales Revenue", type: "Revenue", subtype: "Operating Revenue", description: "Income from sales", balance: "$124,750.00" },
-    { id: 4100, name: "Service Revenue", type: "Revenue", subtype: "Operating Revenue", description: "Income from services", balance: "$45,200.00" },
-    
-    // Expenses
-    { id: 5000, name: "Cost of Goods Sold", type: "Expenses", subtype: "Cost of Sales", description: "Direct costs of products sold", balance: "$35,800.00" },
-    { id: 6000, name: "Office Rent", type: "Expenses", subtype: "Operating Expenses", description: "Monthly office rental", balance: "$12,000.00" },
-    { id: 6100, name: "Utilities", type: "Expenses", subtype: "Operating Expenses", description: "Electricity, water, internet", balance: "$2,450.00" },
-    { id: 6200, name: "Marketing", type: "Expenses", subtype: "Operating Expenses", description: "Advertising and promotion", balance: "$8,750.00" },
-    { id: 6300, name: "Professional Services", type: "Expenses", subtype: "Operating Expenses", description: "Legal and accounting fees", balance: "$5,200.00" }
+  const accounts = [
+    {
+      id: 1,
+      code: "1000",
+      name: "Cash",
+      type: "Asset",
+      balance: "$25,430.50",
+      status: "Active"
+    },
+    {
+      id: 2,
+      code: "1100",
+      name: "Accounts Receivable",
+      type: "Asset",
+      balance: "$18,250.75",
+      status: "Active"
+    },
+    {
+      id: 3,
+      code: "1200",
+      name: "Inventory",
+      type: "Asset",
+      balance: "$45,680.25",
+      status: "Active"
+    },
+    {
+      id: 4,
+      code: "2000",
+      name: "Accounts Payable",
+      type: "Liability",
+      balance: "$12,340.80",
+      status: "Active"
+    },
+    {
+      id: 5,
+      code: "2100",
+      name: "Short-term Loans",
+      type: "Liability",
+      balance: "$8,500.00",
+      status: "Active"
+    },
+    {
+      id: 6,
+      code: "3000",
+      name: "Owner's Equity",
+      type: "Equity",
+      balance: "$75,000.00",
+      status: "Active"
+    },
+    {
+      id: 7,
+      code: "4000",
+      name: "Sales Revenue",
+      type: "Revenue",
+      balance: "$125,430.90",
+      status: "Active"
+    },
+    {
+      id: 8,
+      code: "5000",
+      name: "Cost of Goods Sold",
+      type: "Expense",
+      balance: "$42,150.60",
+      status: "Active"
+    }
   ];
 
-  const accountTypes = ["All", "Assets", "Liabilities", "Equity", "Revenue", "Expenses"];
+  const filteredAccounts = accounts.filter(account =>
+    account.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    account.code.includes(searchTerm) ||
+    account.type.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-  const filteredAccounts = chartOfAccounts.filter(account => {
-    const matchesSearch = account.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         account.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesType = accountTypeFilter === 'all' || account.type.toLowerCase() === accountTypeFilter;
-    return matchesSearch && matchesType;
-  });
-
-  const getAccountTypeIcon = (type: string) => {
+  const getAccountTypeColor = (type: string) => {
     switch (type) {
-      case 'Assets':
-        return '💰';
-      case 'Liabilities':
-        return '📋';
+      case 'Asset':
+        return 'bg-blue-100 text-blue-800';
+      case 'Liability':
+        return 'bg-red-100 text-red-800';
       case 'Equity':
-        return '🏛️';
+        return 'bg-purple-100 text-purple-800';
       case 'Revenue':
-        return '📈';
-      case 'Expenses':
-        return '📊';
+        return 'bg-green-100 text-green-800';
+      case 'Expense':
+        return 'bg-orange-100 text-orange-800';
       default:
-        return '📁';
+        return 'bg-gray-100 text-gray-800';
     }
   };
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-4 sm:py-6 px-4 sm:px-8 shadow-sm border-b border-gray-200">
+      <div className="bg-card py-4 sm:py-6 px-4 sm:px-8 shadow-sm border-b">
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">Chart of Accounts</h1>
-            <p className="text-sm text-gray-600 mt-1">Manage your accounting structure and account categories</p>
+            <h1 className="text-xl sm:text-2xl font-semibold">Chart of Accounts</h1>
+            <p className="text-sm text-muted-foreground mt-1">Manage your company's account structure</p>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm">
             <Plus className="h-4 w-4" />
             <span className="hidden sm:inline">Add Account</span>
             <span className="sm:hidden">Add</span>
@@ -80,126 +115,132 @@ const AccountingChartOfAccounts = () => {
       </div>
 
       {/* Content */}
-      <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-6">
-        {/* Account Type Summary */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
-          {accountTypes.slice(1).map((type) => {
-            const typeAccounts = chartOfAccounts.filter(acc => acc.type === type);
-            return (
-              <Card key={type} className="bg-white">
-                <CardContent className="p-3 sm:p-4 text-center">
-                  <div className="text-xl sm:text-2xl mb-2">{getAccountTypeIcon(type)}</div>
-                  <h3 className="font-medium text-gray-900 text-sm">{type}</h3>
-                  <p className="text-xs text-gray-600">{typeAccounts.length} accounts</p>
-                </CardContent>
-              </Card>
-            );
-          })}
-        </div>
-
-        {/* Filters */}
-        <Card className="bg-white">
+      <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-6 max-w-full overflow-hidden">
+        {/* Search */}
+        <Card>
           <CardContent className="p-4 sm:p-6">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 relative">
-                <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                <input
-                  type="text"
-                  placeholder="Search accounts..."
-                  value={searchTerm}
-                  onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-                />
-              </div>
-              <select
-                value={accountTypeFilter}
-                onChange={(e) => setAccountTypeFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
-              >
-                {accountTypes.map((type) => (
-                  <option key={type} value={type === 'All' ? 'all' : type.toLowerCase()}>
-                    {type}
-                  </option>
-                ))}
-              </select>
+            <div className="relative">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <input
+                type="text"
+                placeholder="Search accounts..."
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+              />
             </div>
           </CardContent>
         </Card>
 
-        {/* Chart of Accounts Table */}
-        <Card className="bg-white">
+        {/* Accounts Table */}
+        <Card>
           <CardHeader className="p-4 sm:p-6">
-            <CardTitle className="text-lg font-semibold text-gray-900">All Accounts</CardTitle>
+            <CardTitle className="text-lg font-semibold">Accounts</CardTitle>
             <CardDescription>{filteredAccounts.length} accounts found</CardDescription>
           </CardHeader>
-          <CardContent className="p-0 sm:p-6 sm:pt-0">
-            <div className="overflow-x-auto">
-              <table className="w-full min-w-[600px]">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Account #</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Name</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Type</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm hidden lg:table-cell">Subtype</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Balance</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Actions</th>
-                  </tr>
-                </thead>
-                <tbody>
+          <CardContent className="p-0">
+            <div className="w-full overflow-x-auto">
+              <Table>
+                <TableHeader>
+                  <TableRow>
+                    <TableHead className="w-[100px] min-w-[100px]">Code</TableHead>
+                    <TableHead className="w-[200px] min-w-[200px]">Account Name</TableHead>
+                    <TableHead className="w-[120px] min-w-[120px]">Type</TableHead>
+                    <TableHead className="w-[140px] min-w-[140px]">Balance</TableHead>
+                    <TableHead className="w-[100px] min-w-[100px] hidden sm:table-cell">Status</TableHead>
+                    <TableHead className="w-[120px] min-w-[120px]">Actions</TableHead>
+                  </TableRow>
+                </TableHeader>
+                <TableBody>
                   {filteredAccounts.map((account) => (
-                    <tr key={account.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 font-medium text-gray-900 text-sm">{account.id}</td>
-                      <td className="py-3 px-4">
-                        <div>
-                          <div className="font-medium text-gray-900 text-sm">{account.name}</div>
-                          <div className="text-xs text-gray-600 lg:hidden">{account.subtype}</div>
-                          <div className="text-xs text-gray-600 truncate max-w-[150px] sm:max-w-[200px]">{account.description}</div>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
-                          <span className="text-sm">{getAccountTypeIcon(account.type)}</span>
-                          <span className="text-gray-700 text-sm hidden sm:inline">{account.type}</span>
-                        </div>
-                      </td>
-                      <td className="py-3 px-4 text-gray-600 text-sm hidden lg:table-cell">{account.subtype}</td>
-                      <td className="py-3 px-4 font-medium text-gray-900 text-sm">{account.balance}</td>
-                      <td className="py-3 px-4">
+                    <TableRow key={account.id}>
+                      <TableCell className="w-[100px] min-w-[100px] font-mono text-sm">{account.code}</TableCell>
+                      <TableCell className="w-[200px] min-w-[200px]">
+                        <div className="font-medium text-sm">{account.name}</div>
+                        <div className="text-xs text-muted-foreground sm:hidden">{account.status}</div>
+                      </TableCell>
+                      <TableCell className="w-[120px] min-w-[120px]">
+                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAccountTypeColor(account.type)}`}>
+                          {account.type}
+                        </span>
+                      </TableCell>
+                      <TableCell className="w-[140px] min-w-[140px] font-medium text-sm">{account.balance}</TableCell>
+                      <TableCell className="w-[100px] min-w-[100px] hidden sm:table-cell">
+                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                          {account.status}
+                        </span>
+                      </TableCell>
+                      <TableCell className="w-[120px] min-w-[120px]">
                         <div className="flex items-center gap-1">
-                          <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
+                          <button className="p-1 hover:bg-muted rounded" title="View">
+                            <Eye className="h-4 w-4 text-muted-foreground" />
                           </button>
-                          <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
+                          <button className="p-1 hover:bg-muted rounded" title="Edit">
+                            <Edit className="h-4 w-4 text-muted-foreground" />
                           </button>
-                          <button className="p-1 text-gray-400 hover:text-red-600 transition-colors">
-                            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
+                          <button className="p-1 hover:bg-muted rounded" title="Delete">
+                            <Trash2 className="h-4 w-4 text-muted-foreground" />
                           </button>
                         </div>
-                      </td>
-                    </tr>
+                      </TableCell>
+                    </TableRow>
                   ))}
-                </tbody>
-              </table>
+                </TableBody>
+              </Table>
             </div>
           </CardContent>
         </Card>
 
-        {/* Help Section */}
-        <Card className="bg-green-50 border-green-200">
-          <CardContent className="p-4 sm:p-6">
-            <div className="flex items-start gap-3">
-              <Calculator className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
-              <div>
-                <h3 className="font-medium text-green-900 text-sm sm:text-base">Chart of Accounts Structure</h3>
-                <p className="text-xs sm:text-sm text-green-700 mt-1">
-                  Your chart of accounts is organized into five main categories: Assets, Liabilities, Equity, Revenue, and Expenses. 
-                  Each account has a unique number for easy identification and reporting.
-                </p>
+        {/* Summary Cards */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+          <Card>
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Assets</p>
+                  <p className="text-lg sm:text-xl font-bold text-green-600">$89,361</p>
+                </div>
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-primary" />
               </div>
-            </div>
-          </CardContent>
-        </Card>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Liabilities</p>
+                  <p className="text-lg sm:text-xl font-bold text-red-600">$20,841</p>
+                </div>
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Equity</p>
+                  <p className="text-lg sm:text-xl font-bold text-purple-600">$75,000</p>
+                </div>
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-purple-500" />
+              </div>
+            </CardContent>
+          </Card>
+          
+          <Card>
+            <CardContent className="p-4 sm:p-6">
+              <div className="flex items-center justify-between">
+                <div>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Net Income</p>
+                  <p className="text-lg sm:text-xl font-bold text-green-600">$83,280</p>
+                </div>
+                <BookOpen className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
+              </div>
+            </CardContent>
+          </Card>
+        </div>
       </div>
     </div>
   );
