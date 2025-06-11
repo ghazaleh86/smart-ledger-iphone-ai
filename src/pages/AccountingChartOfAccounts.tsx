@@ -65,31 +65,32 @@ const AccountingChartOfAccounts = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-white py-4 sm:py-6 px-4 sm:px-8 shadow-sm border-b border-gray-200">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Chart of Accounts</h1>
+            <h1 className="text-xl sm:text-2xl font-semibold text-gray-900">Chart of Accounts</h1>
             <p className="text-sm text-gray-600 mt-1">Manage your accounting structure and account categories</p>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="flex items-center justify-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors text-sm">
             <Plus className="h-4 w-4" />
-            Add Account
+            <span className="hidden sm:inline">Add Account</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-6">
+      <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-6">
         {/* Account Type Summary */}
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 sm:gap-4">
           {accountTypes.slice(1).map((type) => {
             const typeAccounts = chartOfAccounts.filter(acc => acc.type === type);
             return (
               <Card key={type} className="bg-white">
-                <CardContent className="p-4 text-center">
-                  <div className="text-2xl mb-2">{getAccountTypeIcon(type)}</div>
-                  <h3 className="font-medium text-gray-900">{type}</h3>
-                  <p className="text-sm text-gray-600">{typeAccounts.length} accounts</p>
+                <CardContent className="p-3 sm:p-4 text-center">
+                  <div className="text-xl sm:text-2xl mb-2">{getAccountTypeIcon(type)}</div>
+                  <h3 className="font-medium text-gray-900 text-sm">{type}</h3>
+                  <p className="text-xs text-gray-600">{typeAccounts.length} accounts</p>
                 </CardContent>
               </Card>
             );
@@ -98,7 +99,7 @@ const AccountingChartOfAccounts = () => {
 
         {/* Filters */}
         <Card className="bg-white">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex flex-col sm:flex-row gap-4">
               <div className="flex-1 relative">
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
@@ -107,13 +108,13 @@ const AccountingChartOfAccounts = () => {
                   placeholder="Search accounts..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                  className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
                 />
               </div>
               <select
                 value={accountTypeFilter}
                 onChange={(e) => setAccountTypeFilter(e.target.value)}
-                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm"
               >
                 {accountTypes.map((type) => (
                   <option key={type} value={type === 'All' ? 'all' : type.toLowerCase()}>
@@ -127,51 +128,52 @@ const AccountingChartOfAccounts = () => {
 
         {/* Chart of Accounts Table */}
         <Card className="bg-white">
-          <CardHeader>
+          <CardHeader className="p-4 sm:p-6">
             <CardTitle className="text-lg font-semibold text-gray-900">All Accounts</CardTitle>
             <CardDescription>{filteredAccounts.length} accounts found</CardDescription>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-0 sm:p-6 sm:pt-0">
             <div className="overflow-x-auto">
-              <table className="w-full">
+              <table className="w-full min-w-[600px]">
                 <thead>
                   <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Account #</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Name</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Type</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Subtype</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Balance</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Actions</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Account #</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Name</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Type</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm hidden lg:table-cell">Subtype</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Balance</th>
+                    <th className="text-left py-3 px-4 font-medium text-gray-600 text-xs sm:text-sm">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   {filteredAccounts.map((account) => (
                     <tr key={account.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 font-medium text-gray-900">{account.id}</td>
+                      <td className="py-3 px-4 font-medium text-gray-900 text-sm">{account.id}</td>
                       <td className="py-3 px-4">
                         <div>
-                          <div className="font-medium text-gray-900">{account.name}</div>
-                          <div className="text-sm text-gray-600">{account.description}</div>
+                          <div className="font-medium text-gray-900 text-sm">{account.name}</div>
+                          <div className="text-xs text-gray-600 lg:hidden">{account.subtype}</div>
+                          <div className="text-xs text-gray-600 truncate max-w-[150px] sm:max-w-[200px]">{account.description}</div>
                         </div>
                       </td>
                       <td className="py-3 px-4">
                         <div className="flex items-center gap-2">
-                          <span>{getAccountTypeIcon(account.type)}</span>
-                          <span className="text-gray-700">{account.type}</span>
+                          <span className="text-sm">{getAccountTypeIcon(account.type)}</span>
+                          <span className="text-gray-700 text-sm hidden sm:inline">{account.type}</span>
                         </div>
                       </td>
-                      <td className="py-3 px-4 text-gray-600">{account.subtype}</td>
-                      <td className="py-3 px-4 font-medium text-gray-900">{account.balance}</td>
+                      <td className="py-3 px-4 text-gray-600 text-sm hidden lg:table-cell">{account.subtype}</td>
+                      <td className="py-3 px-4 font-medium text-gray-900 text-sm">{account.balance}</td>
                       <td className="py-3 px-4">
-                        <div className="flex items-center gap-2">
+                        <div className="flex items-center gap-1">
                           <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Eye className="h-4 w-4" />
+                            <Eye className="h-3 w-3 sm:h-4 sm:w-4" />
                           </button>
                           <button className="p-1 text-gray-400 hover:text-gray-600 transition-colors">
-                            <Edit className="h-4 w-4" />
+                            <Edit className="h-3 w-3 sm:h-4 sm:w-4" />
                           </button>
                           <button className="p-1 text-gray-400 hover:text-red-600 transition-colors">
-                            <Trash2 className="h-4 w-4" />
+                            <Trash2 className="h-3 w-3 sm:h-4 sm:w-4" />
                           </button>
                         </div>
                       </td>
@@ -185,12 +187,12 @@ const AccountingChartOfAccounts = () => {
 
         {/* Help Section */}
         <Card className="bg-green-50 border-green-200">
-          <CardContent className="p-6">
+          <CardContent className="p-4 sm:p-6">
             <div className="flex items-start gap-3">
-              <Calculator className="h-5 w-5 text-green-600 mt-0.5" />
+              <Calculator className="h-5 w-5 text-green-600 mt-0.5 flex-shrink-0" />
               <div>
-                <h3 className="font-medium text-green-900">Chart of Accounts Structure</h3>
-                <p className="text-sm text-green-700 mt-1">
+                <h3 className="font-medium text-green-900 text-sm sm:text-base">Chart of Accounts Structure</h3>
+                <p className="text-xs sm:text-sm text-green-700 mt-1">
                   Your chart of accounts is organized into five main categories: Assets, Liabilities, Equity, Revenue, and Expenses. 
                   Each account has a unique number for easy identification and reporting.
                 </p>
