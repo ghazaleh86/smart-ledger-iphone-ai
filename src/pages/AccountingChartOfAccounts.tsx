@@ -1,9 +1,8 @@
-
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
-import { BookOpen, Plus, Search, Eye, Edit, Trash2 } from 'lucide-react';
+import { BookOpen, Plus, Search, Eye, Edit, Trash2, Wallet, CreditCard, PiggyBank, TrendingUp } from 'lucide-react';
 
 const AccountingChartOfAccounts = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -233,7 +232,7 @@ const AccountingChartOfAccounts = () => {
                     <p className="text-sm text-muted-foreground">Total Assets</p>
                     <p className="text-xl font-bold text-green-600">$89,361</p>
                   </div>
-                  <BookOpen className="h-8 w-8 text-primary" />
+                  <Wallet className="h-8 w-8 text-green-500" />
                 </div>
               </CardContent>
             </Card>
@@ -245,7 +244,7 @@ const AccountingChartOfAccounts = () => {
                     <p className="text-sm text-muted-foreground">Total Liabilities</p>
                     <p className="text-xl font-bold text-red-600">$20,841</p>
                   </div>
-                  <BookOpen className="h-8 w-8 text-red-500" />
+                  <CreditCard className="h-8 w-8 text-red-500" />
                 </div>
               </CardContent>
             </Card>
@@ -257,7 +256,7 @@ const AccountingChartOfAccounts = () => {
                     <p className="text-sm text-muted-foreground">Total Equity</p>
                     <p className="text-xl font-bold text-purple-600">$75,000</p>
                   </div>
-                  <BookOpen className="h-8 w-8 text-purple-500" />
+                  <PiggyBank className="h-8 w-8 text-purple-500" />
                 </div>
               </CardContent>
             </Card>
@@ -269,7 +268,7 @@ const AccountingChartOfAccounts = () => {
                     <p className="text-sm text-muted-foreground">Net Income</p>
                     <p className="text-xl font-bold text-green-600">$83,280</p>
                   </div>
-                  <BookOpen className="h-8 w-8 text-green-500" />
+                  <TrendingUp className="h-8 w-8 text-green-500" />
                 </div>
               </CardContent>
             </Card>
