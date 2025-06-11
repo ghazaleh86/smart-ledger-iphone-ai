@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { Button } from '@/components/ui/button';
 import { BookOpen, Plus, Search, Eye, Edit, Trash2 } from 'lucide-react';
 
 const AccountingChartOfAccounts = () => {
@@ -106,16 +107,16 @@ const AccountingChartOfAccounts = () => {
             <h1 className="text-xl sm:text-2xl font-semibold">Chart of Accounts</h1>
             <p className="text-sm text-muted-foreground mt-1">Manage your company's account structure</p>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm">
+          <Button className="flex items-center gap-2">
             <Plus className="h-4 w-4" />
             <span className="hidden sm:inline">Add Account</span>
             <span className="sm:hidden">Add</span>
-          </button>
+          </Button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-6 max-w-full overflow-hidden">
+      <div className="px-4 sm:px-8 py-6 sm:py-8 space-y-6 max-w-full">
         {/* Search */}
         <Card>
           <CardContent className="p-4 sm:p-6">
@@ -139,48 +140,42 @@ const AccountingChartOfAccounts = () => {
             <CardDescription>{filteredAccounts.length} accounts found</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
-            <div className="w-full overflow-x-auto">
+            <div className="overflow-x-auto">
               <Table>
                 <TableHeader>
                   <TableRow>
-                    <TableHead className="w-[100px] min-w-[100px]">Code</TableHead>
-                    <TableHead className="w-[200px] min-w-[200px]">Account Name</TableHead>
-                    <TableHead className="w-[120px] min-w-[120px]">Type</TableHead>
-                    <TableHead className="w-[140px] min-w-[140px]">Balance</TableHead>
-                    <TableHead className="w-[100px] min-w-[100px] hidden sm:table-cell">Status</TableHead>
-                    <TableHead className="w-[120px] min-w-[120px]">Actions</TableHead>
+                    <TableHead className="min-w-[80px]">Code</TableHead>
+                    <TableHead className="min-w-[150px]">Account Name</TableHead>
+                    <TableHead className="min-w-[100px]">Type</TableHead>
+                    <TableHead className="min-w-[120px]">Balance</TableHead>
+                    <TableHead className="min-w-[100px]">Actions</TableHead>
                   </TableRow>
                 </TableHeader>
                 <TableBody>
                   {filteredAccounts.map((account) => (
                     <TableRow key={account.id}>
-                      <TableCell className="w-[100px] min-w-[100px] font-mono text-sm">{account.code}</TableCell>
-                      <TableCell className="w-[200px] min-w-[200px]">
+                      <TableCell className="font-mono text-sm">{account.code}</TableCell>
+                      <TableCell>
                         <div className="font-medium text-sm">{account.name}</div>
-                        <div className="text-xs text-muted-foreground sm:hidden">{account.status}</div>
+                        <div className="text-xs text-muted-foreground">{account.status}</div>
                       </TableCell>
-                      <TableCell className="w-[120px] min-w-[120px]">
+                      <TableCell>
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${getAccountTypeColor(account.type)}`}>
                           {account.type}
                         </span>
                       </TableCell>
-                      <TableCell className="w-[140px] min-w-[140px] font-medium text-sm">{account.balance}</TableCell>
-                      <TableCell className="w-[100px] min-w-[100px] hidden sm:table-cell">
-                        <span className="px-2 py-1 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                          {account.status}
-                        </span>
-                      </TableCell>
-                      <TableCell className="w-[120px] min-w-[120px]">
+                      <TableCell className="font-medium text-sm">{account.balance}</TableCell>
+                      <TableCell>
                         <div className="flex items-center gap-1">
-                          <button className="p-1 hover:bg-muted rounded" title="View">
-                            <Eye className="h-4 w-4 text-muted-foreground" />
-                          </button>
-                          <button className="p-1 hover:bg-muted rounded" title="Edit">
-                            <Edit className="h-4 w-4 text-muted-foreground" />
-                          </button>
-                          <button className="p-1 hover:bg-muted rounded" title="Delete">
-                            <Trash2 className="h-4 w-4 text-muted-foreground" />
-                          </button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <Eye className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <Edit className="h-4 w-4" />
+                          </Button>
+                          <Button variant="ghost" size="icon" className="h-8 w-8">
+                            <Trash2 className="h-4 w-4" />
+                          </Button>
                         </div>
                       </TableCell>
                     </TableRow>
