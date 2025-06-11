@@ -97,7 +97,7 @@ const bottomItems = [
 ]
 
 export function AppSidebar() {
-  const { state } = useSidebar()
+  const { state, setOpenMobile, isMobile } = useSidebar()
   const location = useLocation()
   const currentPath = location.pathname
   const [openGroups, setOpenGroups] = useState<string[]>(["Accounting"])
@@ -113,6 +113,12 @@ export function AppSidebar() {
   }
 
   const isActive = (path: string) => currentPath === path
+
+  const handleNavClick = () => {
+    if (isMobile) {
+      setOpenMobile(false)
+    }
+  }
 
   return (
     <Sidebar className="border-r border-gray-200 bg-white">
@@ -168,6 +174,7 @@ export function AppSidebar() {
                               >
                                 <NavLink 
                                   to={subItem.url}
+                                  onClick={handleNavClick}
                                   className={`block px-3 py-2 text-sm rounded-md transition-colors ${
                                     isActive(subItem.url) 
                                       ? 'text-blue-700 bg-blue-50 font-medium' 
@@ -187,6 +194,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild isActive={isActive(item.url!)}>
                     <NavLink 
                       to={item.url!}
+                      onClick={handleNavClick}
                       className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
                         isActive(item.url!) 
                           ? 'text-blue-700 bg-blue-50 font-medium' 
@@ -212,6 +220,7 @@ export function AppSidebar() {
                   <SidebarMenuButton asChild isActive={isActive(item.url)}>
                     <NavLink 
                       to={item.url}
+                      onClick={handleNavClick}
                       className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
                         isActive(item.url) 
                           ? 'text-blue-700 bg-blue-50 font-medium' 
