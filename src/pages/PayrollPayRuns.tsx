@@ -85,7 +85,9 @@ const PayrollPayRuns = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Employees</p>
                   <p className="text-lg sm:text-2xl font-bold">{payrollStats.totalEmployees}</p>
                 </div>
-                <Users className="h-5 w-5 sm:h-8 sm:w-8 text-blue-500" />
+                <div className="bg-blue-50 p-2 rounded-lg">
+                  <Users className="h-4 w-4 text-blue-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -97,7 +99,9 @@ const PayrollPayRuns = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Avg Monthly Pay</p>
                   <p className="text-lg sm:text-2xl font-bold text-green-600">{payrollStats.avgMonthlyPay}</p>
                 </div>
-                <Calculator className="h-5 w-5 sm:h-8 sm:w-8 text-green-500" />
+                <div className="bg-green-50 p-2 rounded-lg">
+                  <Calculator className="h-4 w-4 text-green-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -109,7 +113,9 @@ const PayrollPayRuns = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">YTD Gross Pay</p>
                   <p className="text-lg sm:text-2xl font-bold">{payrollStats.ytdGrossPay}</p>
                 </div>
-                <Calculator className="h-5 w-5 sm:h-8 sm:w-8 text-purple-500" />
+                <div className="bg-purple-50 p-2 rounded-lg">
+                  <Calculator className="h-4 w-4 text-purple-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -121,7 +127,9 @@ const PayrollPayRuns = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Last Pay Run</p>
                   <p className="text-lg sm:text-2xl font-bold">{payrollStats.lastPayRun}</p>
                 </div>
-                <Calendar className="h-5 w-5 sm:h-8 sm:w-8 text-orange-500" />
+                <div className="bg-orange-50 p-2 rounded-lg">
+                  <Calendar className="h-4 w-4 text-orange-600" />
+                </div>
               </div>
             </CardContent>
           </Card>

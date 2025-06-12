@@ -50,7 +50,9 @@ const PurchasesBills = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Outstanding</p>
                   <p className="text-lg sm:text-2xl font-bold">$11,090</p>
                 </div>
-                <AlertCircle className="h-6 w-6 sm:h-8 sm:w-8 text-orange-500" />
+                <div className="bg-orange-50 p-2 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-orange-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -62,7 +64,9 @@ const PurchasesBills = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Overdue Bills</p>
                   <p className="text-lg sm:text-2xl font-bold text-red-600">$3,200</p>
                 </div>
-                <AlertCircle className="h-6 w-6 sm:h-8 sm:w-8 text-red-500" />
+                <div className="bg-red-50 p-2 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-red-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -74,7 +78,9 @@ const PurchasesBills = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Paid This Month</p>
                   <p className="text-lg sm:text-2xl font-bold text-green-600">$2,130</p>
                 </div>
-                <CheckCircle className="h-6 w-6 sm:h-8 sm:w-8 text-green-500" />
+                <div className="bg-green-50 p-2 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                </div>
               </div>
             </CardContent>
           </Card>

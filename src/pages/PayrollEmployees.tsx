@@ -93,7 +93,9 @@ const PayrollEmployees = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Employees</p>
                   <p className="text-lg sm:text-2xl font-bold">{employees.length}</p>
                 </div>
-                <Users className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
+                <div className="bg-blue-50 p-2 rounded-lg">
+                  <Users className="h-4 w-4 text-blue-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -105,7 +107,9 @@ const PayrollEmployees = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Engineering</p>
                   <p className="text-lg sm:text-2xl font-bold">{departmentStats.Engineering}</p>
                 </div>
-                <Users className="h-5 w-5 sm:h-8 sm:w-8 text-green-500" />
+                <div className="bg-green-50 p-2 rounded-lg">
+                  <Users className="h-4 w-4 text-green-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -117,7 +121,9 @@ const PayrollEmployees = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Product</p>
                   <p className="text-lg sm:text-2xl font-bold">{departmentStats.Product}</p>
                 </div>
-                <Users className="h-5 w-5 sm:h-8 sm:w-8 text-purple-500" />
+                <div className="bg-purple-50 p-2 rounded-lg">
+                  <Users className="h-4 w-4 text-purple-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -129,7 +135,9 @@ const PayrollEmployees = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Marketing</p>
                   <p className="text-lg sm:text-2xl font-bold">{departmentStats.Marketing}</p>
                 </div>
-                <Users className="h-5 w-5 sm:h-8 sm:w-8 text-orange-500" />
+                <div className="bg-orange-50 p-2 rounded-lg">
+                  <Users className="h-4 w-4 text-orange-600" />
+                </div>
               </div>
             </CardContent>
           </Card>

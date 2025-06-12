@@ -71,7 +71,14 @@ const Purchases = () => {
                     <p className="text-xs sm:text-sm text-muted-foreground">{metric.title}</p>
                     <p className="text-lg sm:text-2xl font-bold">{metric.value}</p>
                   </div>
-                  <metric.icon className={`h-5 w-5 sm:h-8 sm:w-8 ${metric.color}`} />
+                  <div className={`p-2 rounded-lg ${
+                    metric.color === 'text-red-600' ? 'bg-red-50' :
+                    metric.color === 'text-blue-600' ? 'bg-blue-50' :
+                    metric.color === 'text-orange-600' ? 'bg-orange-50' :
+                    'bg-purple-50'
+                  }`}>
+                    <metric.icon className={`h-4 w-4 ${metric.color}`} />
+                  </div>
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground mt-1">
                   <span className="text-green-600">{metric.change}</span>
