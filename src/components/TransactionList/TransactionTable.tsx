@@ -16,10 +16,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCat
         <div className="bg-gray-50 px-8 py-6 border-b border-gray-200">
           <div className="grid grid-cols-12 gap-6 text-sm font-semibold text-gray-700">
             <div className="col-span-1">Date</div>
-            <div className="col-span-4">Description</div>
+            <div className="col-span-3">Description</div>
             <div className="col-span-2">Category</div>
             <div className="col-span-3">Payment Method</div>
-            <div className="col-span-2 text-right">Amount</div>
+            <div className="col-span-3 text-right">Amount</div>
           </div>
         </div>
         
@@ -31,8 +31,8 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCat
                 <div className="col-span-1 text-sm text-gray-600">
                   {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </div>
-                <div className="col-span-4">
-                  <div className="font-medium text-gray-900">{transaction.merchant}</div>
+                <div className="col-span-3">
+                  <div className="font-medium text-gray-900 truncate">{transaction.merchant}</div>
                   {transaction.isAISuggested && (
                     <div className="text-xs text-blue-600 flex items-center mt-1 font-medium">
                       <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></div>
@@ -48,10 +48,10 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCat
                     onCategoryChange={(category) => onCategorize(transaction.id, category)}
                   />
                 </div>
-                <div className="col-span-3 text-sm text-gray-600">
+                <div className="col-span-3 text-sm text-gray-600 truncate">
                   {transaction.paymentMethod}
                 </div>
-                <div className="col-span-2 text-right">
+                <div className="col-span-3 text-right">
                   <span className={`font-semibold text-base ${transaction.type === 'income' ? 'text-green-600' : 'text-gray-900'}`}>
                     {transaction.type === 'income' ? '+' : '-'}${Math.abs(transaction.amount).toFixed(2)}
                   </span>
