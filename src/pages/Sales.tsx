@@ -51,7 +51,7 @@ const Sales = () => {
             <h1 className="text-lg sm:text-2xl font-semibold">Sales Overview</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Track your sales performance and revenue trends</p>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto text-sm">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
             <Plus className="h-4 w-4" />
             <span>New Invoice</span>
           </button>
