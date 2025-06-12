@@ -1,4 +1,5 @@
 import * as React from "react"
+import { Check } from "lucide-react"
 
 import type {
   ToastActionElement,
@@ -13,6 +14,7 @@ type ToasterToast = ToastProps & {
   title?: React.ReactNode
   description?: React.ReactNode
   action?: ToastActionElement
+  icon?: React.ReactNode
 }
 
 const actionTypes = {
@@ -139,8 +141,15 @@ function dispatch(action: Action) {
 
 type Toast = Omit<ToasterToast, "id">
 
-function toast({ ...props }: Toast) {
+function toast({ variant = "default", ...props }: Toast) {
   const id = genId()
+
+  // Automatically add check icon for success toasts
+  const toastProps = {
+    ...props,
+    variant,
+    icon: variant === "default" ? React.createElement(Check, { className: "h-4 w-4 text-green-600" }) : props.icon,
+  }
 
   const update = (props: ToasterToast) =>
     dispatch({
@@ -152,7 +161,7 @@ function toast({ ...props }: Toast) {
   dispatch({
     type: "ADD_TOAST",
     toast: {
-      ...props,
+      ...toastProps,
       id,
       open: true,
       onOpenChange: (open) => {
