@@ -55,57 +55,64 @@ const BankingAccounts = () => {
     }, 0);
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Banking Accounts</h1>
-            <p className="text-sm text-gray-600 mt-1">Manage your bank accounts and financial institutions</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Banking Accounts</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage your bank accounts and financial institutions</p>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
             <Plus className="h-4 w-4" />
-            Connect Account
+            <span className="hidden sm:inline">Connect Account</span>
+            <span className="sm:hidden">Connect</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-8">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Summary */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <Card className="bg-white">
-            <CardContent className="p-6">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total Balance</p>
-                  <p className="text-2xl font-bold text-gray-900">${totalBalance.toLocaleString()}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Balance</p>
+                  <p className="text-lg sm:text-2xl font-bold">${totalBalance.toLocaleString()}</p>
                 </div>
-                <TrendingUp className="h-8 w-8 text-green-500" />
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <TrendingUp className="h-4 w-4 text-green-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white">
-            <CardContent className="p-6">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Connected Accounts</p>
-                  <p className="text-2xl font-bold text-gray-900">{accounts.length}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Connected Accounts</p>
+                  <p className="text-lg sm:text-2xl font-bold">{accounts.length}</p>
                 </div>
-                <CreditCard className="h-8 w-8 text-blue-500" />
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <CreditCard className="h-4 w-4 text-blue-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white">
-            <CardContent className="p-6">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Last Sync</p>
-                  <p className="text-2xl font-bold text-gray-900">2m ago</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Last Sync</p>
+                  <p className="text-lg sm:text-2xl font-bold">2m ago</p>
                 </div>
-                <Building2 className="h-8 w-8 text-purple-500" />
+                <div className="bg-purple-100 p-2 rounded-lg">
+                  <Building2 className="h-4 w-4 text-purple-600" />
+                </div>
               </div>
             </CardContent>
           </Card>

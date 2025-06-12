@@ -77,33 +77,39 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Financial Dashboard</h1>
-            <p className="text-sm text-gray-600 mt-1">Get an overview of your financial performance and key metrics</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Financial Dashboard</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Get an overview of your financial performance and key metrics</p>
           </div>
-          <div className="text-sm text-gray-500">
+          <div className="text-xs sm:text-sm text-muted-foreground self-end">
             Last updated: {new Date().toLocaleDateString()}
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-8">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Key Performance Indicators */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {kpiData.map((kpi, index) => (
-            <Card key={index} className="bg-white">
-              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                <CardTitle className="text-sm font-medium text-gray-600">{kpi.title}</CardTitle>
-                <kpi.icon className={`h-4 w-4 ${kpi.color}`} />
+            <Card key={index}>
+              <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
+                <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">{kpi.title}</CardTitle>
+                <div className={`p-2 rounded-lg ${
+                  kpi.color === 'text-green-600' ? 'bg-green-100' :
+                  kpi.color === 'text-blue-600' ? 'bg-blue-100' :
+                  'bg-emerald-100'
+                }`}>
+                  <kpi.icon className={`h-4 w-4 ${kpi.color}`} />
+                </div>
               </CardHeader>
-              <CardContent>
-                <div className="text-2xl font-bold text-gray-900">{kpi.value}</div>
-                <div className="flex items-center text-xs text-gray-500 mt-1">
+              <CardContent className="p-3 sm:p-6 pt-0">
+                <div className="text-lg sm:text-2xl font-bold">{kpi.value}</div>
+                <div className="flex items-center text-xs text-muted-foreground mt-1">
                   {kpi.trend === 'up' ? (
                     <TrendingUp className="h-3 w-3 text-green-500 mr-1" />
                   ) : (
