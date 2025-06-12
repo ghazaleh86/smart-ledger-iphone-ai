@@ -51,7 +51,7 @@ const Purchases = () => {
             <h1 className="text-lg sm:text-2xl font-semibold">Purchases Overview</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Track your purchase orders and vendor relationships</p>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto text-sm">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
             <Plus className="h-4 w-4" />
             <span className="hidden sm:inline">New Purchase Order</span>
             <span className="sm:hidden">New PO</span>
