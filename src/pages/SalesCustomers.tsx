@@ -106,15 +106,21 @@ const SalesCustomers = () => {
               <CardContent className="space-y-4 p-3 sm:p-6 pt-0">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <Mail className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <div className="bg-blue-50 p-1 rounded">
+                      <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+                    </div>
                     <span>{customer.email}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <div className="bg-green-50 p-1 rounded">
+                      <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                    </div>
                     <span>{customer.phone}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <div className="bg-purple-50 p-1 rounded">
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+                    </div>
                     <span>{customer.location}</span>
                   </div>
                 </div>

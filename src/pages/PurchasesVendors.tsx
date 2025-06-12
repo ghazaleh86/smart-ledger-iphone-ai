@@ -107,22 +107,30 @@ const PurchasesVendors = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+                  <div className="bg-yellow-50 p-1 rounded">
+                    <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-600 fill-current" />
+                  </div>
                   <span className="text-xs sm:text-sm text-muted-foreground">{vendor.rating}</span>
                 </div>
               </CardHeader>
               <CardContent className="space-y-4 p-3 sm:p-6 pt-0">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <Mail className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <div className="bg-blue-50 p-1 rounded">
+                      <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+                    </div>
                     <span>{vendor.email}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <div className="bg-green-50 p-1 rounded">
+                      <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                    </div>
                     <span>{vendor.phone}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
+                    <div className="bg-purple-50 p-1 rounded">
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+                    </div>
                     <span>{vendor.location}</span>
                   </div>
                 </div>

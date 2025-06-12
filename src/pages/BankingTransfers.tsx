@@ -99,7 +99,9 @@ const BankingTransfers = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Transfers</p>
                   <p className="text-lg sm:text-2xl font-bold">{transferStats.totalTransfers}</p>
                 </div>
-                <ArrowLeftRight className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
+                <div className="bg-blue-50 p-2 rounded-lg">
+                  <ArrowLeftRight className="h-4 w-4 text-blue-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -111,7 +113,9 @@ const BankingTransfers = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Completed Today</p>
                   <p className="text-lg sm:text-2xl font-bold text-green-600">{transferStats.completedToday}</p>
                 </div>
-                <CheckCircle className="h-5 w-5 sm:h-8 sm:w-8 text-green-500" />
+                <div className="bg-green-50 p-2 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -123,7 +127,9 @@ const BankingTransfers = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Pending</p>
                   <p className="text-lg sm:text-2xl font-bold text-orange-600">{transferStats.pendingTransfers}</p>
                 </div>
-                <Clock className="h-5 w-5 sm:h-8 sm:w-8 text-orange-500" />
+                <div className="bg-orange-50 p-2 rounded-lg">
+                  <Clock className="h-4 w-4 text-orange-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -135,7 +141,9 @@ const BankingTransfers = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Amount</p>
                   <p className="text-lg sm:text-2xl font-bold">{transferStats.totalAmount}</p>
                 </div>
-                <ArrowLeftRight className="h-5 w-5 sm:h-8 sm:w-8 text-blue-500" />
+                <div className="bg-purple-50 p-2 rounded-lg">
+                  <ArrowLeftRight className="h-4 w-4 text-purple-600" />
+                </div>
               </div>
             </CardContent>
           </Card>

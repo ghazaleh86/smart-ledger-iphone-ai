@@ -67,7 +67,14 @@ const Sales = () => {
               <Card key={index}>
                 <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
                   <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">{metric.title}</CardTitle>
-                  <metric.icon className={`h-4 w-4 ${metric.color}`} />
+                  <div className={`p-2 rounded-lg ${
+                    metric.color === 'text-green-600' ? 'bg-green-50' :
+                    metric.color === 'text-blue-600' ? 'bg-blue-50' :
+                    metric.color === 'text-orange-600' ? 'bg-orange-50' :
+                    'bg-emerald-50'
+                  }`}>
+                    <metric.icon className={`h-4 w-4 ${metric.color}`} />
+                  </div>
                 </CardHeader>
                 <CardContent className="p-3 pt-0 sm:p-6 sm:pt-0">
                   <div className="text-xl sm:text-2xl font-bold">{metric.value}</div>
