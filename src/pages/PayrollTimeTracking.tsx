@@ -62,69 +62,70 @@ const PayrollTimeTracking = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Time Tracking</h1>
-            <p className="text-sm text-gray-600 mt-1">Track employee time and attendance</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Time Tracking</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Track employee time and attendance</p>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto text-sm">
             <Plus className="h-4 w-4" />
-            Add Time Entry
+            <span className="hidden sm:inline">Add Time Entry</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-6">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Weekly Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-          <Card className="bg-white">
-            <CardContent className="p-6">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Total Hours</p>
-                  <p className="text-2xl font-bold text-gray-900">{weeklyStats.totalHours}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Total Hours</p>
+                  <p className="text-lg sm:text-2xl font-bold">{weeklyStats.totalHours}</p>
                 </div>
-                <Clock className="h-8 w-8 text-blue-500" />
+                <Clock className="h-5 w-5 sm:h-8 sm:w-8 text-blue-500" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white">
-            <CardContent className="p-6">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Overtime Hours</p>
-                  <p className="text-2xl font-bold text-orange-600">{weeklyStats.overtimeHours}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Overtime Hours</p>
+                  <p className="text-lg sm:text-2xl font-bold text-orange-600">{weeklyStats.overtimeHours}</p>
                 </div>
-                <Clock className="h-8 w-8 text-orange-500" />
+                <Clock className="h-5 w-5 sm:h-8 sm:w-8 text-orange-500" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white">
-            <CardContent className="p-6">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Avg per Employee</p>
-                  <p className="text-2xl font-bold text-gray-900">{weeklyStats.avgHoursPerEmployee}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Avg per Employee</p>
+                  <p className="text-lg sm:text-2xl font-bold">{weeklyStats.avgHoursPerEmployee}</p>
                 </div>
-                <User className="h-8 w-8 text-green-500" />
+                <User className="h-5 w-5 sm:h-8 sm:w-8 text-green-500" />
               </div>
             </CardContent>
           </Card>
           
-          <Card className="bg-white">
-            <CardContent className="p-6">
+          <Card>
+            <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
-                  <p className="text-sm text-gray-600">Active Projects</p>
-                  <p className="text-2xl font-bold text-gray-900">{weeklyStats.projectsActive}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground">Active Projects</p>
+                  <p className="text-lg sm:text-2xl font-bold">{weeklyStats.projectsActive}</p>
                 </div>
-                <Calendar className="h-8 w-8 text-purple-500" />
+                <Calendar className="h-5 w-5 sm:h-8 sm:w-8 text-purple-500" />
               </div>
             </CardContent>
           </Card>
@@ -132,100 +133,148 @@ const PayrollTimeTracking = () => {
 
         {/* Quick Timer */}
         <Card className="bg-green-50 border-green-200">
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold text-gray-900">Quick Timer</CardTitle>
-            <CardDescription>Start tracking time for current tasks</CardDescription>
+          <CardHeader className="p-3 sm:p-6">
+            <CardTitle className="text-base sm:text-lg font-semibold">Quick Timer</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">Start tracking time for current tasks</CardDescription>
           </CardHeader>
-          <CardContent className="space-y-4">
-            <div className="flex items-center gap-4">
-              <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+          <CardContent className="p-3 sm:p-6 space-y-4">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3 sm:gap-4">
+              <select className="flex-1 px-3 sm:px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background">
                 <option>Select Employee</option>
                 <option>Sarah Johnson</option>
                 <option>Michael Chen</option>
                 <option>Emily Rodriguez</option>
                 <option>David Park</option>
               </select>
-              <select className="px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+              <select className="flex-1 px-3 sm:px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background">
                 <option>Select Project</option>
                 <option>Website Redesign</option>
                 <option>Mobile App Development</option>
                 <option>Marketing Campaign</option>
                 <option>API Development</option>
               </select>
-              <div className="flex gap-2">
-                <button className="flex items-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors">
-                  <Play className="h-4 w-4" />
-                  Start
-                </button>
-                <button className="flex items-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors">
-                  <Pause className="h-4 w-4" />
-                  Pause
-                </button>
-                <button className="flex items-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors">
-                  <Square className="h-4 w-4" />
-                  Stop
-                </button>
-              </div>
+            </div>
+            <div className="flex flex-col sm:flex-row gap-2">
+              <button className="flex items-center justify-center gap-2 bg-green-600 text-white px-4 py-2 rounded-lg hover:bg-green-700 transition-colors text-sm">
+                <Play className="h-4 w-4" />
+                Start
+              </button>
+              <button className="flex items-center justify-center gap-2 bg-orange-600 text-white px-4 py-2 rounded-lg hover:bg-orange-700 transition-colors text-sm">
+                <Pause className="h-4 w-4" />
+                Pause
+              </button>
+              <button className="flex items-center justify-center gap-2 bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition-colors text-sm">
+                <Square className="h-4 w-4" />
+                Stop
+              </button>
             </div>
           </CardContent>
         </Card>
 
         {/* Search */}
-        <Card className="bg-white">
-          <CardContent className="p-6">
+        <Card>
+          <CardContent className="p-3 sm:p-6">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <input
                 type="text"
                 placeholder="Search time entries..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Time Entries */}
-        <Card className="bg-white">
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold text-gray-900">Today's Time Entries</CardTitle>
-            <CardDescription>{filteredEntries.length} entries found</CardDescription>
+        <Card>
+          <CardHeader className="p-3 sm:p-6">
+            <CardTitle className="text-base sm:text-lg font-semibold">Today's Time Entries</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">{filteredEntries.length} entries found</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="overflow-x-auto">
-              <table className="w-full">
-                <thead>
-                  <tr className="border-b border-gray-200">
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Employee</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Project</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Date</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Start Time</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">End Time</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Hours</th>
-                    <th className="text-left py-3 px-4 font-medium text-gray-600">Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredEntries.map((entry) => (
-                    <tr key={entry.id} className="border-b border-gray-100 hover:bg-gray-50">
-                      <td className="py-3 px-4 font-medium text-gray-900">{entry.employee}</td>
-                      <td className="py-3 px-4 text-gray-700">{entry.project}</td>
-                      <td className="py-3 px-4 text-gray-600">{entry.date}</td>
-                      <td className="py-3 px-4 text-gray-600">{entry.startTime}</td>
-                      <td className="py-3 px-4 text-gray-600">{entry.endTime}</td>
-                      <td className="py-3 px-4 font-medium text-gray-900">{entry.hours}h</td>
-                      <td className="py-3 px-4">
+          <CardContent className="p-0">
+            {/* Mobile Card View */}
+            <div className="block md:hidden">
+              <div className="divide-y divide-border">
+                {filteredEntries.map((entry) => (
+                  <div key={entry.id} className="p-3 space-y-3">
+                    <div className="flex items-start justify-between">
+                      <div className="space-y-1 flex-1">
+                        <div className="text-sm font-medium">{entry.employee}</div>
+                        <div className="text-xs text-muted-foreground">{entry.project}</div>
+                      </div>
+                      <div className="flex items-center gap-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                           entry.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
                         }`}>
                           {entry.status}
                         </span>
-                      </td>
+                      </div>
+                    </div>
+                    
+                    <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border">
+                      <div>
+                        <div className="text-xs text-muted-foreground">Start Time</div>
+                        <div className="text-sm">{entry.startTime}</div>
+                      </div>
+                      <div>
+                        <div className="text-xs text-muted-foreground">End Time</div>
+                        <div className="text-sm">{entry.endTime}</div>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center justify-between pt-2 border-t border-border">
+                      <div>
+                        <div className="text-xs text-muted-foreground">Hours</div>
+                        <div className="text-sm font-medium">{entry.hours}h</div>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-xs text-muted-foreground">Date</div>
+                        <div className="text-sm">{entry.date}</div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Desktop Table View */}
+            <div className="hidden md:block">
+              <div className="overflow-x-auto p-6">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b border-border">
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Employee</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Project</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Date</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Start Time</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">End Time</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Hours</th>
+                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Status</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody>
+                    {filteredEntries.map((entry) => (
+                      <tr key={entry.id} className="border-b border-border hover:bg-muted/50">
+                        <td className="py-3 px-4 font-medium">{entry.employee}</td>
+                        <td className="py-3 px-4">{entry.project}</td>
+                        <td className="py-3 px-4 text-muted-foreground">{entry.date}</td>
+                        <td className="py-3 px-4 text-muted-foreground">{entry.startTime}</td>
+                        <td className="py-3 px-4 text-muted-foreground">{entry.endTime}</td>
+                        <td className="py-3 px-4 font-medium">{entry.hours}h</td>
+                        <td className="py-3 px-4">
+                          <span className={`px-2 py-1 rounded-full text-xs font-medium ${
+                            entry.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                          }`}>
+                            {entry.status}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </CardContent>
         </Card>
