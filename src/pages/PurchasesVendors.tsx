@@ -59,46 +59,47 @@ const PurchasesVendors = () => {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Vendors</h1>
-            <p className="text-sm text-gray-600 mt-1">Manage your vendor relationships and purchase history</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Vendors</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage your vendor relationships and purchase history</p>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
             <Plus className="h-4 w-4" />
-            Add Vendor
+            <span className="hidden sm:inline">Add Vendor</span>
+            <span className="sm:hidden">Add</span>
           </button>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-6">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Search */}
-        <Card className="bg-white">
-          <CardContent className="p-6">
+        <Card>
+          <CardContent className="p-3 sm:p-6">
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
               <input
                 type="text"
                 placeholder="Search vendors..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Vendor Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredVendors.map((vendor) => (
-            <Card key={vendor.id} className="bg-white hover:shadow-md transition-shadow">
-              <CardHeader>
+            <Card key={vendor.id} className="hover:shadow-md transition-shadow">
+              <CardHeader className="p-3 sm:p-6">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-lg font-semibold text-gray-900">{vendor.name}</CardTitle>
+                  <CardTitle className="text-base sm:text-lg font-semibold">{vendor.name}</CardTitle>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                     vendor.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
                   }`}>
@@ -106,35 +107,35 @@ const PurchasesVendors = () => {
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <Star className="h-4 w-4 text-yellow-400 fill-current" />
-                  <span className="text-sm text-gray-600">{vendor.rating}</span>
+                  <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-400 fill-current" />
+                  <span className="text-xs sm:text-sm text-muted-foreground">{vendor.rating}</span>
                 </div>
               </CardHeader>
-              <CardContent className="space-y-4">
+              <CardContent className="space-y-4 p-3 sm:p-6 pt-0">
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Mail className="h-4 w-4" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <Mail className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{vendor.email}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <Phone className="h-4 w-4" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <Phone className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{vendor.phone}</span>
                   </div>
-                  <div className="flex items-center gap-2 text-sm text-gray-600">
-                    <MapPin className="h-4 w-4" />
+                  <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
+                    <MapPin className="h-3 w-3 sm:h-4 sm:w-4" />
                     <span>{vendor.location}</span>
                   </div>
                 </div>
                 
-                <div className="pt-4 border-t border-gray-200">
+                <div className="pt-3 sm:pt-4 border-t border-border">
                   <div className="grid grid-cols-2 gap-4">
                     <div>
-                      <div className="text-sm text-gray-600">Total Spent</div>
-                      <div className="font-semibold text-gray-900">{vendor.totalSpent}</div>
+                      <div className="text-xs sm:text-sm text-muted-foreground">Total Spent</div>
+                      <div className="font-semibold text-sm sm:text-base">{vendor.totalSpent}</div>
                     </div>
                     <div>
-                      <div className="text-sm text-gray-600">Orders</div>
-                      <div className="font-semibold text-gray-900">{vendor.ordersCount}</div>
+                      <div className="text-xs sm:text-sm text-muted-foreground">Orders</div>
+                      <div className="font-semibold text-sm sm:text-base">{vendor.ordersCount}</div>
                     </div>
                   </div>
                 </div>

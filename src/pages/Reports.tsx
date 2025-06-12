@@ -45,51 +45,52 @@ const Reports = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
-        <div className="flex items-center justify-between">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Reports</h1>
-            <p className="text-sm text-gray-600 mt-1">Generate financial reports and analytics</p>
+            <h1 className="text-lg sm:text-2xl font-semibold">Reports</h1>
+            <p className="text-xs sm:text-sm text-muted-foreground mt-1">Generate financial reports and analytics</p>
           </div>
-          <div className="flex items-center gap-3">
-            <button className="flex items-center gap-2 border border-gray-300 text-gray-700 px-4 py-2 rounded-lg hover:bg-gray-50 transition-colors">
+          <div className="flex items-center gap-3 self-end">
+            <button className="flex items-center gap-2 border border-input text-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-accent transition-colors text-sm">
               <Filter className="h-4 w-4" />
-              Filter
+              <span className="hidden sm:inline">Filter</span>
             </button>
-            <button className="flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition-colors">
+            <button className="flex items-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm">
               <FileText className="h-4 w-4" />
-              Custom Report
+              <span className="hidden sm:inline">Custom Report</span>
+              <span className="sm:hidden">Custom</span>
             </button>
           </div>
         </div>
       </div>
 
       {/* Content */}
-      <div className="px-8 py-8 space-y-8">
+      <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Quick Reports */}
-        <Card className="bg-white">
-          <CardHeader>
-            <CardTitle className="text-lg font-semibold text-gray-900">Quick Reports</CardTitle>
-            <CardDescription>Recently generated and ready-to-view reports</CardDescription>
+        <Card>
+          <CardHeader className="p-3 sm:p-6">
+            <CardTitle className="text-base sm:text-lg font-semibold">Quick Reports</CardTitle>
+            <CardDescription className="text-xs sm:text-sm">Recently generated and ready-to-view reports</CardDescription>
           </CardHeader>
-          <CardContent>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+          <CardContent className="p-3 sm:p-6 pt-0">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {quickReports.map((report, index) => (
-                <div key={index} className="p-4 border border-gray-200 rounded-lg hover:shadow-sm transition-shadow">
+                <div key={index} className="p-3 sm:p-4 border border-border rounded-lg hover:shadow-sm transition-shadow">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium text-gray-900">{report.name}</h3>
+                    <h3 className="font-medium text-sm sm:text-base">{report.name}</h3>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
                       report.status === 'Ready' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
                     }`}>
                       {report.status}
                     </span>
                   </div>
-                  <p className="text-sm text-gray-600 mb-3">{report.period}</p>
+                  <p className="text-xs sm:text-sm text-muted-foreground mb-3">{report.period}</p>
                   {report.status === 'Ready' && (
-                    <button className="flex items-center gap-2 text-sm text-blue-600 hover:text-blue-700">
-                      <Download className="h-4 w-4" />
+                    <button className="flex items-center gap-2 text-xs sm:text-sm text-primary hover:text-primary/80">
+                      <Download className="h-3 w-3 sm:h-4 sm:w-4" />
                       Download
                     </button>
                   )}
@@ -100,24 +101,24 @@ const Reports = () => {
         </Card>
 
         {/* Report Categories */}
-        <div className="space-y-8">
+        <div className="space-y-6 sm:space-y-8">
           {reportCategories.map((category, categoryIndex) => (
-            <Card key={categoryIndex} className="bg-white">
-              <CardHeader>
-                <CardTitle className="text-lg font-semibold text-gray-900">{category.title}</CardTitle>
-                <CardDescription>{category.description}</CardDescription>
+            <Card key={categoryIndex}>
+              <CardHeader className="p-3 sm:p-6">
+                <CardTitle className="text-base sm:text-lg font-semibold">{category.title}</CardTitle>
+                <CardDescription className="text-xs sm:text-sm">{category.description}</CardDescription>
               </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <CardContent className="p-3 sm:p-6 pt-0">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
                   {category.reports.map((report, reportIndex) => (
-                    <div key={reportIndex} className="p-4 border border-gray-200 rounded-lg hover:shadow-sm transition-shadow cursor-pointer group">
+                    <div key={reportIndex} className="p-3 sm:p-4 border border-border rounded-lg hover:shadow-sm transition-shadow cursor-pointer group">
                       <div className="flex items-center gap-3 mb-3">
-                        <div className="p-2 bg-blue-100 rounded-lg group-hover:bg-blue-200 transition-colors">
-                          <report.icon className="h-5 w-5 text-blue-600" />
+                        <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
+                          <report.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                         </div>
-                        <h3 className="font-medium text-gray-900">{report.name}</h3>
+                        <h3 className="font-medium text-sm sm:text-base">{report.name}</h3>
                       </div>
-                      <p className="text-sm text-gray-600">{report.description}</p>
+                      <p className="text-xs sm:text-sm text-muted-foreground">{report.description}</p>
                     </div>
                   ))}
                 </div>
@@ -127,15 +128,15 @@ const Reports = () => {
         </div>
 
         {/* Report Builder CTA */}
-        <Card className="bg-gradient-to-r from-blue-50 to-indigo-50 border-blue-200">
-          <CardContent className="p-8 text-center">
+        <Card className="bg-gradient-to-r from-primary/5 to-primary/10 border-primary/20">
+          <CardContent className="p-6 sm:p-8 text-center">
             <div className="max-w-md mx-auto">
-              <BarChart3 className="h-12 w-12 text-blue-600 mx-auto mb-4" />
-              <h3 className="text-lg font-semibold text-gray-900 mb-2">Custom Report Builder</h3>
-              <p className="text-gray-600 mb-4">
+              <BarChart3 className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
+              <h3 className="text-base sm:text-lg font-semibold mb-2">Custom Report Builder</h3>
+              <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                 Create custom reports with your own filters, date ranges, and data visualizations.
               </p>
-              <button className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-colors">
+              <button className="bg-primary text-primary-foreground px-4 sm:px-6 py-2 sm:py-3 rounded-lg hover:bg-primary/90 transition-colors text-sm">
                 Build Custom Report
               </button>
             </div>
