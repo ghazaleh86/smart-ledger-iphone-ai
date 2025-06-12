@@ -84,7 +84,7 @@ const AccountingReconciliation = () => {
             <h1 className="text-lg sm:text-2xl font-semibold">Reconciliation</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Reconcile your accounts and ensure accuracy</p>
           </div>
-          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors w-full sm:w-auto text-sm">
+          <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
             <Plus className="h-4 w-4" />
             <span className="hidden sm:inline">Start Reconciliation</span>
             <span className="sm:hidden">Start</span>
@@ -103,7 +103,9 @@ const AccountingReconciliation = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Accounts</p>
                   <p className="text-lg sm:text-2xl font-bold">{reconciliations.length}</p>
                 </div>
-                <CheckSquare className="h-5 w-5 sm:h-8 sm:w-8 text-primary" />
+                <div className="bg-blue-100 p-2 rounded-lg">
+                  <CheckSquare className="h-4 w-4 text-blue-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -115,7 +117,9 @@ const AccountingReconciliation = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Reconciled</p>
                   <p className="text-lg sm:text-2xl font-bold text-green-600">{reconciledCount}</p>
                 </div>
-                <CheckCircle className="h-5 w-5 sm:h-8 sm:w-8 text-green-500" />
+                <div className="bg-green-100 p-2 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-green-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -127,7 +131,9 @@ const AccountingReconciliation = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Needs Review</p>
                   <p className="text-lg sm:text-2xl font-bold text-red-600">{needsReviewCount}</p>
                 </div>
-                <AlertTriangle className="h-5 w-5 sm:h-8 sm:w-8 text-red-500" />
+                <div className="bg-red-100 p-2 rounded-lg">
+                  <AlertTriangle className="h-4 w-4 text-red-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
@@ -139,7 +145,9 @@ const AccountingReconciliation = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">In Progress</p>
                   <p className="text-lg sm:text-2xl font-bold text-orange-600">{inProgressCount}</p>
                 </div>
-                <Clock className="h-5 w-5 sm:h-8 sm:w-8 text-orange-500" />
+                <div className="bg-orange-100 p-2 rounded-lg">
+                  <Clock className="h-4 w-4 text-orange-600" />
+                </div>
               </div>
             </CardContent>
           </Card>
