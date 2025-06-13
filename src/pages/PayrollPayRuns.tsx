@@ -60,10 +60,10 @@ const PayrollPayRuns = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Pay Runs</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Pay Runs</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage and process employee payroll</p>
           </div>
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
@@ -78,57 +78,57 @@ const PayrollPayRuns = () => {
       <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Employees</p>
-                  <p className="text-lg sm:text-2xl font-bold">{payrollStats.totalEmployees}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{payrollStats.totalEmployees}</p>
                 </div>
-                <div className="bg-blue-50 p-2 rounded-lg">
-                  <Users className="h-4 w-4 text-blue-600" />
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <Users className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Avg Monthly Pay</p>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">{payrollStats.avgMonthlyPay}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">{payrollStats.avgMonthlyPay}</p>
                 </div>
-                <div className="bg-green-50 p-2 rounded-lg">
-                  <Calculator className="h-4 w-4 text-green-600" />
+                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                  <Calculator className="h-4 w-4 text-green-600 dark:text-green-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">YTD Gross Pay</p>
-                  <p className="text-lg sm:text-2xl font-bold">{payrollStats.ytdGrossPay}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{payrollStats.ytdGrossPay}</p>
                 </div>
-                <div className="bg-purple-50 p-2 rounded-lg">
-                  <Calculator className="h-4 w-4 text-purple-600" />
+                <div className="bg-purple-100 dark:bg-purple-900/30 p-2 rounded-lg">
+                  <Calculator className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Last Pay Run</p>
-                  <p className="text-lg sm:text-2xl font-bold">{payrollStats.lastPayRun}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{payrollStats.lastPayRun}</p>
                 </div>
-                <div className="bg-orange-50 p-2 rounded-lg">
-                  <Calendar className="h-4 w-4 text-orange-600" />
+                <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg">
+                  <Calendar className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                 </div>
               </div>
             </CardContent>
@@ -136,7 +136,7 @@ const PayrollPayRuns = () => {
         </div>
 
         {/* Search */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardContent className="p-3 sm:p-6">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -145,17 +145,17 @@ const PayrollPayRuns = () => {
                 placeholder="Search pay runs..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Pay Runs List */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="p-3 sm:p-6">
-            <CardTitle className="text-base sm:text-lg font-semibold">Pay Run History</CardTitle>
-            <CardDescription className="text-xs sm:text-sm">{filteredPayRuns.length} pay runs found</CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold text-foreground">Pay Run History</CardTitle>
+            <CardDescription className="text-xs sm:text-sm text-muted-foreground">{filteredPayRuns.length} pay runs found</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             {/* Mobile Card View */}
@@ -165,13 +165,13 @@ const PayrollPayRuns = () => {
                   <div key={payRun.id} className="p-3 space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
-                        <div className="text-sm font-medium">{payRun.id}</div>
+                        <div className="text-sm font-medium text-foreground">{payRun.id}</div>
                         <div className="text-xs text-muted-foreground">{payRun.period}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          payRun.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                          'bg-orange-100 text-orange-800'
+                          payRun.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                          'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200'
                         }`}>
                           {payRun.status}
                         </span>
@@ -181,22 +181,22 @@ const PayrollPayRuns = () => {
                     <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border">
                       <div>
                         <div className="text-xs text-muted-foreground">Employees</div>
-                        <div className="text-sm font-medium">{payRun.employees}</div>
+                        <div className="text-sm font-medium text-foreground">{payRun.employees}</div>
                       </div>
                       <div>
                         <div className="text-xs text-muted-foreground">Pay Date</div>
-                        <div className="text-sm">{payRun.payDate}</div>
+                        <div className="text-sm text-foreground">{payRun.payDate}</div>
                       </div>
                     </div>
                     
                     <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border">
                       <div>
                         <div className="text-xs text-muted-foreground">Gross Pay</div>
-                        <div className="text-sm font-medium">{payRun.grossPay}</div>
+                        <div className="text-sm font-medium text-foreground">{payRun.grossPay}</div>
                       </div>
                       <div>
                         <div className="text-xs text-muted-foreground">Net Pay</div>
-                        <div className="text-sm font-medium">{payRun.netPay}</div>
+                        <div className="text-sm font-medium text-foreground">{payRun.netPay}</div>
                       </div>
                     </div>
                   </div>
@@ -222,16 +222,16 @@ const PayrollPayRuns = () => {
                   <tbody>
                     {filteredPayRuns.map((payRun) => (
                       <tr key={payRun.id} className="border-b border-border hover:bg-muted/50">
-                        <td className="py-3 px-4 font-medium">{payRun.id}</td>
-                        <td className="py-3 px-4">{payRun.period}</td>
-                        <td className="py-3 px-4">{payRun.payDate}</td>
-                        <td className="py-3 px-4">{payRun.employees}</td>
-                        <td className="py-3 px-4 font-medium">{payRun.grossPay}</td>
-                        <td className="py-3 px-4 font-medium">{payRun.netPay}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{payRun.id}</td>
+                        <td className="py-3 px-4 text-foreground">{payRun.period}</td>
+                        <td className="py-3 px-4 text-foreground">{payRun.payDate}</td>
+                        <td className="py-3 px-4 text-foreground">{payRun.employees}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{payRun.grossPay}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{payRun.netPay}</td>
                         <td className="py-3 px-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            payRun.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                            'bg-orange-100 text-orange-800'
+                            payRun.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                            'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200'
                           }`}>
                             {payRun.status}
                           </span>

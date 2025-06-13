@@ -61,11 +61,11 @@ const AccountingReconciliation = () => {
   const getStatusIcon = (status: string) => {
     switch (status) {
       case 'Reconciled':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
+        return <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />;
       case 'Needs Review':
-        return <AlertTriangle className="h-4 w-4 text-red-500" />;
+        return <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />;
       case 'In Progress':
-        return <Clock className="h-4 w-4 text-orange-500" />;
+        return <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />;
       default:
         return <Clock className="h-4 w-4 text-gray-500" />;
     }
@@ -78,10 +78,10 @@ const AccountingReconciliation = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Reconciliation</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Reconciliation</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Reconcile your accounts and ensure accuracy</p>
           </div>
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
@@ -96,57 +96,57 @@ const AccountingReconciliation = () => {
       <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Accounts</p>
-                  <p className="text-lg sm:text-2xl font-bold">{reconciliations.length}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{reconciliations.length}</p>
                 </div>
-                <div className="bg-blue-100 p-2 rounded-lg">
-                  <CheckSquare className="h-4 w-4 text-blue-600" />
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <CheckSquare className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Reconciled</p>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">{reconciledCount}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">{reconciledCount}</p>
                 </div>
-                <div className="bg-green-100 p-2 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
+                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Needs Review</p>
-                  <p className="text-lg sm:text-2xl font-bold text-red-600">{needsReviewCount}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-red-600 dark:text-red-400">{needsReviewCount}</p>
                 </div>
-                <div className="bg-red-100 p-2 rounded-lg">
-                  <AlertTriangle className="h-4 w-4 text-red-600" />
+                <div className="bg-red-100 dark:bg-red-900/30 p-2 rounded-lg">
+                  <AlertTriangle className="h-4 w-4 text-red-600 dark:text-red-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">In Progress</p>
-                  <p className="text-lg sm:text-2xl font-bold text-orange-600">{inProgressCount}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-orange-600 dark:text-orange-400">{inProgressCount}</p>
                 </div>
-                <div className="bg-orange-100 p-2 rounded-lg">
-                  <Clock className="h-4 w-4 text-orange-600" />
+                <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg">
+                  <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                 </div>
               </div>
             </CardContent>
@@ -154,7 +154,7 @@ const AccountingReconciliation = () => {
         </div>
 
         {/* Search */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardContent className="p-3 sm:p-6">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -163,17 +163,17 @@ const AccountingReconciliation = () => {
                 placeholder="Search accounts..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
               />
             </div>
           </CardContent>
         </Card>
 
         {/* Reconciliation List */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="p-3 sm:p-6">
-            <CardTitle className="text-base sm:text-lg font-semibold">Account Reconciliations</CardTitle>
-            <CardDescription className="text-xs sm:text-sm">{filteredReconciliations.length} accounts found</CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold text-foreground">Account Reconciliations</CardTitle>
+            <CardDescription className="text-xs sm:text-sm text-muted-foreground">{filteredReconciliations.length} accounts found</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             {/* Mobile Card View */}
@@ -183,15 +183,15 @@ const AccountingReconciliation = () => {
                   <div key={recon.id} className="p-3 space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
-                        <div className="text-sm font-medium">{recon.account}</div>
+                        <div className="text-sm font-medium text-foreground">{recon.account}</div>
                         <div className="text-xs text-muted-foreground">{recon.period}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         {getStatusIcon(recon.status)}
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          recon.status === 'Reconciled' ? 'bg-green-100 text-green-800' :
-                          recon.status === 'Needs Review' ? 'bg-red-100 text-red-800' :
-                          'bg-orange-100 text-orange-800'
+                          recon.status === 'Reconciled' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                          recon.status === 'Needs Review' ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' :
+                          'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200'
                         }`}>
                           {recon.status === 'Reconciled' ? 'OK' :
                            recon.status === 'Needs Review' ? 'Review' : 'Progress'}
@@ -202,11 +202,11 @@ const AccountingReconciliation = () => {
                     <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border">
                       <div>
                         <div className="text-xs text-muted-foreground">Statement</div>
-                        <div className="text-sm font-medium">{recon.statementBalance}</div>
+                        <div className="text-sm font-medium text-foreground">{recon.statementBalance}</div>
                       </div>
                       <div>
                         <div className="text-xs text-muted-foreground">Book</div>
-                        <div className="text-sm font-medium">{recon.bookBalance}</div>
+                        <div className="text-sm font-medium text-foreground">{recon.bookBalance}</div>
                       </div>
                     </div>
                     
@@ -214,7 +214,7 @@ const AccountingReconciliation = () => {
                       <div>
                         <div className="text-xs text-muted-foreground">Difference</div>
                         <div className={`text-sm font-medium ${
-                          recon.difference === '$0.00' ? 'text-green-600' : 'text-red-600'
+                          recon.difference === '$0.00' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                         }`}>
                           {recon.difference}
                         </div>
@@ -243,13 +243,13 @@ const AccountingReconciliation = () => {
                   <TableBody>
                     {filteredReconciliations.map((recon) => (
                       <TableRow key={recon.id}>
-                        <TableCell className="font-medium">{recon.account}</TableCell>
-                        <TableCell>{recon.period}</TableCell>
-                        <TableCell className="font-medium">{recon.statementBalance}</TableCell>
-                        <TableCell className="font-medium">{recon.bookBalance}</TableCell>
+                        <TableCell className="font-medium text-foreground">{recon.account}</TableCell>
+                        <TableCell className="text-foreground">{recon.period}</TableCell>
+                        <TableCell className="font-medium text-foreground">{recon.statementBalance}</TableCell>
+                        <TableCell className="font-medium text-foreground">{recon.bookBalance}</TableCell>
                         <TableCell>
                           <span className={`font-medium ${
-                            recon.difference === '$0.00' ? 'text-green-600' : 'text-red-600'
+                            recon.difference === '$0.00' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'
                           }`}>
                             {recon.difference}
                           </span>
@@ -258,9 +258,9 @@ const AccountingReconciliation = () => {
                           <div className="flex items-center gap-2">
                             {getStatusIcon(recon.status)}
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              recon.status === 'Reconciled' ? 'bg-green-100 text-green-800' :
-                              recon.status === 'Needs Review' ? 'bg-red-100 text-red-800' :
-                              'bg-orange-100 text-orange-800'
+                              recon.status === 'Reconciled' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                              recon.status === 'Needs Review' ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' :
+                              'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200'
                             }`}>
                               {recon.status}
                             </span>
@@ -279,13 +279,13 @@ const AccountingReconciliation = () => {
         </Card>
 
         {/* Help Section */}
-        <Card className="bg-blue-50 border-blue-200">
+        <Card className="bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800/50">
           <CardContent className="p-3 sm:p-6">
             <div className="flex items-start gap-3">
-              <CheckSquare className="h-5 w-5 text-blue-600 mt-0.5 flex-shrink-0" />
+              <CheckSquare className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
               <div>
-                <h3 className="font-medium text-blue-900 text-sm sm:text-base">Reconciliation Tips</h3>
-                <p className="text-xs sm:text-sm text-blue-700 mt-1">
+                <h3 className="font-medium text-blue-900 dark:text-blue-100 text-sm sm:text-base">Reconciliation Tips</h3>
+                <p className="text-xs sm:text-sm text-blue-700 dark:text-blue-200 mt-1">
                   Regular reconciliation helps catch errors early and ensures your financial records are accurate. 
                   Reconcile your accounts monthly for best results.
                 </p>
