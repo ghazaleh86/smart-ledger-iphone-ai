@@ -32,9 +32,9 @@ const SpendingInsights = () => {
   const CustomTooltip = ({ active, payload, label }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="text-sm font-medium text-gray-900">{label}</p>
-          <p className="text-sm text-gray-600">
+        <div className="bg-card p-3 border border-border rounded-lg shadow-lg">
+          <p className="text-sm font-medium text-foreground">{label}</p>
+          <p className="text-sm text-muted-foreground">
             Amount: <span className="font-semibold">${payload[0].value}</span>
           </p>
         </div>
@@ -46,9 +46,9 @@ const SpendingInsights = () => {
   const PieTooltip = ({ active, payload }: any) => {
     if (active && payload && payload.length) {
       return (
-        <div className="bg-white p-3 border border-gray-200 rounded-lg shadow-lg">
-          <p className="text-sm font-medium text-gray-900">{payload[0].name}</p>
-          <p className="text-sm text-gray-600">
+        <div className="bg-card p-3 border border-border rounded-lg shadow-lg">
+          <p className="text-sm font-medium text-foreground">{payload[0].name}</p>
+          <p className="text-sm text-muted-foreground">
             Amount: <span className="font-semibold">${payload[0].value}</span>
           </p>
         </div>
@@ -78,15 +78,15 @@ const SpendingInsights = () => {
 
   return (
     <Collapsible open={isOpen} onOpenChange={setIsOpen}>
-      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 rounded-2xl p-4 md:p-8 mb-8 shadow-lg border border-blue-200/50">
+      <div className="bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-100 dark:from-blue-950/50 dark:via-indigo-950/50 dark:to-purple-950/50 rounded-2xl p-4 md:p-8 mb-8 shadow-lg border border-blue-200/50 dark:border-blue-800/50">
         <div className="flex items-center justify-between mb-6 md:mb-8">
-          <h3 className="text-xl font-medium text-gray-700">This Month's Insights</h3>
+          <h3 className="text-xl font-medium text-gray-700 dark:text-gray-200">This Month's Insights</h3>
           <CollapsibleTrigger asChild>
-            <button className="flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white/90 transition-colors duration-200 border border-white/40 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-transparent">
+            <button className="flex items-center justify-center w-8 h-8 rounded-full bg-white/70 dark:bg-black/20 hover:bg-white/90 dark:hover:bg-black/40 transition-colors duration-200 border border-white/40 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-blue-400/50 focus:ring-offset-2 focus:ring-offset-transparent">
               {isOpen ? (
-                <ChevronUp className="w-4 h-4 text-gray-600" />
+                <ChevronUp className="w-4 h-4 text-gray-600 dark:text-gray-300" />
               ) : (
-                <ChevronDown className="w-4 h-4 text-gray-600" />
+                <ChevronDown className="w-4 h-4 text-gray-600 dark:text-gray-300" />
               )}
             </button>
           </CollapsibleTrigger>
@@ -95,40 +95,40 @@ const SpendingInsights = () => {
         <CollapsibleContent className="overflow-hidden transition-all duration-500 ease-out data-[state=closed]:animate-[accordion-up_0.5s_ease-out] data-[state=open]:animate-[accordion-down_0.5s_ease-out]">
           {/* Main Stats Grid */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 md:gap-6 mb-6 md:mb-8">
-            <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-4 md:p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm">
               <div className="flex items-center space-x-3 mb-3 md:mb-4">
                 <DollarSign className="w-5 h-5 text-blue-500" />
-                <div className="text-xl md:text-2xl font-medium text-gray-700">$2,340</div>
+                <div className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">$2,340</div>
               </div>
-              <div className="text-sm text-gray-500 mb-2">Total Spent</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">Total Spent</div>
               <div className="flex items-center text-xs text-red-500 font-medium">
                 <TrendingDown className="w-3 h-3 mr-1" />
                 12% less than last month
               </div>
             </div>
             
-            <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-4 md:p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm">
               <div className="flex items-center space-x-3 mb-3 md:mb-4">
                 <TrendingUp className="w-5 h-5 text-blue-500" />
-                <div className="text-xl md:text-2xl font-medium text-gray-700">$4,820</div>
+                <div className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">$4,820</div>
               </div>
-              <div className="text-sm text-gray-500 mb-2">Total Income</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">Total Income</div>
               <div className="text-xs text-emerald-500 font-medium">On track for goals</div>
             </div>
 
-            <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm hidden lg:block">
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-4 md:p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm hidden lg:block">
               <div className="flex items-center space-x-3 mb-3 md:mb-4">
                 <Target className="w-5 h-5 text-blue-500" />
-                <div className="text-xl md:text-2xl font-medium text-gray-700">$2,480</div>
+                <div className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200">$2,480</div>
               </div>
-              <div className="text-sm text-gray-500 mb-2">Net Savings</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-2">Net Savings</div>
               <div className="text-xs text-emerald-500 font-medium">+5.2% from last month</div>
             </div>
 
-            <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm hidden lg:block">
-              <div className="text-xl md:text-2xl font-medium text-gray-700 mb-2">73%</div>
-              <div className="text-sm text-gray-500 mb-3 md:mb-4">Budget Used</div>
-              <div className="w-full bg-gray-100 rounded-full h-2">
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-4 md:p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm hidden lg:block">
+              <div className="text-xl md:text-2xl font-medium text-gray-700 dark:text-gray-200 mb-2">73%</div>
+              <div className="text-sm text-gray-500 dark:text-gray-400 mb-3 md:mb-4">Budget Used</div>
+              <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-2">
                 <div className="bg-blue-400 h-2 rounded-full" style={{ width: '73%' }}></div>
               </div>
             </div>
@@ -136,8 +136,8 @@ const SpendingInsights = () => {
 
           {/* Desktop Charts */}
           <div className="hidden lg:grid lg:grid-cols-2 gap-8 mb-8">
-            <div className="bg-white/90 rounded-xl p-6 border border-white/40 shadow-sm backdrop-blur-sm">
-              <h4 className="font-medium text-gray-600 mb-6">Spending by Category</h4>
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm">
+              <h4 className="font-medium text-gray-600 dark:text-gray-300 mb-6">Spending by Category</h4>
               <div className="h-64 [&_*]:!outline-none [&_.recharts-pie-sector]:!outline-none [&_.recharts-pie-sector]:!focus:outline-none [&_.recharts-surface]:!outline-none [&_.recharts-layer]:!outline-none">
                 <ResponsiveContainer width="100%" height="100%">
                   <PieChart>
@@ -161,8 +161,8 @@ const SpendingInsights = () => {
               </div>
             </div>
 
-            <div className="bg-white/90 rounded-xl p-6 border border-white/40 shadow-sm backdrop-blur-sm">
-              <h4 className="font-medium text-gray-600 mb-6">Weekly Spending Trend</h4>
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm">
+              <h4 className="font-medium text-gray-600 dark:text-gray-300 mb-6">Weekly Spending Trend</h4>
               <div className="h-64 [&_*]:!outline-none [&_.recharts-bar]:!outline-none [&_.recharts-bar]:!focus:outline-none [&_.recharts-surface]:!outline-none [&_.recharts-layer]:!outline-none">
                 <ResponsiveContainer width="100%" height="100%">
                   <BarChart data={weeklyData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
@@ -205,8 +205,8 @@ const SpendingInsights = () => {
 
           {/* Bottom Grid - Top Categories and Budget Progress */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
-              <h4 className="font-medium text-gray-600 mb-4 md:mb-6">Top Categories</h4>
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-4 md:p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm">
+              <h4 className="font-medium text-gray-600 dark:text-gray-300 mb-4 md:mb-6">Top Categories</h4>
               <div className="space-y-4">
                 {categoryData.slice(0, 3).map((category, index) => (
                   <div key={category.name} className="flex justify-between items-center">
@@ -215,26 +215,26 @@ const SpendingInsights = () => {
                         className="w-3 h-3 rounded-full" 
                         style={{ backgroundColor: category.color }}
                       ></div>
-                      <span className="text-sm text-gray-500">{category.name}</span>
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{category.name}</span>
                     </div>
-                    <span className="text-sm font-medium text-gray-600">${category.value}</span>
+                    <span className="text-sm font-medium text-gray-600 dark:text-gray-300">${category.value}</span>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="bg-white/90 rounded-xl p-4 md:p-6 border border-white/40 shadow-sm backdrop-blur-sm">
-              <h4 className="font-medium text-gray-600 mb-4 md:mb-6">Budget Progress</h4>
+            <div className="bg-white/90 dark:bg-card/90 rounded-xl p-4 md:p-6 border border-white/40 dark:border-border shadow-sm backdrop-blur-sm">
+              <h4 className="font-medium text-gray-600 dark:text-gray-300 mb-4 md:mb-6">Budget Progress</h4>
               <div className="space-y-4">
                 {budgetData.map((item, index) => (
                   <div key={item.category} className="space-y-2">
                     <div className="flex justify-between items-center">
-                      <span className="text-sm text-gray-500">{item.category}</span>
-                      <span className="text-sm font-medium text-gray-600">
+                      <span className="text-sm text-gray-500 dark:text-gray-400">{item.category}</span>
+                      <span className="text-sm font-medium text-gray-600 dark:text-gray-300">
                         ${item.spent} / ${item.budget}
                       </span>
                     </div>
-                    <div className="w-full bg-gray-100 rounded-full h-1">
+                    <div className="w-full bg-gray-100 dark:bg-gray-700 rounded-full h-1">
                       <div 
                         className="bg-blue-400 h-1 rounded-full transition-all duration-300"
                         style={{ width: `${item.percentage}%` }}
