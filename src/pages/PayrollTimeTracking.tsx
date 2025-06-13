@@ -89,8 +89,8 @@ const PayrollTimeTracking = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Hours</p>
                   <p className="text-lg sm:text-2xl font-bold">{weeklyStats.totalHours}</p>
                 </div>
-                <div className="bg-blue-50 p-2 rounded-lg">
-                  <Clock className="h-4 w-4 text-blue-600" />
+                <div className="bg-blue-50 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <Clock className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 </div>
               </div>
             </CardContent>
@@ -101,10 +101,10 @@ const PayrollTimeTracking = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Overtime Hours</p>
-                  <p className="text-lg sm:text-2xl font-bold text-orange-600">{weeklyStats.overtimeHours}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-orange-600 dark:text-orange-400">{weeklyStats.overtimeHours}</p>
                 </div>
-                <div className="bg-orange-50 p-2 rounded-lg">
-                  <Clock className="h-4 w-4 text-orange-600" />
+                <div className="bg-orange-50 dark:bg-orange-900/30 p-2 rounded-lg">
+                  <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                 </div>
               </div>
             </CardContent>
@@ -117,8 +117,8 @@ const PayrollTimeTracking = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Avg per Employee</p>
                   <p className="text-lg sm:text-2xl font-bold">{weeklyStats.avgHoursPerEmployee}</p>
                 </div>
-                <div className="bg-green-50 p-2 rounded-lg">
-                  <User className="h-4 w-4 text-green-600" />
+                <div className="bg-green-50 dark:bg-green-900/30 p-2 rounded-lg">
+                  <User className="h-4 w-4 text-green-600 dark:text-green-400" />
                 </div>
               </div>
             </CardContent>
@@ -131,8 +131,8 @@ const PayrollTimeTracking = () => {
                   <p className="text-xs sm:text-sm text-muted-foreground">Active Projects</p>
                   <p className="text-lg sm:text-2xl font-bold">{weeklyStats.projectsActive}</p>
                 </div>
-                <div className="bg-purple-50 p-2 rounded-lg">
-                  <Calendar className="h-4 w-4 text-purple-600" />
+                <div className="bg-purple-50 dark:bg-purple-900/30 p-2 rounded-lg">
+                  <Calendar className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                 </div>
               </div>
             </CardContent>
@@ -140,7 +140,7 @@ const PayrollTimeTracking = () => {
         </div>
 
         {/* Quick Timer */}
-        <Card className="bg-green-50 border-green-200">
+        <Card className="bg-green-50 dark:bg-green-900/20 border-green-200 dark:border-green-800">
           <CardHeader className="p-3 sm:p-6">
             <CardTitle className="text-base sm:text-lg font-semibold">Quick Timer</CardTitle>
             <CardDescription className="text-xs sm:text-sm">Start tracking time for current tasks</CardDescription>
@@ -214,7 +214,7 @@ const PayrollTimeTracking = () => {
                       </div>
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          entry.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                          entry.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
                         }`}>
                           {entry.status}
                         </span>
@@ -273,7 +273,7 @@ const PayrollTimeTracking = () => {
                         <td className="py-3 px-4 font-medium">{entry.hours}h</td>
                         <td className="py-3 px-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            entry.status === 'Completed' ? 'bg-green-100 text-green-800' : 'bg-blue-100 text-blue-800'
+                            entry.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-300' : 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-300'
                           }`}>
                             {entry.status}
                           </span>

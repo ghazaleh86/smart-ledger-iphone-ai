@@ -100,11 +100,11 @@ const Dashboard = () => {
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2 p-3 sm:p-6 sm:pb-2">
                 <CardTitle className="text-xs sm:text-sm font-medium text-muted-foreground">{kpi.title}</CardTitle>
                 <div className={`p-2 rounded-lg ${
-                  kpi.color === 'text-green-600' ? 'bg-green-100' :
-                  kpi.color === 'text-blue-600' ? 'bg-blue-100' :
-                  'bg-emerald-100'
+                  kpi.color === 'text-green-600' ? 'bg-green-100 dark:bg-green-900/30' :
+                  kpi.color === 'text-blue-600' ? 'bg-blue-100 dark:bg-blue-900/30' :
+                  'bg-emerald-100 dark:bg-emerald-900/30'
                 }`}>
-                  <kpi.icon className={`h-4 w-4 ${kpi.color}`} />
+                  <kpi.icon className={`h-4 w-4 ${kpi.color} dark:${kpi.color.replace('600', '400')}`} />
                 </div>
               </CardHeader>
               <CardContent className="p-3 sm:p-6 pt-0">
@@ -115,7 +115,7 @@ const Dashboard = () => {
                   ) : (
                     <TrendingDown className="h-3 w-3 text-red-500 mr-1" />
                   )}
-                  <span className={kpi.trend === 'up' ? 'text-green-600' : 'text-red-600'}>
+                  <span className={kpi.trend === 'up' ? 'text-green-600 dark:text-green-400' : 'text-red-600 dark:text-red-400'}>
                     {kpi.change}
                   </span>
                   <span className="ml-1">{kpi.description}</span>
@@ -131,51 +131,51 @@ const Dashboard = () => {
         {/* Alerts and Quick Stats */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
           {/* Financial Alerts */}
-          <Card className="bg-white">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Financial Alerts</CardTitle>
+              <CardTitle className="text-lg font-semibold">Financial Alerts</CardTitle>
               <CardDescription>Items requiring attention</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {alertsData.map((alert, index) => (
-                <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div key={index} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
                   <div className="flex items-center space-x-3">
                     <div className={`p-2 rounded-full ${
-                      alert.severity === 'high' ? 'bg-red-100' :
-                      alert.severity === 'medium' ? 'bg-yellow-100' : 'bg-blue-100'
+                      alert.severity === 'high' ? 'bg-red-100 dark:bg-red-900/30' :
+                      alert.severity === 'medium' ? 'bg-yellow-100 dark:bg-yellow-900/30' : 'bg-blue-100 dark:bg-blue-900/30'
                     }`}>
                       <alert.icon className={`h-4 w-4 ${
-                        alert.severity === 'high' ? 'text-red-600' :
-                        alert.severity === 'medium' ? 'text-yellow-600' : 'text-blue-600'
+                        alert.severity === 'high' ? 'text-red-600 dark:text-red-400' :
+                        alert.severity === 'medium' ? 'text-yellow-600 dark:text-yellow-400' : 'text-blue-600 dark:text-blue-400'
                       }`} />
                     </div>
                     <div>
-                      <div className="font-medium text-gray-900">{alert.title}</div>
-                      <div className="text-sm text-gray-500">{alert.description}</div>
+                      <div className="font-medium">{alert.title}</div>
+                      <div className="text-sm text-muted-foreground">{alert.description}</div>
                     </div>
                   </div>
-                  <div className="font-semibold text-gray-900">{alert.value}</div>
+                  <div className="font-semibold">{alert.value}</div>
                 </div>
               ))}
             </CardContent>
           </Card>
 
           {/* Quick Stats */}
-          <Card className="bg-white">
+          <Card>
             <CardHeader>
-              <CardTitle className="text-lg font-semibold text-gray-900">Quick Stats</CardTitle>
+              <CardTitle className="text-lg font-semibold">Quick Stats</CardTitle>
               <CardDescription>Key business metrics at a glance</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
               {quickStats.map((stat, index) => (
-                <div key={index} className="flex items-center justify-between p-4 bg-gray-50 rounded-lg">
+                <div key={index} className="flex items-center justify-between p-4 bg-muted/50 rounded-lg">
                   <div className="flex items-center space-x-3">
-                    <div className="p-2 bg-blue-100 rounded-full">
-                      <stat.icon className="h-4 w-4 text-blue-600" />
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-full">
+                      <stat.icon className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                     </div>
-                    <span className="font-medium text-gray-900">{stat.label}</span>
+                    <span className="font-medium">{stat.label}</span>
                   </div>
-                  <span className="font-semibold text-gray-900">{stat.value}</span>
+                  <span className="font-semibold">{stat.value}</span>
                 </div>
               ))}
             </CardContent>

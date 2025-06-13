@@ -52,13 +52,13 @@ const Settings = () => {
   ];
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-6 px-8 shadow-sm border-b border-gray-200">
+      <div className="bg-card py-6 px-8 shadow-sm border-b">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-semibold text-gray-900">Settings</h1>
-            <p className="text-sm text-gray-600 mt-1">Configure your application preferences and account settings</p>
+            <h1 className="text-2xl font-semibold">Settings</h1>
+            <p className="text-sm text-muted-foreground mt-1">Configure your application preferences and account settings</p>
           </div>
         </div>
       </div>
@@ -67,35 +67,35 @@ const Settings = () => {
       <div className="px-8 py-8 space-y-8">
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="bg-white hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
-              <User className="h-8 w-8 text-blue-600 mx-auto mb-2" />
-              <h3 className="font-medium text-gray-900">Profile</h3>
-              <p className="text-sm text-gray-600">Update your info</p>
+              <User className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
+              <h3 className="font-medium">Profile</h3>
+              <p className="text-sm text-muted-foreground">Update your info</p>
             </CardContent>
           </Card>
           
-          <Card className="bg-white hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
-              <Bell className="h-8 w-8 text-green-600 mx-auto mb-2" />
-              <h3 className="font-medium text-gray-900">Notifications</h3>
-              <p className="text-sm text-gray-600">Control alerts</p>
+              <Bell className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
+              <h3 className="font-medium">Notifications</h3>
+              <p className="text-sm text-muted-foreground">Control alerts</p>
             </CardContent>
           </Card>
           
-          <Card className="bg-white hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
-              <Shield className="h-8 w-8 text-purple-600 mx-auto mb-2" />
-              <h3 className="font-medium text-gray-900">Security</h3>
-              <p className="text-sm text-gray-600">Privacy settings</p>
+              <Shield className="h-8 w-8 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
+              <h3 className="font-medium">Security</h3>
+              <p className="text-sm text-muted-foreground">Privacy settings</p>
             </CardContent>
           </Card>
           
-          <Card className="bg-white hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
-              <Database className="h-8 w-8 text-orange-600 mx-auto mb-2" />
-              <h3 className="font-medium text-gray-900">Data</h3>
-              <p className="text-sm text-gray-600">Export & backup</p>
+              <Database className="h-8 w-8 text-orange-600 dark:text-orange-400 mx-auto mb-2" />
+              <h3 className="font-medium">Data</h3>
+              <p className="text-sm text-muted-foreground">Export & backup</p>
             </CardContent>
           </Card>
         </div>
@@ -103,14 +103,14 @@ const Settings = () => {
         {/* Settings Categories */}
         <div className="space-y-8">
           {settingsCategories.map((category, categoryIndex) => (
-            <Card key={categoryIndex} className="bg-white">
+            <Card key={categoryIndex}>
               <CardHeader>
                 <div className="flex items-center gap-3">
-                  <div className="p-2 bg-blue-100 rounded-lg">
-                    <category.icon className="h-5 w-5 text-blue-600" />
+                  <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                    <category.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg font-semibold text-gray-900">{category.title}</CardTitle>
+                    <CardTitle className="text-lg font-semibold">{category.title}</CardTitle>
                     <CardDescription>{category.description}</CardDescription>
                   </div>
                 </div>
@@ -118,12 +118,12 @@ const Settings = () => {
               <CardContent>
                 <div className="space-y-4">
                   {category.settings.map((setting, settingIndex) => (
-                    <div key={settingIndex} className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors cursor-pointer">
+                    <div key={settingIndex} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
                       <div>
-                        <h3 className="font-medium text-gray-900">{setting.name}</h3>
-                        <p className="text-sm text-gray-600">{setting.description}</p>
+                        <h3 className="font-medium">{setting.name}</h3>
+                        <p className="text-sm text-muted-foreground">{setting.description}</p>
                       </div>
-                      <div className="text-gray-400">
+                      <div className="text-muted-foreground">
                         <svg className="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
@@ -137,17 +137,17 @@ const Settings = () => {
         </div>
 
         {/* Support Section */}
-        <Card className="bg-gray-900 text-white">
+        <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
           <CardContent className="p-8 text-center">
             <h3 className="text-lg font-semibold mb-2">Need Help?</h3>
-            <p className="text-gray-300 mb-4">
+            <p className="text-muted-foreground mb-4">
               Contact our support team or check out our knowledge base for answers to common questions.
             </p>
             <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button className="bg-white text-gray-900 px-6 py-2 rounded-lg hover:bg-gray-100 transition-colors">
+              <button className="bg-primary text-primary-foreground px-6 py-2 rounded-lg hover:bg-primary/90 transition-colors">
                 Contact Support
               </button>
-              <button className="border border-gray-600 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors">
+              <button className="border border-border text-foreground px-6 py-2 rounded-lg hover:bg-muted transition-colors">
                 Knowledge Base
               </button>
             </div>
