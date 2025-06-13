@@ -60,7 +60,7 @@ const BankingTransfers = () => {
       case 'Failed':
         return <AlertTriangle className="h-4 w-4 text-red-500" />;
       default:
-        return <Clock className="h-4 w-4 text-gray-500" />;
+        return <Clock className="h-4 w-4 text-muted-foreground" />;
     }
   };
 
@@ -74,10 +74,10 @@ const BankingTransfers = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Bank Transfers</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Bank Transfers</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Transfer funds between your accounts</p>
           </div>
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
@@ -97,10 +97,10 @@ const BankingTransfers = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Transfers</p>
-                  <p className="text-lg sm:text-2xl font-bold">{transferStats.totalTransfers}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{transferStats.totalTransfers}</p>
                 </div>
-                <div className="bg-blue-50 p-2 rounded-lg">
-                  <ArrowLeftRight className="h-4 w-4 text-blue-600" />
+                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
+                  <ArrowLeftRight className="h-4 w-4 text-blue-600 dark:text-blue-400" />
                 </div>
               </div>
             </CardContent>
@@ -111,10 +111,10 @@ const BankingTransfers = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Completed Today</p>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">{transferStats.completedToday}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">{transferStats.completedToday}</p>
                 </div>
-                <div className="bg-green-50 p-2 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
+                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                 </div>
               </div>
             </CardContent>
@@ -125,10 +125,10 @@ const BankingTransfers = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Pending</p>
-                  <p className="text-lg sm:text-2xl font-bold text-orange-600">{transferStats.pendingTransfers}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-orange-600 dark:text-orange-400">{transferStats.pendingTransfers}</p>
                 </div>
-                <div className="bg-orange-50 p-2 rounded-lg">
-                  <Clock className="h-4 w-4 text-orange-600" />
+                <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg">
+                  <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                 </div>
               </div>
             </CardContent>
@@ -139,10 +139,10 @@ const BankingTransfers = () => {
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Amount</p>
-                  <p className="text-lg sm:text-2xl font-bold">{transferStats.totalAmount}</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">{transferStats.totalAmount}</p>
                 </div>
-                <div className="bg-purple-50 p-2 rounded-lg">
-                  <ArrowLeftRight className="h-4 w-4 text-purple-600" />
+                <div className="bg-purple-100 dark:bg-purple-900/30 p-2 rounded-lg">
+                  <ArrowLeftRight className="h-4 w-4 text-purple-600 dark:text-purple-400" />
                 </div>
               </div>
             </CardContent>
@@ -159,7 +159,7 @@ const BankingTransfers = () => {
                 placeholder="Search transfers..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
               />
             </div>
           </CardContent>
@@ -168,7 +168,7 @@ const BankingTransfers = () => {
         {/* Transfers List */}
         <Card>
           <CardHeader className="p-3 sm:p-6">
-            <CardTitle className="text-base sm:text-lg font-semibold">Recent Transfers</CardTitle>
+            <CardTitle className="text-base sm:text-lg font-semibold text-foreground">Recent Transfers</CardTitle>
             <CardDescription className="text-xs sm:text-sm">{filteredTransfers.length} transfers found</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
@@ -179,15 +179,15 @@ const BankingTransfers = () => {
                   <div key={transfer.id} className="p-3 space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
-                        <div className="text-sm font-medium">{transfer.id}</div>
+                        <div className="text-sm font-medium text-foreground">{transfer.id}</div>
                         <div className="text-xs text-muted-foreground">{transfer.reference}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         {getStatusIcon(transfer.status)}
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          transfer.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                          transfer.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
-                          'bg-red-100 text-red-800'
+                          transfer.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                          transfer.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
+                          'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
                         }`}>
                           {transfer.status}
                         </span>
@@ -197,23 +197,23 @@ const BankingTransfers = () => {
                     <div className="grid grid-cols-1 gap-3 pt-2 border-t border-border">
                       <div className="flex items-center gap-2">
                         <span className="text-xs text-muted-foreground">From:</span>
-                        <span className="text-sm font-medium">{transfer.fromAccount}</span>
+                        <span className="text-sm font-medium text-foreground">{transfer.fromAccount}</span>
                       </div>
                       <div className="flex items-center gap-2">
                         <ArrowLeftRight className="h-3 w-3 text-muted-foreground" />
                         <span className="text-xs text-muted-foreground">To:</span>
-                        <span className="text-sm font-medium">{transfer.toAccount}</span>
+                        <span className="text-sm font-medium text-foreground">{transfer.toAccount}</span>
                       </div>
                     </div>
                     
                     <div className="flex items-center justify-between pt-2 border-t border-border">
                       <div>
                         <div className="text-xs text-muted-foreground">Amount</div>
-                        <div className="text-sm font-medium">{transfer.amount}</div>
+                        <div className="text-sm font-medium text-foreground">{transfer.amount}</div>
                       </div>
                       <div className="text-right">
                         <div className="text-xs text-muted-foreground">Date</div>
-                        <div className="text-sm">{transfer.date}</div>
+                        <div className="text-sm text-foreground">{transfer.date}</div>
                       </div>
                     </div>
                   </div>
@@ -238,17 +238,17 @@ const BankingTransfers = () => {
                   <tbody>
                     {filteredTransfers.map((transfer) => (
                       <tr key={transfer.id} className="border-b border-border hover:bg-muted/50">
-                        <td className="py-3 px-4 font-medium">{transfer.id}</td>
-                        <td className="py-3 px-4">{transfer.fromAccount}</td>
-                        <td className="py-3 px-4">{transfer.toAccount}</td>
-                        <td className="py-3 px-4 font-medium">{transfer.amount}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{transfer.id}</td>
+                        <td className="py-3 px-4 text-foreground">{transfer.fromAccount}</td>
+                        <td className="py-3 px-4 text-foreground">{transfer.toAccount}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{transfer.amount}</td>
                         <td className="py-3 px-4">
                           <div className="flex items-center gap-2">
                             {getStatusIcon(transfer.status)}
                             <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              transfer.status === 'Completed' ? 'bg-green-100 text-green-800' :
-                              transfer.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
-                              'bg-red-100 text-red-800'
+                              transfer.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                              transfer.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
+                              'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
                             }`}>
                               {transfer.status}
                             </span>
