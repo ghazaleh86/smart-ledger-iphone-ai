@@ -121,18 +121,18 @@ export function AppSidebar() {
   }
 
   return (
-    <Sidebar className="border-r border-gray-200 bg-white">
-      <SidebarContent className="bg-white">
+    <Sidebar className="border-r border-border bg-sidebar">
+      <SidebarContent className="bg-sidebar">
         {/* Header */}
-        <div className="p-4 border-b border-gray-100">
+        <div className="p-4 border-b border-sidebar-border">
           <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gradient-to-br from-blue-500 to-blue-600 rounded-lg flex items-center justify-center shadow-sm">
-              <Home className="w-4 h-4 text-white" />
+            <div className="w-8 h-8 bg-gradient-to-br from-primary/90 to-primary rounded-lg flex items-center justify-center shadow-sm">
+              <Home className="w-4 h-4 text-primary-foreground" />
             </div>
             {!isCollapsed && (
               <div>
-                <div className="font-semibold text-gray-900 text-sm">Nautilus Hosting</div>
-                <div className="text-xs text-gray-500">Financial Dashboard</div>
+                <div className="font-semibold text-sidebar-foreground text-sm">Nautilus Hosting</div>
+                <div className="text-xs text-sidebar-foreground/60">Financial Dashboard</div>
               </div>
             )}
           </div>
@@ -150,14 +150,14 @@ export function AppSidebar() {
                   >
                     <CollapsibleTrigger asChild>
                       <SidebarMenuButton 
-                        className="w-full justify-between text-gray-600 hover:text-gray-900 hover:bg-gray-50 rounded-md transition-colors data-[state=open]:text-gray-900 data-[state=open]:bg-gray-50"
+                        className="w-full justify-between text-sidebar-foreground hover:text-sidebar-accent-foreground hover:bg-sidebar-accent rounded-md transition-colors data-[state=open]:text-sidebar-accent-foreground data-[state=open]:bg-sidebar-accent"
                       >
                         <div className="flex items-center gap-3">
-                          <item.icon className="w-4 h-4 text-gray-500" />
+                          <item.icon className="w-4 h-4 text-sidebar-foreground/60" />
                           {!isCollapsed && <span className="text-sm font-medium">{item.title}</span>}
                         </div>
                         {!isCollapsed && (
-                          <ChevronDown className={`w-4 h-4 text-gray-400 transition-transform ${
+                          <ChevronDown className={`w-4 h-4 text-sidebar-foreground/60 transition-transform ${
                             openGroups.includes(item.title) ? 'rotate-180' : ''
                           }`} />
                         )}
@@ -177,8 +177,8 @@ export function AppSidebar() {
                                   onClick={handleNavClick}
                                   className={`block px-3 py-2 text-sm rounded-md transition-colors ${
                                     isActive(subItem.url) 
-                                      ? 'text-blue-700 bg-blue-50 font-medium' 
-                                      : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                                      ? 'text-sidebar-primary bg-sidebar-accent font-medium' 
+                                      : 'text-sidebar-foreground hover:text-sidebar-accent-foreground hover:bg-sidebar-accent/50'
                                   }`}
                                 >
                                   {subItem.title}
@@ -197,11 +197,11 @@ export function AppSidebar() {
                       onClick={handleNavClick}
                       className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
                         isActive(item.url!) 
-                          ? 'text-blue-700 bg-blue-50 font-medium' 
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                          ? 'text-sidebar-primary bg-sidebar-accent font-medium' 
+                          : 'text-sidebar-foreground hover:text-sidebar-accent-foreground hover:bg-sidebar-accent/50'
                       }`}
                     >
-                      <item.icon className="w-4 h-4 text-gray-500" />
+                      <item.icon className="w-4 h-4 text-sidebar-foreground/60" />
                       {!isCollapsed && <span className="text-sm font-medium">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
@@ -212,7 +212,7 @@ export function AppSidebar() {
         </SidebarGroup>
 
         {/* Bottom Section */}
-        <div className="mt-auto border-t border-gray-100">
+        <div className="mt-auto border-t border-sidebar-border">
           <SidebarGroup className="px-3 py-2">
             <SidebarMenu className="space-y-1">
               {bottomItems.map((item) => (
@@ -223,11 +223,11 @@ export function AppSidebar() {
                       onClick={handleNavClick}
                       className={`flex items-center gap-3 px-3 py-2 rounded-md transition-colors ${
                         isActive(item.url) 
-                          ? 'text-blue-700 bg-blue-50 font-medium' 
-                          : 'text-gray-600 hover:text-gray-900 hover:bg-gray-50'
+                          ? 'text-sidebar-primary bg-sidebar-accent font-medium' 
+                          : 'text-sidebar-foreground hover:text-sidebar-accent-foreground hover:bg-sidebar-accent/50'
                       }`}
                     >
-                      <item.icon className="w-4 h-4 text-gray-500" />
+                      <item.icon className="w-4 h-4 text-sidebar-foreground/60" />
                       {!isCollapsed && <span className="text-sm font-medium">{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>

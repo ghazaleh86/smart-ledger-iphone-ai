@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider, SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
+import { ThemeProvider } from "@/components/ThemeProvider";
+import { ThemeToggle } from "@/components/ThemeToggle";
 import { AppSidebar } from "@/components/AppSidebar";
 import Index from "./pages/Index";
 import Dashboard from "./pages/Dashboard";
@@ -31,50 +33,52 @@ const queryClient = new QueryClient();
 
 const App = () => (
   <QueryClientProvider client={queryClient}>
-    <TooltipProvider>
-      <Toaster />
-      <Sonner />
-      <BrowserRouter>
-        <SidebarProvider>
-          <div className="min-h-screen flex w-full">
-            <AppSidebar />
-            <SidebarInset className="flex-1">
-              <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
-                <SidebarTrigger className="-ml-1" />
-                <div className="ml-auto flex items-center gap-2">
-                  {/* Header content can be added here */}
+    <ThemeProvider defaultTheme="system" storageKey="ui-theme">
+      <TooltipProvider>
+        <Toaster />
+        <Sonner />
+        <BrowserRouter>
+          <SidebarProvider>
+            <div className="min-h-screen flex w-full">
+              <AppSidebar />
+              <SidebarInset className="flex-1">
+                <header className="flex h-12 shrink-0 items-center gap-2 border-b px-4">
+                  <SidebarTrigger className="-ml-1" />
+                  <div className="ml-auto flex items-center gap-2">
+                    <ThemeToggle />
+                  </div>
+                </header>
+                <div className="flex-1">
+                  <Routes>
+                    <Route path="/" element={<Index />} />
+                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/sales" element={<Sales />} />
+                    <Route path="/sales/invoices" element={<SalesInvoices />} />
+                    <Route path="/sales/customers" element={<SalesCustomers />} />
+                    <Route path="/purchases" element={<Purchases />} />
+                    <Route path="/purchases/bills" element={<PurchasesBills />} />
+                    <Route path="/purchases/vendors" element={<PurchasesVendors />} />
+                    <Route path="/accounting/reconciliation" element={<AccountingReconciliation />} />
+                    <Route path="/accounting/chart-of-accounts" element={<AccountingChartOfAccounts />} />
+                    <Route path="/banking/accounts" element={<BankingAccounts />} />
+                    <Route path="/banking/transfers" element={<BankingTransfers />} />
+                    <Route path="/banking/statements" element={<BankingStatements />} />
+                    <Route path="/payroll/employees" element={<PayrollEmployees />} />
+                    <Route path="/payroll/pay-runs" element={<PayrollPayRuns />} />
+                    <Route path="/payroll/time-tracking" element={<PayrollTimeTracking />} />
+                    <Route path="/reports" element={<Reports />} />
+                    <Route path="/settings" element={<Settings />} />
+                    <Route path="/integrations" element={<Integrations />} />
+                    {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+                    <Route path="*" element={<NotFound />} />
+                  </Routes>
                 </div>
-              </header>
-              <div className="flex-1">
-                <Routes>
-                  <Route path="/" element={<Index />} />
-                  <Route path="/dashboard" element={<Dashboard />} />
-                  <Route path="/sales" element={<Sales />} />
-                  <Route path="/sales/invoices" element={<SalesInvoices />} />
-                  <Route path="/sales/customers" element={<SalesCustomers />} />
-                  <Route path="/purchases" element={<Purchases />} />
-                  <Route path="/purchases/bills" element={<PurchasesBills />} />
-                  <Route path="/purchases/vendors" element={<PurchasesVendors />} />
-                  <Route path="/accounting/reconciliation" element={<AccountingReconciliation />} />
-                  <Route path="/accounting/chart-of-accounts" element={<AccountingChartOfAccounts />} />
-                  <Route path="/banking/accounts" element={<BankingAccounts />} />
-                  <Route path="/banking/transfers" element={<BankingTransfers />} />
-                  <Route path="/banking/statements" element={<BankingStatements />} />
-                  <Route path="/payroll/employees" element={<PayrollEmployees />} />
-                  <Route path="/payroll/pay-runs" element={<PayrollPayRuns />} />
-                  <Route path="/payroll/time-tracking" element={<PayrollTimeTracking />} />
-                  <Route path="/reports" element={<Reports />} />
-                  <Route path="/settings" element={<Settings />} />
-                  <Route path="/integrations" element={<Integrations />} />
-                  {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-                  <Route path="*" element={<NotFound />} />
-                </Routes>
-              </div>
-            </SidebarInset>
-          </div>
-        </SidebarProvider>
-      </BrowserRouter>
-    </TooltipProvider>
+              </SidebarInset>
+            </div>
+          </SidebarProvider>
+        </BrowserRouter>
+      </TooltipProvider>
+    </ThemeProvider>
   </QueryClientProvider>
 );
 
