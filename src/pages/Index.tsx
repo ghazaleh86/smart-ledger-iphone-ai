@@ -21,12 +21,8 @@ const Index = () => {
   const visibleTransactions = filteredTransactions.slice(0, displayedItems);
 
   const handleAIQuery = (query: string) => {
-    console.log('AI Query:', query);
-    toast({
-      title: "AI Assistant",
-      description: `Processing: "${query}"`,
-    });
-    setIsAIOpen(false);
+    console.log('AI Query processed:', query);
+    // The AI assistant now handles its own responses internally
   };
 
   const handleAddTransaction = () => {
