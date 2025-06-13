@@ -40,21 +40,21 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
       {/* Mobile Layout */}
       <div className="block md:hidden text-center">
         <Select value={selectedAccount} onValueChange={onAccountChange}>
-          <SelectTrigger className="w-auto min-w-[200px] mx-auto border-0 bg-transparent text-2xl font-medium text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0 justify-center">
-            <span className="text-2xl font-medium text-gray-900">
+          <SelectTrigger className="w-auto min-w-[200px] mx-auto border-0 bg-transparent text-2xl font-medium text-foreground hover:bg-muted/50 focus:ring-0 focus:ring-offset-0 justify-center">
+            <span className="text-2xl font-medium text-foreground">
               {selectedAccountData?.name || "Select account"}
             </span>
           </SelectTrigger>
-          <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+          <SelectContent className="bg-popover border border-border rounded-lg shadow-lg z-50">
             {accounts.map((account) => (
-              <SelectItem key={account.id} value={account.id} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-gray-50 focus:bg-gray-50">
+              <SelectItem key={account.id} value={account.id} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-accent focus:bg-accent">
                 <div className="flex justify-between items-center w-full min-w-[280px]">
                   <div className="text-left">
-                    <div className="font-medium text-gray-900 text-base">{account.name}</div>
-                    <div className="text-sm text-gray-500">{account.type}</div>
+                    <div className="font-medium text-foreground text-base">{account.name}</div>
+                    <div className="text-sm text-muted-foreground">{account.type}</div>
                   </div>
                   <div className="text-right">
-                    <div className="font-medium text-gray-900 text-base">
+                    <div className="font-medium text-foreground text-base">
                       ${account.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                     </div>
                   </div>
@@ -63,12 +63,12 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
             ))}
           </SelectContent>
         </Select>
-        <div className="text-xs text-gray-500 mb-2 mt-8 uppercase tracking-wide font-medium">NET BALANCE</div>
-        <div className="text-3xl font-semibold text-gray-900">
+        <div className="text-xs text-muted-foreground mb-2 mt-8 uppercase tracking-wide font-medium">NET BALANCE</div>
+        <div className="text-3xl font-semibold text-foreground">
           ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </div>
-        <div className="mt-4 text-sm text-gray-600 font-medium px-4">
-          <div className="bg-gradient-to-r from-pink-50 to-yellow-50 border border-pink-100/30 rounded-lg px-4 py-3 mx-2">
+        <div className="mt-4 text-sm text-foreground font-medium px-4">
+          <div className="bg-gradient-to-r from-muted/80 to-muted/60 border border-border/30 rounded-lg px-4 py-3 mx-2">
             {randomInsight}
           </div>
         </div>
@@ -79,21 +79,21 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
         <div className="flex flex-col">
           <div className="flex items-center mb-6">
             <Select value={selectedAccount} onValueChange={onAccountChange}>
-              <SelectTrigger className="w-auto min-w-[200px] border-0 bg-transparent text-2xl font-medium text-gray-900 hover:bg-gray-50 focus:ring-0 focus:ring-offset-0">
-                <span className="text-2xl font-medium text-gray-900">
+              <SelectTrigger className="w-auto min-w-[200px] border-0 bg-transparent text-2xl font-medium text-foreground hover:bg-muted/50 focus:ring-0 focus:ring-offset-0">
+                <span className="text-2xl font-medium text-foreground">
                   {selectedAccountData?.name || "Select account"}
                 </span>
               </SelectTrigger>
-              <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <SelectContent className="bg-popover border border-border rounded-lg shadow-lg z-50">
                 {accounts.map((account) => (
-                  <SelectItem key={account.id} value={account.id} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-gray-50 focus:bg-gray-50">
+                  <SelectItem key={account.id} value={account.id} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-accent focus:bg-accent">
                     <div className="flex justify-between items-center w-full min-w-[280px]">
                       <div className="text-left">
-                        <div className="font-medium text-gray-900 text-base">{account.name}</div>
-                        <div className="text-sm text-gray-500">{account.type}</div>
+                        <div className="font-medium text-foreground text-base">{account.name}</div>
+                        <div className="text-sm text-muted-foreground">{account.type}</div>
                       </div>
                       <div className="text-right">
-                        <div className="font-medium text-gray-900 text-base">
+                        <div className="font-medium text-foreground text-base">
                           ${account.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
                         </div>
                       </div>
@@ -103,16 +103,16 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
               </SelectContent>
             </Select>
           </div>
-          <div className="text-sm text-gray-600 font-medium max-w-md">
-            <div className="bg-gradient-to-r from-pink-50 to-yellow-50 border border-pink-100/30 rounded-lg px-4 py-3">
+          <div className="text-sm text-foreground font-medium max-w-md">
+            <div className="bg-gradient-to-r from-muted/80 to-muted/60 border border-border/30 rounded-lg px-4 py-3">
               {randomInsight}
             </div>
           </div>
         </div>
         
         <div className="text-right">
-          <div className="text-xs text-gray-500 mb-2 uppercase tracking-wide font-medium">NET BALANCE</div>
-          <div className="text-3xl font-semibold text-gray-900">
+          <div className="text-xs text-muted-foreground mb-2 uppercase tracking-wide font-medium">NET BALANCE</div>
+          <div className="text-3xl font-semibold text-foreground">
             ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
         </div>

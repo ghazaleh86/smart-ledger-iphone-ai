@@ -33,36 +33,36 @@ const categories = [
 const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested, onCategoryChange }: CategorySelectorProps) => {
   const getCategoryColor = (category?: string) => {
     const colors: Record<string, string> = {
-      'Meals & Entertainment': 'bg-orange-50 text-orange-700 border-orange-200',
-      'Transportation': 'bg-blue-50 text-blue-700 border-blue-200',
-      'Shopping': 'bg-purple-50 text-purple-700 border-purple-200',
-      'Bills & Utilities': 'bg-gray-50 text-gray-700 border-gray-200',
-      'Healthcare': 'bg-red-50 text-red-700 border-red-200',
-      'Education': 'bg-green-50 text-green-700 border-green-200',
-      'Travel': 'bg-indigo-50 text-indigo-700 border-indigo-200',
-      'Home & Garden': 'bg-emerald-50 text-emerald-700 border-emerald-200',
-      'Business': 'bg-slate-50 text-slate-700 border-slate-200',
-      'Business Income': 'bg-green-50 text-green-700 border-green-200',
-      'Payment to Credit Card': 'bg-blue-50 text-blue-700 border-blue-200',
-      'Other': 'bg-gray-50 text-gray-600 border-gray-200',
+      'Meals & Entertainment': 'bg-orange-100 dark:bg-orange-950/50 text-orange-800 dark:text-orange-200 border-orange-300 dark:border-orange-800',
+      'Transportation': 'bg-blue-100 dark:bg-blue-950/50 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-800',
+      'Shopping': 'bg-purple-100 dark:bg-purple-950/50 text-purple-800 dark:text-purple-200 border-purple-300 dark:border-purple-800',
+      'Bills & Utilities': 'bg-gray-100 dark:bg-gray-800/50 text-gray-800 dark:text-gray-200 border-gray-300 dark:border-gray-700',
+      'Healthcare': 'bg-red-100 dark:bg-red-950/50 text-red-800 dark:text-red-200 border-red-300 dark:border-red-800',
+      'Education': 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-200 border-green-300 dark:border-green-800',
+      'Travel': 'bg-indigo-100 dark:bg-indigo-950/50 text-indigo-800 dark:text-indigo-200 border-indigo-300 dark:border-indigo-800',
+      'Home & Garden': 'bg-emerald-100 dark:bg-emerald-950/50 text-emerald-800 dark:text-emerald-200 border-emerald-300 dark:border-emerald-800',
+      'Business': 'bg-slate-100 dark:bg-slate-800/50 text-slate-800 dark:text-slate-200 border-slate-300 dark:border-slate-700',
+      'Business Income': 'bg-green-100 dark:bg-green-950/50 text-green-800 dark:text-green-200 border-green-300 dark:border-green-800',
+      'Payment to Credit Card': 'bg-blue-100 dark:bg-blue-950/50 text-blue-800 dark:text-blue-200 border-blue-300 dark:border-blue-800',
+      'Other': 'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700',
     };
-    return colors[category || ''] || 'bg-gray-50 text-gray-600 border-gray-200';
+    return colors[category || ''] || 'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700';
   };
 
   return (
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
-      <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-blue-500 w-[140px] min-w-[140px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
+      <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(currentCategory)} hover:opacity-80 focus:ring-1 focus:ring-ring w-[140px] min-w-[140px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
         <SelectValue placeholder="Categorize">
           {currentCategory}
         </SelectValue>
       </SelectTrigger>
-      <SelectContent className="bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+      <SelectContent className="bg-popover border border-border rounded-lg shadow-lg z-50">
         {categories.map((category) => (
-          <SelectItem key={category} value={category} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-gray-50 focus:bg-gray-50">
+          <SelectItem key={category} value={category} className="cursor-pointer rounded-md mx-1 my-0.5 hover:bg-accent focus:bg-accent">
             <span className={`px-3 py-1.5 rounded-md text-sm font-medium ${getCategoryColor(category)}`}>
               {category}
               {aiSuggestedCategory === category && (
-                <span className="text-blue-600 font-normal"> (AI suggested)</span>
+                <span className="text-blue-600 dark:text-blue-400 font-normal"> (AI suggested)</span>
               )}
             </span>
           </SelectItem>
