@@ -1,6 +1,8 @@
 
 import React, { useState } from 'react';
 import { Search, X, Bot, Sparkles } from 'lucide-react';
+import { Transaction } from '@/types/financial';
+import { allTransactions } from '@/data/transactions';
 
 interface AIAssistantProps {
   onQuery: (query: string) => void;
@@ -12,6 +14,7 @@ interface AIResponse {
   answer: string;
   insights: string[];
   followUpQuestions: string[];
+  matchedTransactions?: Transaction[];
 }
 
 const AIAssistant = ({ onQuery, isOpen, onClose }: AIAssistantProps) => {
@@ -26,81 +29,184 @@ const AIAssistant = ({ onQuery, isOpen, onClose }: AIAssistantProps) => {
     "Show all income from March",
   ];
 
-  // Mock AI responses for different queries
-  const getAIResponse = (query: string): AIResponse => {
+  // Actual AI agent that analyzes real transaction data
+  const analyzeTransactions = (query: string): AIResponse => {
     const lowerQuery = query.toLowerCase();
+    const transactions = allTransactions;
     
+    // Search for specific merchants
     if (lowerQuery.includes('starbucks')) {
+      const starbucksTransactions = transactions.filter(t => 
+        t.merchant.toLowerCase().includes('starbucks')
+      );
+      const totalSpent = starbucksTransactions.reduce((sum, t) => sum + t.amount, 0);
+      
       return {
-        answer: "I found 1 Starbucks transaction this month: **STARBUCKS QUEEN LOGAN** for $3.45 on Feb 27, 2024. This was paid using Cash and Bank from your checking account.",
+        answer: `I found ${starbucksTransactions.length} Starbucks transaction${starbucksTransactions.length !== 1 ? 's' : ''} totaling **$${totalSpent.toFixed(2)}**. ${starbucksTransactions.map(t => `**${t.merchant}** for $${t.amount.toFixed(2)} on ${new Date(t.date).toLocaleDateString()}`).join(', ')}.`,
         insights: [
-          "💡 You spent 85% less on coffee this month compared to last month",
-          "☕ This is your most frequent coffee shop location",
-          "📊 Your average coffee spend is $4.12 per visit"
+          `☕ Average spend per visit: $${(totalSpent / starbucksTransactions.length).toFixed(2)}`,
+          `📅 Most recent visit: ${new Date(Math.max(...starbucksTransactions.map(t => new Date(t.date).getTime()))).toLocaleDateString()}`,
+          `💰 This represents ${((totalSpent / transactions.reduce((sum, t) => t.type === 'expense' ? sum + t.amount : sum, 0)) * 100).toFixed(1)}% of your total expenses`
         ],
         followUpQuestions: [
-          "Show me all coffee purchases this year",
-          "Compare my coffee spending to last month",
-          "Find all transactions at Queen Logan locations"
-        ]
-      };
-    } else if (lowerQuery.includes('food') || lowerQuery.includes('meals')) {
-      return {
-        answer: "Last week you spent **$67.77** on food across 4 transactions: Subway ($12.65), Pizzaville ($24.65), Tim Hortons ($8.99), McDonald's ($14.78), and Harvey's ($19.87).",
-        insights: [
-          "🍕 Fast food represents 78% of your food spending",
-          "📈 Food spending increased by 23% compared to previous week",
-          "🥪 Lunch purchases are your most common meal expense"
+          "Show me all coffee-related purchases",
+          "Compare my coffee spending to food spending",
+          "Find my most expensive coffee purchase"
         ],
-        followUpQuestions: [
-          "Show me grocery vs restaurant spending",
-          "What's my monthly food budget trending?",
-          "Find healthier food options in my area"
-        ]
-      };
-    } else if (lowerQuery.includes('100') || lowerQuery.includes('over')) {
-      return {
-        answer: "I found **5 transactions over $100** recently: Home Hardware ($113.00), Metro Grocery ($134.67), Best Buy ($234.56), Costco ($187.65), and CC Visa Payment ($503.40).",
-        insights: [
-          "🏠 Home & business expenses make up 60% of large transactions",
-          "💳 Your largest transaction was a credit card payment",
-          "🛒 Bulk shopping at Costco saved you an estimated $23 vs smaller stores"
-        ],
-        followUpQuestions: [
-          "Show me all business-related expenses",
-          "What's my average large purchase amount?",
-          "Find recurring large payments"
-        ]
-      };
-    } else if (lowerQuery.includes('income') || lowerQuery.includes('march')) {
-      return {
-        answer: "In March 2024, you had **$1,850** in income from a business payment (PYMT CHQ 3023) deposited to your checking account on Feb 27th.",
-        insights: [
-          "💼 100% of your income this period was from business sources",
-          "📅 This represents your typical monthly business income",
-          "💰 Income was received 2 days earlier than usual"
-        ],
-        followUpQuestions: [
-          "Show me income trends over the last 6 months",
-          "Compare business vs other income sources",
-          "When is my next expected payment?"
-        ]
-      };
-    } else {
-      return {
-        answer: `I analyzed your request: "${query}". Based on your transaction history, I can help you understand spending patterns, categorize expenses, and track financial goals.`,
-        insights: [
-          "📊 Your account shows healthy spending diversity",
-          "🎯 Most transactions are properly categorized",
-          "💡 Consider setting up spending alerts for better tracking"
-        ],
-        followUpQuestions: [
-          "Show me my spending by category",
-          "What are my largest expense categories?",
-          "Help me set a monthly budget"
-        ]
+        matchedTransactions: starbucksTransactions
       };
     }
+    
+    // Search for food/meal transactions
+    if (lowerQuery.includes('food') || lowerQuery.includes('meal') || lowerQuery.includes('restaurant')) {
+      const foodTransactions = transactions.filter(t => 
+        t.category?.toLowerCase().includes('meal') || 
+        t.category?.toLowerCase().includes('food') ||
+        ['subway', 'pizzaville', 'tim hortons', 'mcdonalds', 'harvey', 'pizza'].some(keyword => 
+          t.merchant.toLowerCase().includes(keyword)
+        )
+      );
+      const totalSpent = foodTransactions.reduce((sum, t) => sum + t.amount, 0);
+      
+      return {
+        answer: `I found ${foodTransactions.length} food-related transactions totaling **$${totalSpent.toFixed(2)}**. Recent purchases include: ${foodTransactions.slice(0, 3).map(t => `${t.merchant} ($${t.amount.toFixed(2)})`).join(', ')}.`,
+        insights: [
+          `🍽️ Average meal cost: $${(totalSpent / foodTransactions.length).toFixed(2)}`,
+          `📊 Food represents ${((totalSpent / transactions.reduce((sum, t) => t.type === 'expense' ? sum + t.amount : sum, 0)) * 100).toFixed(1)}% of your expenses`,
+          `🥪 Most expensive meal: $${Math.max(...foodTransactions.map(t => t.amount)).toFixed(2)}`
+        ],
+        followUpQuestions: [
+          "Show me my most expensive restaurants",
+          "Compare fast food vs sit-down restaurants",
+          "What's my weekly food budget trending?"
+        ],
+        matchedTransactions: foodTransactions
+      };
+    }
+    
+    // Search for transactions over a certain amount
+    if (lowerQuery.includes('over') || lowerQuery.includes('above') || lowerQuery.includes('>')) {
+      const amountMatch = lowerQuery.match(/(\d+)/);
+      const threshold = amountMatch ? parseInt(amountMatch[1]) : 100;
+      
+      const largeTransactions = transactions.filter(t => t.amount > threshold);
+      const totalAmount = largeTransactions.reduce((sum, t) => sum + t.amount, 0);
+      
+      return {
+        answer: `I found ${largeTransactions.length} transactions over $${threshold} totaling **$${totalAmount.toFixed(2)}**. Largest transactions: ${largeTransactions.slice(0, 3).map(t => `${t.merchant} ($${t.amount.toFixed(2)})`).join(', ')}.`,
+        insights: [
+          `💰 Largest single transaction: $${Math.max(...largeTransactions.map(t => t.amount)).toFixed(2)}`,
+          `📈 Large transactions represent ${((totalAmount / transactions.reduce((sum, t) => sum + t.amount, 0)) * 100).toFixed(1)}% of total spending`,
+          `🏪 Most common large expense category: ${largeTransactions.reduce((acc, t) => { acc[t.category || 'Other'] = (acc[t.category || 'Other'] || 0) + 1; return acc; }, {} as Record<string, number>)}`
+        ],
+        followUpQuestions: [
+          "Show me all business expenses",
+          "Find recurring large payments",
+          "What's my average large purchase amount?"
+        ],
+        matchedTransactions: largeTransactions
+      };
+    }
+    
+    // Search for income transactions
+    if (lowerQuery.includes('income') || lowerQuery.includes('payment') || lowerQuery.includes('deposit')) {
+      const incomeTransactions = transactions.filter(t => t.type === 'income');
+      const totalIncome = incomeTransactions.reduce((sum, t) => sum + t.amount, 0);
+      
+      return {
+        answer: `I found ${incomeTransactions.length} income transaction${incomeTransactions.length !== 1 ? 's' : ''} totaling **$${totalIncome.toFixed(2)}**. ${incomeTransactions.map(t => `${t.merchant} for $${t.amount.toFixed(2)} on ${new Date(t.date).toLocaleDateString()}`).join(', ')}.`,
+        insights: [
+          `💼 Total income this period: $${totalIncome.toFixed(2)}`,
+          `📅 Most recent income: ${new Date(Math.max(...incomeTransactions.map(t => new Date(t.date).getTime()))).toLocaleDateString()}`,
+          `📊 Income vs expenses ratio: ${(totalIncome / transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0)).toFixed(2)}:1`
+        ],
+        followUpQuestions: [
+          "Show me income trends over time",
+          "Compare business vs other income",
+          "When is my next expected payment?"
+        ],
+        matchedTransactions: incomeTransactions
+      };
+    }
+    
+    // Search by category
+    const categories = ['transportation', 'shopping', 'healthcare', 'business', 'home', 'garden'];
+    const matchedCategory = categories.find(cat => lowerQuery.includes(cat));
+    
+    if (matchedCategory) {
+      const categoryTransactions = transactions.filter(t => 
+        t.category?.toLowerCase().includes(matchedCategory)
+      );
+      const totalSpent = categoryTransactions.reduce((sum, t) => sum + t.amount, 0);
+      
+      return {
+        answer: `I found ${categoryTransactions.length} ${matchedCategory} transactions totaling **$${totalSpent.toFixed(2)}**. Recent purchases: ${categoryTransactions.slice(0, 3).map(t => `${t.merchant} ($${t.amount.toFixed(2)})`).join(', ')}.`,
+        insights: [
+          `💰 Average ${matchedCategory} expense: $${(totalSpent / categoryTransactions.length).toFixed(2)}`,
+          `📊 ${matchedCategory} represents ${((totalSpent / transactions.reduce((sum, t) => t.type === 'expense' ? sum + t.amount : sum, 0)) * 100).toFixed(1)}% of your expenses`,
+          `📈 Largest ${matchedCategory} expense: $${Math.max(...categoryTransactions.map(t => t.amount)).toFixed(2)}`
+        ],
+        followUpQuestions: [
+          `Show me ${matchedCategory} spending trends`,
+          `Find my most expensive ${matchedCategory} purchases`,
+          `Compare ${matchedCategory} to other categories`
+        ],
+        matchedTransactions: categoryTransactions
+      };
+    }
+    
+    // Search by merchant name
+    const merchantKeywords = query.split(' ').filter(word => word.length > 2);
+    const merchantTransactions = transactions.filter(t => 
+      merchantKeywords.some(keyword => 
+        t.merchant.toLowerCase().includes(keyword.toLowerCase())
+      )
+    );
+    
+    if (merchantTransactions.length > 0) {
+      const totalSpent = merchantTransactions.reduce((sum, t) => sum + t.amount, 0);
+      
+      return {
+        answer: `I found ${merchantTransactions.length} transaction${merchantTransactions.length !== 1 ? 's' : ''} matching your search totaling **$${totalSpent.toFixed(2)}**. ${merchantTransactions.slice(0, 3).map(t => `${t.merchant} ($${t.amount.toFixed(2)}) on ${new Date(t.date).toLocaleDateString()}`).join(', ')}.`,
+        insights: [
+          `💰 Average transaction amount: $${(totalSpent / merchantTransactions.length).toFixed(2)}`,
+          `📅 Date range: ${new Date(Math.min(...merchantTransactions.map(t => new Date(t.date).getTime()))).toLocaleDateString()} to ${new Date(Math.max(...merchantTransactions.map(t => new Date(t.date).getTime()))).toLocaleDateString()}`,
+          `🏪 Payment methods used: ${[...new Set(merchantTransactions.map(t => t.paymentMethod))].join(', ')}`
+        ],
+        followUpQuestions: [
+          "Show me similar merchants",
+          "Find transactions in the same category",
+          "Compare spending at this merchant over time"
+        ],
+        matchedTransactions: merchantTransactions
+      };
+    }
+    
+    // Default response with general insights
+    const totalExpenses = transactions.filter(t => t.type === 'expense').reduce((sum, t) => sum + t.amount, 0);
+    const totalIncome = transactions.filter(t => t.type === 'income').reduce((sum, t) => sum + t.amount, 0);
+    const categoryBreakdown = transactions.reduce((acc, t) => {
+      if (t.type === 'expense') {
+        acc[t.category || 'Other'] = (acc[t.category || 'Other'] || 0) + t.amount;
+      }
+      return acc;
+    }, {} as Record<string, number>);
+    
+    const topCategory = Object.entries(categoryBreakdown).sort((a, b) => b[1] - a[1])[0];
+    
+    return {
+      answer: `I analyzed your transaction history and found ${transactions.length} total transactions. Your total expenses are **$${totalExpenses.toFixed(2)}** and total income is **$${totalIncome.toFixed(2)}**.`,
+      insights: [
+        `📊 Net position: ${totalIncome > totalExpenses ? '+' : ''}$${(totalIncome - totalExpenses).toFixed(2)}`,
+        `💰 Top spending category: ${topCategory[0]} ($${topCategory[1].toFixed(2)})`,
+        `📱 Most used payment method: ${transactions.reduce((acc, t) => { acc[t.paymentMethod] = (acc[t.paymentMethod] || 0) + 1; return acc; }, {} as Record<string, number>)}`
+      ],
+      followUpQuestions: [
+        "Show me spending by category",
+        "Find my largest expenses this month",
+        "What's my average daily spending?"
+      ]
+    };
   };
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -116,7 +222,7 @@ const AIAssistant = ({ onQuery, isOpen, onClose }: AIAssistantProps) => {
     
     // Simulate AI processing time
     setTimeout(() => {
-      const response = getAIResponse(queryText);
+      const response = analyzeTransactions(queryText);
       setCurrentResponse(response);
       setIsLoading(false);
       onQuery(queryText);
@@ -196,7 +302,7 @@ const AIAssistant = ({ onQuery, isOpen, onClose }: AIAssistantProps) => {
                 <div className="flex items-start gap-2">
                   <Sparkles className="w-4 h-4 text-blue-600 dark:text-blue-400 mt-0.5 flex-shrink-0" />
                   <p className="text-sm text-blue-700 dark:text-blue-300">
-                    I can help you categorize transactions, find spending patterns, and answer questions about your finances.
+                    I can analyze your actual transaction data, find spending patterns, and answer specific questions about your finances.
                   </p>
                 </div>
               </div>
@@ -231,6 +337,31 @@ const AIAssistant = ({ onQuery, isOpen, onClose }: AIAssistantProps) => {
                   </div>
                 </div>
 
+                {/* Show matched transactions if available */}
+                {currentResponse.matchedTransactions && currentResponse.matchedTransactions.length > 0 && (
+                  <div className="space-y-2">
+                    <h4 className="text-sm font-medium text-foreground">Matching Transactions:</h4>
+                    <div className="space-y-2 max-h-32 overflow-y-auto">
+                      {currentResponse.matchedTransactions.slice(0, 5).map((transaction) => (
+                        <div key={transaction.id} className="p-2 bg-muted/20 rounded border border-border/30 text-xs">
+                          <div className="flex justify-between items-center">
+                            <span className="font-medium">{transaction.merchant}</span>
+                            <span className="text-foreground">${transaction.amount.toFixed(2)}</span>
+                          </div>
+                          <div className="text-muted-foreground">
+                            {new Date(transaction.date).toLocaleDateString()} • {transaction.category}
+                          </div>
+                        </div>
+                      ))}
+                      {currentResponse.matchedTransactions.length > 5 && (
+                        <div className="text-xs text-muted-foreground text-center py-1">
+                          +{currentResponse.matchedTransactions.length - 5} more transactions
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                )}
+
                 {/* Insights */}
                 <div className="space-y-3">
                   <h4 className="text-sm font-medium text-foreground flex items-center gap-2">
@@ -238,7 +369,7 @@ const AIAssistant = ({ onQuery, isOpen, onClose }: AIAssistantProps) => {
                     Key Insights
                   </h4>
                   {currentResponse.insights.map((insight, index) => (
-                    <div key={index} className="p-3 bg-muted/30 rounded-lg border border-border/50">
+                    <div key={index} className="p-3 bg-gradient-to-r from-blue-50/50 via-purple-50/50 to-pink-50/50 dark:from-blue-950/20 dark:via-purple-950/20 dark:to-pink-950/20 rounded-lg border border-blue-200/30 dark:border-blue-800/20">
                       <p className="text-sm text-foreground">{insight}</p>
                     </div>
                   ))}
