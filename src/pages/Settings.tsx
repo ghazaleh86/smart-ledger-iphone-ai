@@ -54,10 +54,10 @@ const Settings = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-6 px-8 shadow-sm border-b">
+      <div className="bg-card py-6 px-8 shadow-sm border-b border-border">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-semibold">Settings</h1>
+            <h1 className="text-2xl font-semibold text-foreground">Settings</h1>
             <p className="text-sm text-muted-foreground mt-1">Configure your application preferences and account settings</p>
           </div>
         </div>
@@ -67,34 +67,34 @@ const Settings = () => {
       <div className="px-8 py-8 space-y-8">
         {/* Quick Actions */}
         <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="bg-card border-border hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <User className="h-8 w-8 text-blue-600 dark:text-blue-400 mx-auto mb-2" />
-              <h3 className="font-medium">Profile</h3>
+              <h3 className="font-medium text-foreground">Profile</h3>
               <p className="text-sm text-muted-foreground">Update your info</p>
             </CardContent>
           </Card>
           
-          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="bg-card border-border hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <Bell className="h-8 w-8 text-green-600 dark:text-green-400 mx-auto mb-2" />
-              <h3 className="font-medium">Notifications</h3>
+              <h3 className="font-medium text-foreground">Notifications</h3>
               <p className="text-sm text-muted-foreground">Control alerts</p>
             </CardContent>
           </Card>
           
-          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="bg-card border-border hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <Shield className="h-8 w-8 text-purple-600 dark:text-purple-400 mx-auto mb-2" />
-              <h3 className="font-medium">Security</h3>
+              <h3 className="font-medium text-foreground">Security</h3>
               <p className="text-sm text-muted-foreground">Privacy settings</p>
             </CardContent>
           </Card>
           
-          <Card className="hover:shadow-md transition-shadow cursor-pointer">
+          <Card className="bg-card border-border hover:shadow-md transition-shadow cursor-pointer">
             <CardContent className="p-6 text-center">
               <Database className="h-8 w-8 text-orange-600 dark:text-orange-400 mx-auto mb-2" />
-              <h3 className="font-medium">Data</h3>
+              <h3 className="font-medium text-foreground">Data</h3>
               <p className="text-sm text-muted-foreground">Export & backup</p>
             </CardContent>
           </Card>
@@ -103,24 +103,24 @@ const Settings = () => {
         {/* Settings Categories */}
         <div className="space-y-8">
           {settingsCategories.map((category, categoryIndex) => (
-            <Card key={categoryIndex}>
+            <Card key={categoryIndex} className="bg-card border-border">
               <CardHeader>
                 <div className="flex items-center gap-3">
                   <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
                     <category.icon className="h-5 w-5 text-blue-600 dark:text-blue-400" />
                   </div>
                   <div>
-                    <CardTitle className="text-lg font-semibold">{category.title}</CardTitle>
-                    <CardDescription>{category.description}</CardDescription>
+                    <CardTitle className="text-lg font-semibold text-foreground">{category.title}</CardTitle>
+                    <CardDescription className="text-muted-foreground">{category.description}</CardDescription>
                   </div>
                 </div>
               </CardHeader>
               <CardContent>
                 <div className="space-y-4">
                   {category.settings.map((setting, settingIndex) => (
-                    <div key={settingIndex} className="flex items-center justify-between p-4 border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
+                    <div key={settingIndex} className="flex items-center justify-between p-4 border border-border rounded-lg hover:bg-muted/50 transition-colors cursor-pointer">
                       <div>
-                        <h3 className="font-medium">{setting.name}</h3>
+                        <h3 className="font-medium text-foreground">{setting.name}</h3>
                         <p className="text-sm text-muted-foreground">{setting.description}</p>
                       </div>
                       <div className="text-muted-foreground">
@@ -139,7 +139,7 @@ const Settings = () => {
         {/* Support Section */}
         <Card className="bg-gradient-to-r from-primary/10 to-primary/5 border-primary/20">
           <CardContent className="p-8 text-center">
-            <h3 className="text-lg font-semibold mb-2">Need Help?</h3>
+            <h3 className="text-lg font-semibold mb-2 text-foreground">Need Help?</h3>
             <p className="text-muted-foreground mb-4">
               Contact our support team or check out our knowledge base for answers to common questions.
             </p>

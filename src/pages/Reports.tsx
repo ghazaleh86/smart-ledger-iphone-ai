@@ -47,10 +47,10 @@ const Reports = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Reports</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Reports</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Generate financial reports and analytics</p>
           </div>
           <div className="flex items-center gap-3 self-end">
@@ -70,19 +70,19 @@ const Reports = () => {
       {/* Content */}
       <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-6 sm:space-y-8">
         {/* Quick Reports */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="p-3 sm:p-6">
-            <CardTitle className="text-base sm:text-lg font-semibold">Quick Reports</CardTitle>
-            <CardDescription className="text-xs sm:text-sm">Recently generated and ready-to-view reports</CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold text-foreground">Quick Reports</CardTitle>
+            <CardDescription className="text-xs sm:text-sm text-muted-foreground">Recently generated and ready-to-view reports</CardDescription>
           </CardHeader>
           <CardContent className="p-3 sm:p-6 pt-0">
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
               {quickReports.map((report, index) => (
                 <div key={index} className="p-3 sm:p-4 border border-border rounded-lg hover:shadow-sm transition-shadow">
                   <div className="flex items-center justify-between mb-2">
-                    <h3 className="font-medium text-sm sm:text-base">{report.name}</h3>
+                    <h3 className="font-medium text-sm sm:text-base text-foreground">{report.name}</h3>
                     <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                      report.status === 'Ready' ? 'bg-green-100 text-green-800' : 'bg-orange-100 text-orange-800'
+                      report.status === 'Ready' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' : 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200'
                     }`}>
                       {report.status}
                     </span>
@@ -103,10 +103,10 @@ const Reports = () => {
         {/* Report Categories */}
         <div className="space-y-6 sm:space-y-8">
           {reportCategories.map((category, categoryIndex) => (
-            <Card key={categoryIndex}>
+            <Card key={categoryIndex} className="bg-card border-border">
               <CardHeader className="p-3 sm:p-6">
-                <CardTitle className="text-base sm:text-lg font-semibold">{category.title}</CardTitle>
-                <CardDescription className="text-xs sm:text-sm">{category.description}</CardDescription>
+                <CardTitle className="text-base sm:text-lg font-semibold text-foreground">{category.title}</CardTitle>
+                <CardDescription className="text-xs sm:text-sm text-muted-foreground">{category.description}</CardDescription>
               </CardHeader>
               <CardContent className="p-3 sm:p-6 pt-0">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
@@ -116,7 +116,7 @@ const Reports = () => {
                         <div className="p-2 bg-primary/10 rounded-lg group-hover:bg-primary/20 transition-colors">
                           <report.icon className="h-4 w-4 sm:h-5 sm:w-5 text-primary" />
                         </div>
-                        <h3 className="font-medium text-sm sm:text-base">{report.name}</h3>
+                        <h3 className="font-medium text-sm sm:text-base text-foreground">{report.name}</h3>
                       </div>
                       <p className="text-xs sm:text-sm text-muted-foreground">{report.description}</p>
                     </div>
@@ -132,7 +132,7 @@ const Reports = () => {
           <CardContent className="p-6 sm:p-8 text-center">
             <div className="max-w-md mx-auto">
               <BarChart3 className="h-10 w-10 sm:h-12 sm:w-12 text-primary mx-auto mb-4" />
-              <h3 className="text-base sm:text-lg font-semibold mb-2">Custom Report Builder</h3>
+              <h3 className="text-base sm:text-lg font-semibold mb-2 text-foreground">Custom Report Builder</h3>
               <p className="text-xs sm:text-sm text-muted-foreground mb-4">
                 Create custom reports with your own filters, date ranges, and data visualizations.
               </p>

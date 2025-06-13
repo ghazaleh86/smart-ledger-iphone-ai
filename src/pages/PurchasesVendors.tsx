@@ -61,10 +61,10 @@ const PurchasesVendors = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Vendors</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Vendors</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage your vendor relationships and purchase history</p>
           </div>
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
@@ -78,7 +78,7 @@ const PurchasesVendors = () => {
       {/* Content */}
       <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Search */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardContent className="p-3 sm:p-6">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
@@ -87,7 +87,7 @@ const PurchasesVendors = () => {
                 placeholder="Search vendors..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
               />
             </div>
           </CardContent>
@@ -96,19 +96,19 @@ const PurchasesVendors = () => {
         {/* Vendor Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
           {filteredVendors.map((vendor) => (
-            <Card key={vendor.id} className="hover:shadow-md transition-shadow">
+            <Card key={vendor.id} className="bg-card border-border hover:shadow-md transition-shadow">
               <CardHeader className="p-3 sm:p-6">
                 <div className="flex items-center justify-between">
-                  <CardTitle className="text-base sm:text-lg font-semibold">{vendor.name}</CardTitle>
+                  <CardTitle className="text-base sm:text-lg font-semibold text-foreground">{vendor.name}</CardTitle>
                   <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                    vendor.status === 'Active' ? 'bg-green-100 text-green-800' : 'bg-gray-100 text-gray-800'
+                    vendor.status === 'Active' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' : 'bg-gray-100 dark:bg-gray-800/50 text-gray-800 dark:text-gray-200'
                   }`}>
                     {vendor.status}
                   </span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="bg-yellow-50 p-1 rounded">
-                    <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-600 fill-current" />
+                  <div className="bg-yellow-100 dark:bg-yellow-900/30 p-1 rounded">
+                    <Star className="h-3 w-3 sm:h-4 sm:w-4 text-yellow-600 dark:text-yellow-400 fill-current" />
                   </div>
                   <span className="text-xs sm:text-sm text-muted-foreground">{vendor.rating}</span>
                 </div>
@@ -116,20 +116,20 @@ const PurchasesVendors = () => {
               <CardContent className="space-y-4 p-3 sm:p-6 pt-0">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <div className="bg-blue-50 p-1 rounded">
-                      <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600" />
+                    <div className="bg-blue-100 dark:bg-blue-900/30 p-1 rounded">
+                      <Mail className="h-3 w-3 sm:h-4 sm:w-4 text-blue-600 dark:text-blue-400" />
                     </div>
                     <span>{vendor.email}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <div className="bg-green-50 p-1 rounded">
-                      <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-green-600" />
+                    <div className="bg-green-100 dark:bg-green-900/30 p-1 rounded">
+                      <Phone className="h-3 w-3 sm:h-4 sm:w-4 text-green-600 dark:text-green-400" />
                     </div>
                     <span>{vendor.phone}</span>
                   </div>
                   <div className="flex items-center gap-2 text-xs sm:text-sm text-muted-foreground">
-                    <div className="bg-purple-50 p-1 rounded">
-                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600" />
+                    <div className="bg-purple-100 dark:bg-purple-900/30 p-1 rounded">
+                      <MapPin className="h-3 w-3 sm:h-4 sm:w-4 text-purple-600 dark:text-purple-400" />
                     </div>
                     <span>{vendor.location}</span>
                   </div>
@@ -139,11 +139,11 @@ const PurchasesVendors = () => {
                   <div className="grid grid-cols-2 gap-4">
                     <div>
                       <div className="text-xs sm:text-sm text-muted-foreground">Total Spent</div>
-                      <div className="font-semibold text-sm sm:text-base">{vendor.totalSpent}</div>
+                      <div className="font-semibold text-sm sm:text-base text-foreground">{vendor.totalSpent}</div>
                     </div>
                     <div>
                       <div className="text-xs sm:text-sm text-muted-foreground">Orders</div>
-                      <div className="font-semibold text-sm sm:text-base">{vendor.ordersCount}</div>
+                      <div className="font-semibold text-sm sm:text-base text-foreground">{vendor.ordersCount}</div>
                     </div>
                   </div>
                 </div>

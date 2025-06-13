@@ -10,28 +10,28 @@ const Purchases = () => {
       value: "$89,340",
       change: "+3.2%",
       icon: ShoppingCart,
-      color: "text-red-600"
+      color: "text-red-600 dark:text-red-400"
     },
     {
       title: "Active Vendors",
       value: "28",
       change: "+2",
       icon: Users,
-      color: "text-blue-600"
+      color: "text-blue-600 dark:text-blue-400"
     },
     {
       title: "Pending Bills",
       value: "$15,720",
       change: "-8.1%",
       icon: FileText,
-      color: "text-orange-600"
+      color: "text-orange-600 dark:text-orange-400"
     },
     {
       title: "Avg. Order Value",
       value: "$2,450",
       change: "+5.7%",
       icon: TrendingDown,
-      color: "text-purple-600"
+      color: "text-purple-600 dark:text-purple-400"
     }
   ];
 
@@ -45,10 +45,10 @@ const Purchases = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Purchases Overview</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Purchases Overview</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Track your purchase orders and vendor relationships</p>
           </div>
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
@@ -64,24 +64,24 @@ const Purchases = () => {
         {/* Metrics */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
           {purchaseMetrics.map((metric, index) => (
-            <Card key={index}>
+            <Card key={index} className="bg-card border-border">
               <CardContent className="p-3 sm:p-6">
                 <div className="flex items-center justify-between space-y-0 pb-2">
                   <div>
                     <p className="text-xs sm:text-sm text-muted-foreground">{metric.title}</p>
-                    <p className="text-lg sm:text-2xl font-bold">{metric.value}</p>
+                    <p className="text-lg sm:text-2xl font-bold text-foreground">{metric.value}</p>
                   </div>
                   <div className={`p-2 rounded-lg ${
-                    metric.color === 'text-red-600' ? 'bg-red-50' :
-                    metric.color === 'text-blue-600' ? 'bg-blue-50' :
-                    metric.color === 'text-orange-600' ? 'bg-orange-50' :
-                    'bg-purple-50'
+                    metric.color === 'text-red-600 dark:text-red-400' ? 'bg-red-100 dark:bg-red-900/30' :
+                    metric.color === 'text-blue-600 dark:text-blue-400' ? 'bg-blue-100 dark:bg-blue-900/30' :
+                    metric.color === 'text-orange-600 dark:text-orange-400' ? 'bg-orange-100 dark:bg-orange-900/30' :
+                    'bg-purple-100 dark:bg-purple-900/30'
                   }`}>
                     <metric.icon className={`h-4 w-4 ${metric.color}`} />
                   </div>
                 </div>
                 <div className="flex items-center text-xs text-muted-foreground mt-1">
-                  <span className="text-green-600">{metric.change}</span>
+                  <span className="text-green-600 dark:text-green-400">{metric.change}</span>
                   <span className="ml-1">vs last month</span>
                 </div>
               </CardContent>
@@ -90,10 +90,10 @@ const Purchases = () => {
         </div>
 
         {/* Recent Purchase Orders */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="p-3 sm:p-6">
-            <CardTitle className="text-base sm:text-lg font-semibold">Recent Purchase Orders</CardTitle>
-            <CardDescription className="text-xs sm:text-sm">Latest purchasing activity</CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold text-foreground">Recent Purchase Orders</CardTitle>
+            <CardDescription className="text-xs sm:text-sm text-muted-foreground">Latest purchasing activity</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             {/* Mobile Card View */}
@@ -103,15 +103,15 @@ const Purchases = () => {
                   <div key={purchase.id} className="p-3 space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
-                        <div className="text-sm font-medium">{purchase.id}</div>
+                        <div className="text-sm font-medium text-foreground">{purchase.id}</div>
                         <div className="text-xs text-muted-foreground">{purchase.vendor}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          purchase.status === 'Delivered' ? 'bg-green-100 text-green-800' :
-                          purchase.status === 'Approved' ? 'bg-blue-100 text-blue-800' :
-                          purchase.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
-                          'bg-gray-100 text-gray-800'
+                          purchase.status === 'Delivered' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                          purchase.status === 'Approved' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200' :
+                          purchase.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
+                          'bg-gray-100 dark:bg-gray-800/50 text-gray-800 dark:text-gray-200'
                         }`}>
                           {purchase.status}
                         </span>
@@ -121,11 +121,11 @@ const Purchases = () => {
                     <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border">
                       <div>
                         <div className="text-xs text-muted-foreground">Amount</div>
-                        <div className="text-sm font-medium">{purchase.amount}</div>
+                        <div className="text-sm font-medium text-foreground">{purchase.amount}</div>
                       </div>
                       <div>
                         <div className="text-xs text-muted-foreground">Date</div>
-                        <div className="text-sm">{purchase.date}</div>
+                        <div className="text-sm text-foreground">{purchase.date}</div>
                       </div>
                     </div>
                   </div>
@@ -149,15 +149,15 @@ const Purchases = () => {
                   <tbody>
                     {recentPurchases.map((purchase) => (
                       <tr key={purchase.id} className="border-b border-border hover:bg-muted/50">
-                        <td className="py-3 px-4 font-medium">{purchase.id}</td>
-                        <td className="py-3 px-4">{purchase.vendor}</td>
-                        <td className="py-3 px-4 font-medium">{purchase.amount}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{purchase.id}</td>
+                        <td className="py-3 px-4 text-foreground">{purchase.vendor}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{purchase.amount}</td>
                         <td className="py-3 px-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            purchase.status === 'Delivered' ? 'bg-green-100 text-green-800' :
-                            purchase.status === 'Approved' ? 'bg-blue-100 text-blue-800' :
-                            purchase.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
-                            'bg-gray-100 text-gray-800'
+                            purchase.status === 'Delivered' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                            purchase.status === 'Approved' ? 'bg-blue-100 dark:bg-blue-900/30 text-blue-800 dark:text-blue-200' :
+                            purchase.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
+                            'bg-gray-100 dark:bg-gray-800/50 text-gray-800 dark:text-gray-200'
                           }`}>
                             {purchase.status}
                           </span>

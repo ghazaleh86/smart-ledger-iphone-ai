@@ -25,10 +25,10 @@ const PurchasesBills = () => {
   return (
     <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b">
+      <div className="bg-card py-3 sm:py-6 px-3 sm:px-6 shadow-sm border-b border-border">
         <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-center justify-between gap-3 sm:gap-4">
           <div>
-            <h1 className="text-lg sm:text-2xl font-semibold">Bills</h1>
+            <h1 className="text-lg sm:text-2xl font-semibold text-foreground">Bills</h1>
             <p className="text-xs sm:text-sm text-muted-foreground mt-1">Manage and track all your purchase bills and expenses</p>
           </div>
           <button className="flex items-center justify-center gap-2 bg-primary text-primary-foreground px-3 sm:px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors text-sm self-end">
@@ -43,43 +43,43 @@ const PurchasesBills = () => {
       <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Summary Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4">
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Total Outstanding</p>
-                  <p className="text-lg sm:text-2xl font-bold">$11,090</p>
+                  <p className="text-lg sm:text-2xl font-bold text-foreground">$11,090</p>
                 </div>
-                <div className="bg-orange-50 p-2 rounded-lg">
-                  <AlertCircle className="h-4 w-4 text-orange-600" />
+                <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-orange-600 dark:text-orange-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Overdue Bills</p>
-                  <p className="text-lg sm:text-2xl font-bold text-red-600">$3,200</p>
+                  <p className="text-lg sm:text-2xl font-bold text-red-600 dark:text-red-400">$3,200</p>
                 </div>
-                <div className="bg-red-50 p-2 rounded-lg">
-                  <AlertCircle className="h-4 w-4 text-red-600" />
+                <div className="bg-red-100 dark:bg-red-900/30 p-2 rounded-lg">
+                  <AlertCircle className="h-4 w-4 text-red-600 dark:text-red-400" />
                 </div>
               </div>
             </CardContent>
           </Card>
           
-          <Card>
+          <Card className="bg-card border-border">
             <CardContent className="p-3 sm:p-6">
               <div className="flex items-center justify-between">
                 <div>
                   <p className="text-xs sm:text-sm text-muted-foreground">Paid This Month</p>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600">$2,130</p>
+                  <p className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">$2,130</p>
                 </div>
-                <div className="bg-green-50 p-2 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-green-600" />
+                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
+                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
                 </div>
               </div>
             </CardContent>
@@ -87,7 +87,7 @@ const PurchasesBills = () => {
         </div>
 
         {/* Filters */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardContent className="p-3 sm:p-6">
             <div className="flex flex-col sm:flex-row gap-3 sm:gap-4">
               <div className="flex-1 relative">
@@ -97,13 +97,13 @@ const PurchasesBills = () => {
                   placeholder="Search bills..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                  className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
                 />
               </div>
               <select
                 value={statusFilter}
                 onChange={(e) => setStatusFilter(e.target.value)}
-                className="px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background"
+                className="px-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
               >
                 <option value="all">All Status</option>
                 <option value="draft">Draft</option>
@@ -116,10 +116,10 @@ const PurchasesBills = () => {
         </Card>
 
         {/* Bills List */}
-        <Card>
+        <Card className="bg-card border-border">
           <CardHeader className="p-3 sm:p-6">
-            <CardTitle className="text-base sm:text-lg font-semibold">All Bills</CardTitle>
-            <CardDescription className="text-xs sm:text-sm">{filteredBills.length} bills found</CardDescription>
+            <CardTitle className="text-base sm:text-lg font-semibold text-foreground">All Bills</CardTitle>
+            <CardDescription className="text-xs sm:text-sm text-muted-foreground">{filteredBills.length} bills found</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
             {/* Mobile Card View */}
@@ -129,15 +129,15 @@ const PurchasesBills = () => {
                   <div key={bill.id} className="p-3 space-y-3">
                     <div className="flex items-start justify-between">
                       <div className="space-y-1 flex-1">
-                        <div className="text-sm font-medium">{bill.id}</div>
+                        <div className="text-sm font-medium text-foreground">{bill.id}</div>
                         <div className="text-xs text-muted-foreground">{bill.vendor}</div>
                       </div>
                       <div className="flex items-center gap-2">
                         <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          bill.status === 'Paid' ? 'bg-green-100 text-green-800' :
-                          bill.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
-                          bill.status === 'Overdue' ? 'bg-red-100 text-red-800' :
-                          'bg-gray-100 text-gray-800'
+                          bill.status === 'Paid' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                          bill.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
+                          bill.status === 'Overdue' ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' :
+                          'bg-gray-100 dark:bg-gray-800/50 text-gray-800 dark:text-gray-200'
                         }`}>
                           {bill.status}
                         </span>
@@ -147,11 +147,11 @@ const PurchasesBills = () => {
                     <div className="grid grid-cols-2 gap-4 pt-2 border-t border-border">
                       <div>
                         <div className="text-xs text-muted-foreground">Amount</div>
-                        <div className="text-sm font-medium">{bill.amount}</div>
+                        <div className="text-sm font-medium text-foreground">{bill.amount}</div>
                       </div>
                       <div>
                         <div className="text-xs text-muted-foreground">Due Date</div>
-                        <div className="text-sm">{bill.dueDate}</div>
+                        <div className="text-sm text-foreground">{bill.dueDate}</div>
                       </div>
                     </div>
                   </div>
@@ -175,15 +175,15 @@ const PurchasesBills = () => {
                   <tbody>
                     {filteredBills.map((bill) => (
                       <tr key={bill.id} className="border-b border-border hover:bg-muted/50">
-                        <td className="py-3 px-4 font-medium">{bill.id}</td>
-                        <td className="py-3 px-4">{bill.vendor}</td>
-                        <td className="py-3 px-4 font-medium">{bill.amount}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{bill.id}</td>
+                        <td className="py-3 px-4 text-foreground">{bill.vendor}</td>
+                        <td className="py-3 px-4 font-medium text-foreground">{bill.amount}</td>
                         <td className="py-3 px-4">
                           <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                            bill.status === 'Paid' ? 'bg-green-100 text-green-800' :
-                            bill.status === 'Pending' ? 'bg-orange-100 text-orange-800' :
-                            bill.status === 'Overdue' ? 'bg-red-100 text-red-800' :
-                            'bg-gray-100 text-gray-800'
+                            bill.status === 'Paid' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
+                            bill.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
+                            bill.status === 'Overdue' ? 'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200' :
+                            'bg-gray-100 dark:bg-gray-800/50 text-gray-800 dark:text-gray-200'
                           }`}>
                             {bill.status}
                           </span>
