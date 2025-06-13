@@ -68,7 +68,7 @@ const BankingStatements = () => {
             <h1 className="text-2xl font-semibold text-foreground">Bank Statements</h1>
             <p className="text-sm text-muted-foreground mt-1">View and import your bank statements</p>
           </div>
-          <button className="flex items-center gap-2 bg-blue-600 dark:bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">
+          <button className="flex items-center gap-2 bg-primary text-primary-foreground px-4 py-2 rounded-lg hover:bg-primary/90 transition-colors">
             <Upload className="h-4 w-4" />
             Import Statement
           </button>
@@ -78,7 +78,7 @@ const BankingStatements = () => {
       {/* Content */}
       <div className="px-8 py-8 space-y-6">
         {/* Account Filter */}
-        <Card className="bg-card">
+        <Card className="bg-card border-border">
           <CardContent className="p-6">
             <div className="flex items-center gap-4">
               <label className="text-sm font-medium text-foreground">Filter by Account:</label>
@@ -100,7 +100,7 @@ const BankingStatements = () => {
         {/* Statements Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filteredStatements.map((statement) => (
-            <Card key={statement.id} className="bg-card hover:shadow-md transition-shadow">
+            <Card key={statement.id} className="bg-card border-border hover:shadow-md transition-shadow">
               <CardHeader>
                 <div className="flex items-center justify-between">
                   <CardTitle className="text-lg font-semibold text-foreground">{statement.account}</CardTitle>
@@ -136,7 +136,7 @@ const BankingStatements = () => {
                 </div>
                 
                 <div className="pt-4 flex gap-2">
-                  <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm bg-blue-600 dark:bg-blue-500 text-white rounded-lg hover:bg-blue-700 dark:hover:bg-blue-600 transition-colors">
+                  <button className="flex-1 flex items-center justify-center gap-2 px-3 py-2 text-sm bg-primary text-primary-foreground rounded-lg hover:bg-primary/90 transition-colors">
                     <Eye className="h-4 w-4" />
                     View
                   </button>
@@ -151,7 +151,7 @@ const BankingStatements = () => {
         </div>
 
         {/* Info Card */}
-        <Card className="bg-blue-50 dark:bg-blue-950/50 border-blue-200 dark:border-blue-800">
+        <Card className="bg-blue-50 dark:bg-blue-950/30 border-blue-200 dark:border-blue-800/50">
           <CardContent className="p-6">
             <div className="flex items-start gap-3">
               <AlertCircle className="h-5 w-5 text-blue-600 dark:text-blue-400 mt-0.5" />
