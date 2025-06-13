@@ -1,7 +1,11 @@
 
 import React, { useState } from 'react';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { ArrowLeftRight, Plus, Search, Calendar, CheckCircle, Clock, AlertTriangle } from 'lucide-react';
+import { Plus } from 'lucide-react';
+import TransferStatsCards from '@/components/TransferStatsCards';
+import TransferSearch from '@/components/TransferSearch';
+import TransferListMobile from '@/components/TransferListMobile';
+import TransferListDesktop from '@/components/TransferListDesktop';
 
 const BankingTransfers = () => {
   const [searchTerm, setSearchTerm] = useState('');
@@ -51,19 +55,6 @@ const BankingTransfers = () => {
     transfer.reference.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
-  const getStatusIcon = (status: string) => {
-    switch (status) {
-      case 'Completed':
-        return <CheckCircle className="h-4 w-4 text-green-500" />;
-      case 'Pending':
-        return <Clock className="h-4 w-4 text-orange-500" />;
-      case 'Failed':
-        return <AlertTriangle className="h-4 w-4 text-red-500" />;
-      default:
-        return <Clock className="h-4 w-4 text-muted-foreground" />;
-    }
-  };
-
   const transferStats = {
     totalTransfers: transfers.length,
     completedToday: transfers.filter(t => t.status === 'Completed' && t.date === '2024-06-07').length,
@@ -91,79 +82,10 @@ const BankingTransfers = () => {
       {/* Content */}
       <div className="px-3 sm:px-6 py-4 sm:py-8 max-w-7xl mx-auto space-y-4 sm:space-y-6">
         {/* Summary Cards */}
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-          <Card>
-            <CardContent className="p-3 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Transfers</p>
-                  <p className="text-lg sm:text-2xl font-bold text-foreground">{transferStats.totalTransfers}</p>
-                </div>
-                <div className="bg-blue-100 dark:bg-blue-900/30 p-2 rounded-lg">
-                  <ArrowLeftRight className="h-4 w-4 text-blue-600 dark:text-blue-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-3 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Completed Today</p>
-                  <p className="text-lg sm:text-2xl font-bold text-green-600 dark:text-green-400">{transferStats.completedToday}</p>
-                </div>
-                <div className="bg-green-100 dark:bg-green-900/30 p-2 rounded-lg">
-                  <CheckCircle className="h-4 w-4 text-green-600 dark:text-green-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-3 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Pending</p>
-                  <p className="text-lg sm:text-2xl font-bold text-orange-600 dark:text-orange-400">{transferStats.pendingTransfers}</p>
-                </div>
-                <div className="bg-orange-100 dark:bg-orange-900/30 p-2 rounded-lg">
-                  <Clock className="h-4 w-4 text-orange-600 dark:text-orange-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-          
-          <Card>
-            <CardContent className="p-3 sm:p-6">
-              <div className="flex items-center justify-between">
-                <div>
-                  <p className="text-xs sm:text-sm text-muted-foreground">Total Amount</p>
-                  <p className="text-lg sm:text-2xl font-bold text-foreground">{transferStats.totalAmount}</p>
-                </div>
-                <div className="bg-purple-100 dark:bg-purple-900/30 p-2 rounded-lg">
-                  <ArrowLeftRight className="h-4 w-4 text-purple-600 dark:text-purple-400" />
-                </div>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
+        <TransferStatsCards transferStats={transferStats} />
 
         {/* Search */}
-        <Card>
-          <CardContent className="p-3 sm:p-6">
-            <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
-              <input
-                type="text"
-                placeholder="Search transfers..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full pl-10 pr-4 py-2 border border-input rounded-lg focus:ring-2 focus:ring-ring focus:border-transparent text-sm bg-background text-foreground"
-              />
-            </div>
-          </CardContent>
-        </Card>
+        <TransferSearch searchTerm={searchTerm} onSearchChange={setSearchTerm} />
 
         {/* Transfers List */}
         <Card>
@@ -172,95 +94,8 @@ const BankingTransfers = () => {
             <CardDescription className="text-xs sm:text-sm">{filteredTransfers.length} transfers found</CardDescription>
           </CardHeader>
           <CardContent className="p-0">
-            {/* Mobile Card View */}
-            <div className="block md:hidden">
-              <div className="divide-y divide-border">
-                {filteredTransfers.map((transfer) => (
-                  <div key={transfer.id} className="p-3 space-y-3">
-                    <div className="flex items-start justify-between">
-                      <div className="space-y-1 flex-1">
-                        <div className="text-sm font-medium text-foreground">{transfer.id}</div>
-                        <div className="text-xs text-muted-foreground">{transfer.reference}</div>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        {getStatusIcon(transfer.status)}
-                        <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                          transfer.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
-                          transfer.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
-                          'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
-                        }`}>
-                          {transfer.status}
-                        </span>
-                      </div>
-                    </div>
-                    
-                    <div className="grid grid-cols-1 gap-3 pt-2 border-t border-border">
-                      <div className="flex items-center gap-2">
-                        <span className="text-xs text-muted-foreground">From:</span>
-                        <span className="text-sm font-medium text-foreground">{transfer.fromAccount}</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <ArrowLeftRight className="h-3 w-3 text-muted-foreground" />
-                        <span className="text-xs text-muted-foreground">To:</span>
-                        <span className="text-sm font-medium text-foreground">{transfer.toAccount}</span>
-                      </div>
-                    </div>
-                    
-                    <div className="flex items-center justify-between pt-2 border-t border-border">
-                      <div>
-                        <div className="text-xs text-muted-foreground">Amount</div>
-                        <div className="text-sm font-medium text-foreground">{transfer.amount}</div>
-                      </div>
-                      <div className="text-right">
-                        <div className="text-xs text-muted-foreground">Date</div>
-                        <div className="text-sm text-foreground">{transfer.date}</div>
-                      </div>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Desktop Table View */}
-            <div className="hidden md:block">
-              <div className="overflow-x-auto p-6">
-                <table className="w-full">
-                  <thead>
-                    <tr className="border-b border-border">
-                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Transfer ID</th>
-                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">From Account</th>
-                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">To Account</th>
-                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Amount</th>
-                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Status</th>
-                      <th className="text-left py-3 px-4 font-medium text-muted-foreground">Date</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {filteredTransfers.map((transfer) => (
-                      <tr key={transfer.id} className="border-b border-border hover:bg-muted/50">
-                        <td className="py-3 px-4 font-medium text-foreground">{transfer.id}</td>
-                        <td className="py-3 px-4 text-foreground">{transfer.fromAccount}</td>
-                        <td className="py-3 px-4 text-foreground">{transfer.toAccount}</td>
-                        <td className="py-3 px-4 font-medium text-foreground">{transfer.amount}</td>
-                        <td className="py-3 px-4">
-                          <div className="flex items-center gap-2">
-                            {getStatusIcon(transfer.status)}
-                            <span className={`px-2 py-1 rounded-full text-xs font-medium ${
-                              transfer.status === 'Completed' ? 'bg-green-100 dark:bg-green-900/30 text-green-800 dark:text-green-200' :
-                              transfer.status === 'Pending' ? 'bg-orange-100 dark:bg-orange-900/30 text-orange-800 dark:text-orange-200' :
-                              'bg-red-100 dark:bg-red-900/30 text-red-800 dark:text-red-200'
-                            }`}>
-                              {transfer.status}
-                            </span>
-                          </div>
-                        </td>
-                        <td className="py-3 px-4 text-muted-foreground">{transfer.date}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
-            </div>
+            <TransferListMobile transfers={filteredTransfers} />
+            <TransferListDesktop transfers={filteredTransfers} />
           </CardContent>
         </Card>
       </div>
