@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import AIAssistant from '@/components/AIAssistant';
 import QuickActions from '@/components/QuickActions';
@@ -40,9 +41,9 @@ const Index = () => {
     : accounts.find(acc => acc.id === selectedAccount)?.balance || 0;
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-background">
       {/* Header */}
-      <div className="bg-white py-4 px-8 shadow-sm border-b border-gray-200">
+      <div className="bg-card py-4 px-8 shadow-sm border-b border-border">
         <AccountSelector
           accounts={accounts}
           selectedAccount={selectedAccount}
@@ -55,7 +56,7 @@ const Index = () => {
         {/* Transactions List */}
         <div className="space-y-0">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-xl font-semibold text-gray-900">Recent Transactions</h2>
+            <h2 className="text-xl font-semibold text-foreground">Recent Transactions</h2>
             <QuickActions 
               onAddTransaction={handleAddTransaction}
               onOpenAI={() => setIsAIOpen(true)}

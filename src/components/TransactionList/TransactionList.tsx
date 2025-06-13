@@ -24,13 +24,13 @@ const TransactionList: React.FC<TransactionListProps> = ({
       
       {isLoading && (
         <div className="text-center py-8">
-          <div className="text-sm text-gray-500">Loading more transactions...</div>
+          <div className="text-sm text-muted-foreground">Loading more transactions...</div>
         </div>
       )}
       
       {!hasMoreItems && transactions.length > 0 && (
         <div className="text-center py-8">
-          <div className="text-sm text-gray-500">All transactions loaded</div>
+          <div className="text-sm text-muted-foreground">All transactions loaded</div>
         </div>
       )}
     </div>

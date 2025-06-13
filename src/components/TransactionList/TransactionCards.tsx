@@ -10,7 +10,7 @@ interface TransactionCardsProps {
 
 const TransactionCards: React.FC<TransactionCardsProps> = ({ transactions, onCategorize }) => {
   return (
-    <div className="md:hidden shadow-sm border border-gray-200 rounded-lg overflow-hidden bg-white">
+    <div className="md:hidden shadow-sm border border-border rounded-lg overflow-hidden bg-card">
       {transactions.map((transaction, index) => (
         <TransactionItem
           key={transaction.id}

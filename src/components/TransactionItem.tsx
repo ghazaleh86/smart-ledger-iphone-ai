@@ -45,14 +45,14 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
   };
 
   return (
-    <div className={`bg-white p-6 border-b border-gray-100 last:border-b-0 hover:bg-gray-50 transition-all duration-150 ${getBorderRadius()}`}>
+    <div className={`bg-card p-6 border-b border-border last:border-b-0 hover:bg-muted/50 transition-all duration-150 ${getBorderRadius()}`}>
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-3">
-            <h3 className="font-medium text-gray-900 text-base">{transaction.merchant}</h3>
+            <h3 className="font-medium text-foreground text-base">{transaction.merchant}</h3>
             <span className={cn(
               "font-semibold text-base",
-              transaction.type === 'income' ? 'text-green-600' : 'text-gray-900'
+              transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-foreground'
             )}>
               {formatAmount(transaction.amount, transaction.type)}
             </span>
@@ -60,9 +60,9 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
           
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-3">
-              <span className="text-sm text-gray-500">{formatDate(transaction.date)}</span>
-              <span className="text-sm text-gray-300">•</span>
-              <span className="text-sm text-gray-500">{transaction.paymentMethod}</span>
+              <span className="text-sm text-muted-foreground">{formatDate(transaction.date)}</span>
+              <span className="text-sm text-muted-foreground">•</span>
+              <span className="text-sm text-muted-foreground">{transaction.paymentMethod}</span>
             </div>
             
             <CategorySelector
@@ -74,8 +74,8 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
           </div>
           
           {transaction.isAISuggested && (
-            <div className="mt-3 text-xs text-blue-600 flex items-center font-medium">
-              <div className="w-1.5 h-1.5 bg-blue-600 rounded-full mr-2"></div>
+            <div className="mt-3 text-xs text-blue-600 dark:text-blue-400 flex items-center font-medium">
+              <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
               AI suggested category
             </div>
           )}
