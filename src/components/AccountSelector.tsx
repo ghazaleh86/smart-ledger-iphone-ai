@@ -68,7 +68,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
           ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </div>
         <div className="mt-4 text-sm text-foreground font-medium px-4">
-          <div className="bg-gradient-to-r from-muted/80 to-muted/60 border border-border/30 rounded-lg px-4 py-3 mx-2">
+          <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950/30 dark:via-purple-950/30 dark:to-pink-950/30 border border-blue-200/50 dark:border-blue-800/30 rounded-lg px-4 py-3 mx-2 shadow-sm">
             {randomInsight}
           </div>
         </div>
@@ -104,7 +104,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
             </Select>
           </div>
           <div className="text-sm text-foreground font-medium max-w-md">
-            <div className="bg-gradient-to-r from-muted/80 to-muted/60 border border-border/30 rounded-lg px-4 py-3">
+            <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950/30 dark:via-purple-950/30 dark:to-pink-950/30 border border-blue-200/50 dark:border-blue-800/30 rounded-lg px-4 py-3 shadow-sm">
               {randomInsight}
             </div>
           </div>
