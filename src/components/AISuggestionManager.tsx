@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CheckAll, X, Sparkles } from 'lucide-react';
+import { Check, X, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -53,7 +53,7 @@ const AISuggestionManager = ({
               onClick={onAcceptAll}
               className="h-8 px-3 bg-green-600 hover:bg-green-700 text-white"
             >
-              <CheckAll className="w-3 h-3 mr-1" />
+              <Check className="w-3 h-3 mr-1" />
               Accept High Confidence ({highConfidenceSuggestions})
             </Button>
           )}
