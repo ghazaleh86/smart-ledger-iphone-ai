@@ -2,6 +2,7 @@
 import React from 'react';
 import { Transaction } from '@/types/financial';
 import CategorySelector from '@/components/CategorySelector';
+import AISuggestionBadge from '@/components/AISuggestionBadge';
 
 interface TransactionTableProps {
   transactions: Transaction[];
@@ -9,6 +10,14 @@ interface TransactionTableProps {
 }
 
 const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCategorize }) => {
+  const handleAcceptSuggestion = (transactionId: string, suggestedCategory: string) => {
+    onCategorize(transactionId, suggestedCategory);
+  };
+
+  const handleRejectSuggestion = (transactionId: string) => {
+    console.log('Rejected AI suggestion for transaction:', transactionId);
+  };
+
   return (
     <div className="hidden md:block">
       <div className="bg-card shadow-sm border border-border rounded-lg overflow-hidden">
@@ -27,16 +36,22 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCat
         <div className="divide-y divide-border">
           {transactions.map((transaction) => (
             <div key={transaction.id} className="px-8 py-6 hover:bg-muted/50 transition-colors duration-150">
-              <div className="grid grid-cols-12 gap-4 items-center">
+              <div className="grid grid-cols-12 gap-4 items-start">
                 <div className="col-span-1 text-sm text-muted-foreground">
                   {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </div>
                 <div className="col-span-3">
                   <div className="font-medium text-foreground truncate pr-2">{transaction.merchant}</div>
-                  {transaction.isAISuggested && (
-                    <div className="text-xs text-blue-600 dark:text-blue-400 flex items-center mt-1 font-medium">
-                      <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-                      AI suggested category
+                  {transaction.isAISuggested && transaction.aiSuggestedCategory && (
+                    <div className="mt-2">
+                      <AISuggestionBadge
+                        suggestedCategory={transaction.aiSuggestedCategory}
+                        confidence={transaction.aiConfidence}
+                        reasoning={transaction.aiReasoning}
+                        onAccept={() => handleAcceptSuggestion(transaction.id, transaction.aiSuggestedCategory!)}
+                        onReject={() => handleRejectSuggestion(transaction.id)}
+                        compact
+                      />
                     </div>
                   )}
                 </div>

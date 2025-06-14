@@ -2,6 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import CategorySelector from './CategorySelector';
+import AISuggestionBadge from './AISuggestionBadge';
 
 interface Transaction {
   id: string;
@@ -13,6 +14,8 @@ interface Transaction {
   paymentMethod: string;
   isAISuggested?: boolean;
   aiSuggestedCategory?: string;
+  aiConfidence?: 'high' | 'medium' | 'low';
+  aiReasoning?: string;
 }
 
 interface TransactionItemProps {
@@ -35,6 +38,17 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
 
   const handleCategoryChange = (category: string) => {
     onCategorize(transaction.id, category);
+  };
+
+  const handleAcceptSuggestion = () => {
+    if (transaction.aiSuggestedCategory) {
+      onCategorize(transaction.id, transaction.aiSuggestedCategory);
+    }
+  };
+
+  const handleRejectSuggestion = () => {
+    // For now, just remove the suggestion flag - in a real app, this would update the transaction
+    console.log('Rejected AI suggestion for transaction:', transaction.id);
   };
 
   const getBorderRadius = () => {
@@ -73,10 +87,16 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
             />
           </div>
           
-          {transaction.isAISuggested && (
-            <div className="mt-3 text-xs text-blue-600 dark:text-blue-400 flex items-center font-medium">
-              <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-              AI suggested category
+          {transaction.isAISuggested && transaction.aiSuggestedCategory && (
+            <div className="mt-4">
+              <AISuggestionBadge
+                suggestedCategory={transaction.aiSuggestedCategory}
+                confidence={transaction.aiConfidence}
+                reasoning={transaction.aiReasoning}
+                onAccept={handleAcceptSuggestion}
+                onReject={handleRejectSuggestion}
+                compact
+              />
             </div>
           )}
         </div>
