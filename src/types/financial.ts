@@ -9,8 +9,6 @@ export interface Transaction {
   paymentMethod: string;
   isAISuggested?: boolean;
   aiSuggestedCategory?: string;
-  aiConfidence?: 'high' | 'medium' | 'low';
-  aiReasoning?: string;
   accountId: string;
 }
 

@@ -4,7 +4,6 @@ import AIAssistant from '@/components/AIAssistant';
 import QuickActions from '@/components/QuickActions';
 import AccountSelector from '@/components/AccountSelector';
 import TransactionList from '@/components/TransactionList';
-import AISuggestionManager from '@/components/AISuggestionManager';
 import { useToast } from '@/hooks/use-toast';
 import { useTransactions } from '@/hooks/useTransactions';
 import { useInfiniteScroll } from '@/hooks/useInfiniteScroll';
@@ -15,17 +14,9 @@ const Index = () => {
   const [isAIOpen, setIsAIOpen] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState('all');
   
-  const { 
-    handleCategorize, 
-    getFilteredTransactions, 
-    getSuggestionStats,
-    handleAcceptAllHighConfidence,
-    handleRejectAllSuggestions
-  } = useTransactions();
-  
+  const { handleCategorize, getFilteredTransactions } = useTransactions();
   const filteredTransactions = getFilteredTransactions(selectedAccount);
   const { displayedItems, isLoading } = useInfiniteScroll(filteredTransactions.length);
-  const { totalSuggestions, highConfidenceSuggestions } = getSuggestionStats();
   
   const visibleTransactions = filteredTransactions.slice(0, displayedItems);
 
@@ -38,13 +29,6 @@ const Index = () => {
     toast({
       title: "Add Transaction",
       description: "Transaction form would open here",
-    });
-  };
-
-  const handleReviewMode = () => {
-    toast({
-      title: "Review Mode",
-      description: "Review mode would allow you to go through each suggestion individually",
     });
   };
 
@@ -65,15 +49,6 @@ const Index = () => {
 
       {/* Content */}
       <div className="px-8 py-10 space-y-10">
-        {/* AI Suggestion Manager */}
-        <AISuggestionManager
-          totalSuggestions={totalSuggestions}
-          highConfidenceSuggestions={highConfidenceSuggestions}
-          onAcceptAll={handleAcceptAllHighConfidence}
-          onRejectAll={handleRejectAllSuggestions}
-          onReviewMode={handleReviewMode}
-        />
-
         {/* Transactions List */}
         <div className="space-y-0">
           <div className="flex items-center justify-between mb-8">
