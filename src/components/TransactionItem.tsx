@@ -2,6 +2,9 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import CategorySelector from './CategorySelector';
+import AIConfidenceBadge from './AIConfidenceBadge';
+import AIActionButtons from './AIActionButtons';
+import AITooltip from './AITooltip';
 
 interface Transaction {
   id: string;
@@ -13,16 +16,27 @@ interface Transaction {
   paymentMethod: string;
   isAISuggested?: boolean;
   aiSuggestedCategory?: string;
+  aiConfidence?: 'high' | 'medium' | 'low';
+  aiReasoning?: string;
 }
 
 interface TransactionItemProps {
   transaction: Transaction;
   onCategorize: (id: string, category: string) => void;
+  onAcceptAI?: (id: string) => void;
+  onRejectAI?: (id: string) => void;
   isFirst?: boolean;
   isLast?: boolean;
 }
 
-const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: TransactionItemProps) => {
+const TransactionItem = ({ 
+  transaction, 
+  onCategorize, 
+  onAcceptAI,
+  onRejectAI,
+  isFirst, 
+  isLast 
+}: TransactionItemProps) => {
   const formatAmount = (amount: number, type: 'income' | 'expense') => {
     const sign = type === 'income' ? '+' : '-';
     return `${sign}$${Math.abs(amount).toFixed(2)}`;
@@ -37,6 +51,14 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
     onCategorize(transaction.id, category);
   };
 
+  const handleAccept = () => {
+    onAcceptAI?.(transaction.id);
+  };
+
+  const handleReject = () => {
+    onRejectAI?.(transaction.id);
+  };
+
   const getBorderRadius = () => {
     if (isFirst && isLast) return 'rounded-lg';
     if (isFirst) return 'rounded-t-lg';
@@ -44,8 +66,27 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
     return '';
   };
 
+  const getAIIndicatorStyles = () => {
+    if (!transaction.isAISuggested || !transaction.aiConfidence) return '';
+    
+    switch (transaction.aiConfidence) {
+      case 'high':
+        return 'border-l-4 border-l-green-400 bg-green-50/30 dark:bg-green-950/20';
+      case 'medium':
+        return 'border-l-4 border-l-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/20';
+      case 'low':
+        return 'border-l-4 border-l-red-400 bg-red-50/30 dark:bg-red-950/20';
+      default:
+        return '';
+    }
+  };
+
   return (
-    <div className={`bg-card p-6 border-b border-border last:border-b-0 hover:bg-muted/50 transition-all duration-150 ${getBorderRadius()}`}>
+    <div className={cn(
+      'bg-card p-6 border-b border-border last:border-b-0 hover:bg-muted/50 transition-all duration-150',
+      getBorderRadius(),
+      getAIIndicatorStyles()
+    )}>
       <div className="flex items-center justify-between">
         <div className="flex-1">
           <div className="flex items-center justify-between mb-3">
@@ -73,11 +114,28 @@ const TransactionItem = ({ transaction, onCategorize, isFirst, isLast }: Transac
             />
           </div>
           
-          {transaction.isAISuggested && (
-            <div className="mt-3 text-xs text-blue-600 dark:text-blue-400 flex items-center font-medium">
-              <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-              AI suggested category
-            </div>
+          {transaction.isAISuggested && transaction.aiConfidence && (
+            <AITooltip 
+              reasoning={transaction.aiReasoning}
+              confidence={transaction.aiConfidence}
+              category={transaction.aiSuggestedCategory}
+            >
+              <div className="mt-3 flex items-center justify-between">
+                <div className="flex items-center space-x-2">
+                  <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                    AI suggested category
+                  </span>
+                  <AIConfidenceBadge confidence={transaction.aiConfidence} />
+                </div>
+                
+                <AIActionButtons
+                  onAccept={handleAccept}
+                  onReject={handleReject}
+                  confidence={transaction.aiConfidence}
+                />
+              </div>
+            </AITooltip>
           )}
         </div>
       </div>

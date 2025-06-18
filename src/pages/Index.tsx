@@ -14,7 +14,13 @@ const Index = () => {
   const [isAIOpen, setIsAIOpen] = useState(false);
   const [selectedAccount, setSelectedAccount] = useState('all');
   
-  const { handleCategorize, getFilteredTransactions } = useTransactions();
+  const { 
+    handleCategorize, 
+    handleAcceptAISuggestion,
+    handleRejectAISuggestion,
+    getFilteredTransactions 
+  } = useTransactions();
+  
   const filteredTransactions = getFilteredTransactions(selectedAccount);
   const { displayedItems, isLoading } = useInfiniteScroll(filteredTransactions.length);
   
@@ -62,6 +68,8 @@ const Index = () => {
           <TransactionList
             transactions={visibleTransactions}
             onCategorize={handleCategorize}
+            onAcceptAI={handleAcceptAISuggestion}
+            onRejectAI={handleRejectAISuggestion}
             isLoading={isLoading}
             hasMoreItems={displayedItems < filteredTransactions.length}
           />

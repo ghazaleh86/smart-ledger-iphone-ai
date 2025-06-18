@@ -2,13 +2,39 @@
 import React from 'react';
 import { Transaction } from '@/types/financial';
 import CategorySelector from '@/components/CategorySelector';
+import AIConfidenceBadge from '@/components/AIConfidenceBadge';
+import AIActionButtons from '@/components/AIActionButtons';
+import AITooltip from '@/components/AITooltip';
+import { cn } from '@/lib/utils';
 
 interface TransactionTableProps {
   transactions: Transaction[];
   onCategorize: (id: string, category: string) => void;
+  onAcceptAI?: (id: string) => void;
+  onRejectAI?: (id: string) => void;
 }
 
-const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCategorize }) => {
+const TransactionTable: React.FC<TransactionTableProps> = ({ 
+  transactions, 
+  onCategorize,
+  onAcceptAI,
+  onRejectAI 
+}) => {
+  const getRowStyles = (transaction: Transaction) => {
+    if (!transaction.isAISuggested || !transaction.aiConfidence) return '';
+    
+    switch (transaction.aiConfidence) {
+      case 'high':
+        return 'border-l-4 border-l-green-400 bg-green-50/30 dark:bg-green-950/20';
+      case 'medium':
+        return 'border-l-4 border-l-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/20';
+      case 'low':
+        return 'border-l-4 border-l-red-400 bg-red-50/30 dark:bg-red-950/20';
+      default:
+        return '';
+    }
+  };
+
   return (
     <div className="hidden md:block">
       <div className="bg-card shadow-sm border border-border rounded-lg overflow-hidden">
@@ -19,26 +45,27 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCat
             <div className="col-span-3">Description</div>
             <div className="col-span-2">Category</div>
             <div className="col-span-3">Payment Method</div>
-            <div className="col-span-3 text-right">Amount</div>
+            <div className="col-span-2">AI Status</div>
+            <div className="col-span-1 text-right">Amount</div>
           </div>
         </div>
         
         {/* Desktop Transaction Rows */}
         <div className="divide-y divide-border">
           {transactions.map((transaction) => (
-            <div key={transaction.id} className="px-8 py-6 hover:bg-muted/50 transition-colors duration-150">
+            <div 
+              key={transaction.id} 
+              className={cn(
+                'px-8 py-6 hover:bg-muted/50 transition-colors duration-150',
+                getRowStyles(transaction)
+              )}
+            >
               <div className="grid grid-cols-12 gap-4 items-center">
                 <div className="col-span-1 text-sm text-muted-foreground">
                   {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </div>
                 <div className="col-span-3">
                   <div className="font-medium text-foreground truncate pr-2">{transaction.merchant}</div>
-                  {transaction.isAISuggested && (
-                    <div className="text-xs text-blue-600 dark:text-blue-400 flex items-center mt-1 font-medium">
-                      <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full mr-2"></div>
-                      AI suggested category
-                    </div>
-                  )}
                 </div>
                 <div className="col-span-2">
                   <CategorySelector
@@ -53,7 +80,27 @@ const TransactionTable: React.FC<TransactionTableProps> = ({ transactions, onCat
                     {transaction.paymentMethod}
                   </div>
                 </div>
-                <div className="col-span-3 text-right">
+                <div className="col-span-2">
+                  {transaction.isAISuggested && transaction.aiConfidence ? (
+                    <AITooltip 
+                      reasoning={transaction.aiReasoning}
+                      confidence={transaction.aiConfidence}
+                      category={transaction.aiSuggestedCategory}
+                    >
+                      <div className="flex items-center space-x-2">
+                        <AIConfidenceBadge confidence={transaction.aiConfidence} />
+                        <AIActionButtons
+                          onAccept={() => onAcceptAI?.(transaction.id)}
+                          onReject={() => onRejectAI?.(transaction.id)}
+                          confidence={transaction.aiConfidence}
+                        />
+                      </div>
+                    </AITooltip>
+                  ) : (
+                    <span className="text-xs text-muted-foreground">Manual</span>
+                  )}
+                </div>
+                <div className="col-span-1 text-right">
                   <span className={`font-semibold text-base ${transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-foreground'}`}>
                     {transaction.type === 'income' ? '+' : '-'}${Math.abs(transaction.amount).toFixed(2)}
                   </span>

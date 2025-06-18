@@ -7,20 +7,34 @@ import TransactionCards from './TransactionCards';
 interface TransactionListProps {
   transactions: Transaction[];
   onCategorize: (id: string, category: string) => void;
+  onAcceptAI?: (id: string) => void;
+  onRejectAI?: (id: string) => void;
   isLoading: boolean;
   hasMoreItems: boolean;
 }
 
 const TransactionList: React.FC<TransactionListProps> = ({ 
   transactions, 
-  onCategorize, 
+  onCategorize,
+  onAcceptAI,
+  onRejectAI,
   isLoading, 
   hasMoreItems 
 }) => {
   return (
     <div className="space-y-0">
-      <TransactionTable transactions={transactions} onCategorize={onCategorize} />
-      <TransactionCards transactions={transactions} onCategorize={onCategorize} />
+      <TransactionTable 
+        transactions={transactions} 
+        onCategorize={onCategorize}
+        onAcceptAI={onAcceptAI}
+        onRejectAI={onRejectAI}
+      />
+      <TransactionCards 
+        transactions={transactions} 
+        onCategorize={onCategorize}
+        onAcceptAI={onAcceptAI}
+        onRejectAI={onRejectAI}
+      />
       
       {isLoading && (
         <div className="text-center py-8">
