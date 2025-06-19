@@ -30,35 +30,44 @@ const AIStatusIndicator: React.FC<AIStatusIndicatorProps> = ({
       case 'suggested':
         if (aiConfidence === 'medium') {
           return (
-            <AITooltip 
-              reasoning={aiReasoning}
-              confidence={aiConfidence}
-              category={aiSuggestedCategory}
-            >
-              <div className="flex items-center space-x-2">
+            <>
+              <AITooltip 
+                reasoning={aiReasoning}
+                confidence={aiConfidence}
+                category={aiSuggestedCategory}
+              >
                 <AIConfidenceBadge confidence={aiConfidence} />
-                {onAccept && onReject && (
-                  <AIActionButtons
-                    onAccept={onAccept}
-                    onReject={onReject}
-                    confidence={aiConfidence}
-                  />
-                )}
-              </div>
-            </AITooltip>
+              </AITooltip>
+              {onAccept && onReject && (
+                <AIActionButtons
+                  onAccept={onAccept}
+                  onReject={onReject}
+                  confidence={aiConfidence}
+                />
+              )}
+            </>
           );
         } else if (aiConfidence === 'low') {
           return (
-            <AITooltip 
-              reasoning={aiReasoning}
-              confidence={aiConfidence}
-              category={aiSuggestedCategory}
-            >
-              <div className="flex items-center space-x-1">
-                <AlertCircle className="h-3 w-3 text-orange-600 dark:text-orange-400" />
-                <span className="text-xs text-orange-600 dark:text-orange-400 font-medium">Needs Review</span>
-              </div>
-            </AITooltip>
+            <>
+              <AITooltip 
+                reasoning={aiReasoning}
+                confidence={aiConfidence}
+                category={aiSuggestedCategory}
+              >
+                <div className="flex items-center space-x-1">
+                  <AlertCircle className="h-3 w-3 text-orange-600 dark:text-orange-400" />
+                  <span className="text-xs text-orange-600 dark:text-orange-400 font-medium">Needs Review</span>
+                </div>
+              </AITooltip>
+              {onAccept && onReject && (
+                <AIActionButtons
+                  onAccept={onAccept}
+                  onReject={onReject}
+                  confidence={aiConfidence}
+                />
+              )}
+            </>
           );
         }
         return <span className="text-xs text-muted-foreground">AI Suggested</span>;
@@ -99,7 +108,7 @@ const AIStatusIndicator: React.FC<AIStatusIndicatorProps> = ({
   };
 
   return (
-    <div className={cn('flex items-center', className)}>
+    <div className={cn('flex items-center justify-between w-full', className)}>
       {getStatusDisplay()}
     </div>
   );

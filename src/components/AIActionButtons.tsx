@@ -17,8 +17,8 @@ const AIActionButtons: React.FC<AIActionButtonsProps> = ({
   confidence, 
   className 
 }) => {
-  // Only show action buttons for medium confidence suggestions
-  if (confidence !== 'medium') {
+  // Show action buttons for medium and low confidence suggestions
+  if (confidence !== 'medium' && confidence !== 'low') {
     return null;
   }
 

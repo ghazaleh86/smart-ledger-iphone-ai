@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import CategorySelector from './CategorySelector';
@@ -115,8 +116,8 @@ const TransactionItem = ({
           />
         </div>
         
-        {/* AI Status Row - separate row to prevent overlapping */}
-        <div className="flex items-center justify-end">
+        {/* AI Status Row - status on left, actions on right */}
+        <div className="flex items-center justify-between">
           <AIStatusIndicator
             aiStatus={transaction.aiStatus || 'manual'}
             aiConfidence={transaction.aiConfidence}
