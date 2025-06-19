@@ -106,24 +106,13 @@ const TransactionItem = ({
               <span className="text-sm text-muted-foreground">{transaction.paymentMethod}</span>
             </div>
             
-            <CategorySelector
-              currentCategory={transaction.category}
-              aiSuggestedCategory={transaction.aiSuggestedCategory}
-              isAISuggested={transaction.isAISuggested}
-              onCategoryChange={handleCategoryChange}
-            />
-          </div>
-          
-          {(transaction.aiStatus === 'suggested' || transaction.aiStatus === 'accepted' || transaction.aiStatus === 'rejected') && (
-            <div className="mt-3 flex items-center justify-between">
-              <div className="flex items-center space-x-2">
-                <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-                  {transaction.aiStatus === 'suggested' ? 'AI suggested category' : 
-                   transaction.aiStatus === 'accepted' ? 'AI category applied' :
-                   'AI suggestion dismissed'}
-                </span>
-              </div>
+            <div className="flex items-center space-x-2">
+              <CategorySelector
+                currentCategory={transaction.category}
+                aiSuggestedCategory={transaction.aiSuggestedCategory}
+                isAISuggested={transaction.isAISuggested}
+                onCategoryChange={handleCategoryChange}
+              />
               
               <AIStatusIndicator
                 aiStatus={transaction.aiStatus || 'manual'}
@@ -134,7 +123,7 @@ const TransactionItem = ({
                 onReject={handleReject}
               />
             </div>
-          )}
+          </div>
         </div>
       </div>
     </div>
