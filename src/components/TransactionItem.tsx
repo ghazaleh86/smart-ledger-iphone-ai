@@ -88,9 +88,9 @@ const TransactionItem = ({
       getAIIndicatorStyles()
     )}>
       <div className="space-y-4">
-        {/* Header: Merchant and Amount */}
-        <div className="flex items-start justify-between">
-          <h3 className="font-medium text-foreground text-base pr-4">{transaction.merchant}</h3>
+        {/* Header: Merchant and Amount - consistently aligned */}
+        <div className="flex items-center justify-between">
+          <h3 className="font-medium text-foreground text-base flex-1 pr-4">{transaction.merchant}</h3>
           <span className={cn(
             "font-semibold text-base shrink-0",
             transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-foreground'
@@ -99,15 +99,15 @@ const TransactionItem = ({
           </span>
         </div>
         
-        {/* Transaction Details */}
+        {/* Transaction Details - consistently positioned */}
         <div className="flex items-center space-x-3 text-sm text-muted-foreground">
           <span>{formatDate(transaction.date)}</span>
           <span>•</span>
           <span>{transaction.paymentMethod}</span>
         </div>
         
-        {/* Category Selector */}
-        <div className="flex items-center justify-between gap-3">
+        {/* Category and AI Status Row - consistent alignment */}
+        <div className="flex items-center justify-between gap-4">
           <div className="flex-1 min-w-0">
             <CategorySelector
               currentCategory={transaction.category}
@@ -117,7 +117,7 @@ const TransactionItem = ({
             />
           </div>
           
-          <div className="shrink-0">
+          <div className="shrink-0 flex items-center">
             <AIStatusIndicator
               aiStatus={transaction.aiStatus || 'manual'}
               aiConfidence={transaction.aiConfidence}
