@@ -21,10 +21,14 @@ export const useTransactions = () => {
           isAISuggested: true,
           aiSuggestedCategory: transaction.category || getSmartCategory(transaction.merchant),
           aiConfidence: confidenceLevel as 'high' | 'medium' | 'low',
-          aiReasoning: getAIReasoning(transaction.merchant, confidenceLevel as 'high' | 'medium' | 'low')
+          aiReasoning: getAIReasoning(transaction.merchant, confidenceLevel as 'high' | 'medium' | 'low'),
+          aiStatus: 'suggested' as const
         };
       }
-      return transaction;
+      return {
+        ...transaction,
+        aiStatus: 'manual' as const
+      };
     });
     setTransactions(transactionsWithAI);
   }, []);
@@ -55,7 +59,7 @@ export const useTransactions = () => {
     setTransactions(prev => 
       prev.map(t => 
         t.id === id 
-          ? { ...t, category, isAISuggested: false }
+          ? { ...t, category, isAISuggested: false, aiStatus: 'manual' }
           : t
       )
     );
@@ -70,7 +74,7 @@ export const useTransactions = () => {
     setTransactions(prev => 
       prev.map(t => 
         t.id === id && t.aiSuggestedCategory
-          ? { ...t, category: t.aiSuggestedCategory, isAISuggested: false }
+          ? { ...t, category: t.aiSuggestedCategory, isAISuggested: false, aiStatus: 'accepted' }
           : t
       )
     );
@@ -86,7 +90,7 @@ export const useTransactions = () => {
     setTransactions(prev => 
       prev.map(t => 
         t.id === id 
-          ? { ...t, isAISuggested: false, aiSuggestedCategory: undefined }
+          ? { ...t, isAISuggested: false, aiSuggestedCategory: undefined, aiStatus: 'rejected' }
           : t
       )
     );

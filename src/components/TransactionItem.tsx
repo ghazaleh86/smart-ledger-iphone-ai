@@ -2,9 +2,7 @@
 import React from 'react';
 import { cn } from '@/lib/utils';
 import CategorySelector from './CategorySelector';
-import AIConfidenceBadge from './AIConfidenceBadge';
-import AIActionButtons from './AIActionButtons';
-import AITooltip from './AITooltip';
+import AIStatusIndicator from './AIStatusIndicator';
 
 interface Transaction {
   id: string;
@@ -18,6 +16,7 @@ interface Transaction {
   aiSuggestedCategory?: string;
   aiConfidence?: 'high' | 'medium' | 'low';
   aiReasoning?: string;
+  aiStatus?: 'suggested' | 'accepted' | 'rejected' | 'manual';
 }
 
 interface TransactionItemProps {
@@ -67,18 +66,19 @@ const TransactionItem = ({
   };
 
   const getAIIndicatorStyles = () => {
-    if (!transaction.isAISuggested || !transaction.aiConfidence) return '';
-    
-    switch (transaction.aiConfidence) {
-      case 'high':
-        return 'border-l-4 border-l-green-400 bg-green-50/30 dark:bg-green-950/20';
-      case 'medium':
-        return 'border-l-4 border-l-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/20';
-      case 'low':
-        return 'border-l-4 border-l-red-400 bg-red-50/30 dark:bg-red-950/20';
-      default:
-        return '';
+    if (transaction.aiStatus === 'suggested' && transaction.aiConfidence) {
+      switch (transaction.aiConfidence) {
+        case 'high':
+          return 'border-l-4 border-l-green-400 bg-green-50/30 dark:bg-green-950/20';
+        case 'medium':
+          return 'border-l-4 border-l-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/20';
+        case 'low':
+          return 'border-l-4 border-l-red-400 bg-red-50/30 dark:bg-red-950/20';
+        default:
+          return '';
+      }
     }
+    return '';
   };
 
   return (
@@ -114,28 +114,26 @@ const TransactionItem = ({
             />
           </div>
           
-          {transaction.isAISuggested && transaction.aiConfidence && (
-            <AITooltip 
-              reasoning={transaction.aiReasoning}
-              confidence={transaction.aiConfidence}
-              category={transaction.aiSuggestedCategory}
-            >
-              <div className="mt-3 flex items-center justify-between">
-                <div className="flex items-center space-x-2">
-                  <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
-                  <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
-                    AI suggested category
-                  </span>
-                  <AIConfidenceBadge confidence={transaction.aiConfidence} />
-                </div>
-                
-                <AIActionButtons
-                  onAccept={handleAccept}
-                  onReject={handleReject}
-                  confidence={transaction.aiConfidence}
-                />
+          {(transaction.aiStatus === 'suggested' || transaction.aiStatus === 'accepted' || transaction.aiStatus === 'rejected') && (
+            <div className="mt-3 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <div className="w-1.5 h-1.5 bg-blue-600 dark:bg-blue-400 rounded-full"></div>
+                <span className="text-xs text-blue-600 dark:text-blue-400 font-medium">
+                  {transaction.aiStatus === 'suggested' ? 'AI suggested category' : 
+                   transaction.aiStatus === 'accepted' ? 'AI category applied' :
+                   'AI suggestion dismissed'}
+                </span>
               </div>
-            </AITooltip>
+              
+              <AIStatusIndicator
+                aiStatus={transaction.aiStatus || 'manual'}
+                aiConfidence={transaction.aiConfidence}
+                aiReasoning={transaction.aiReasoning}
+                aiSuggestedCategory={transaction.aiSuggestedCategory}
+                onAccept={handleAccept}
+                onReject={handleReject}
+              />
+            </div>
           )}
         </div>
       </div>

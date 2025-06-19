@@ -2,9 +2,7 @@
 import React from 'react';
 import { Transaction } from '@/types/financial';
 import CategorySelector from '@/components/CategorySelector';
-import AIConfidenceBadge from '@/components/AIConfidenceBadge';
-import AIActionButtons from '@/components/AIActionButtons';
-import AITooltip from '@/components/AITooltip';
+import AIStatusIndicator from '@/components/AIStatusIndicator';
 import { cn } from '@/lib/utils';
 
 interface TransactionTableProps {
@@ -21,18 +19,19 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
   onRejectAI 
 }) => {
   const getRowStyles = (transaction: Transaction) => {
-    if (!transaction.isAISuggested || !transaction.aiConfidence) return '';
-    
-    switch (transaction.aiConfidence) {
-      case 'high':
-        return 'border-l-4 border-l-green-400 bg-green-50/30 dark:bg-green-950/20';
-      case 'medium':
-        return 'border-l-4 border-l-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/20';
-      case 'low':
-        return 'border-l-4 border-l-red-400 bg-red-50/30 dark:bg-red-950/20';
-      default:
-        return '';
+    if (transaction.aiStatus === 'suggested' && transaction.aiConfidence) {
+      switch (transaction.aiConfidence) {
+        case 'high':
+          return 'border-l-4 border-l-green-400 bg-green-50/30 dark:bg-green-950/20';
+        case 'medium':
+          return 'border-l-4 border-l-yellow-400 bg-yellow-50/30 dark:bg-yellow-950/20';
+        case 'low':
+          return 'border-l-4 border-l-red-400 bg-red-50/30 dark:bg-red-950/20';
+        default:
+          return '';
+      }
     }
+    return '';
   };
 
   return (
@@ -81,24 +80,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                   </div>
                 </div>
                 <div className="col-span-2">
-                  {transaction.isAISuggested && transaction.aiConfidence ? (
-                    <AITooltip 
-                      reasoning={transaction.aiReasoning}
-                      confidence={transaction.aiConfidence}
-                      category={transaction.aiSuggestedCategory}
-                    >
-                      <div className="flex items-center space-x-2">
-                        <AIConfidenceBadge confidence={transaction.aiConfidence} />
-                        <AIActionButtons
-                          onAccept={() => onAcceptAI?.(transaction.id)}
-                          onReject={() => onRejectAI?.(transaction.id)}
-                          confidence={transaction.aiConfidence}
-                        />
-                      </div>
-                    </AITooltip>
-                  ) : (
-                    <span className="text-xs text-muted-foreground">Manual</span>
-                  )}
+                  <AIStatusIndicator
+                    aiStatus={transaction.aiStatus || 'manual'}
+                    aiConfidence={transaction.aiConfidence}
+                    aiReasoning={transaction.aiReasoning}
+                    aiSuggestedCategory={transaction.aiSuggestedCategory}
+                    onAccept={() => onAcceptAI?.(transaction.id)}
+                    onReject={() => onRejectAI?.(transaction.id)}
+                  />
                 </div>
                 <div className="col-span-1 text-right">
                   <span className={`font-semibold text-base ${transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-foreground'}`}>

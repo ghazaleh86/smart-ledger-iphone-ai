@@ -11,6 +11,7 @@ export interface Transaction {
   aiSuggestedCategory?: string;
   aiConfidence?: 'high' | 'medium' | 'low';
   aiReasoning?: string;
+  aiStatus?: 'suggested' | 'accepted' | 'rejected' | 'manual';
   accountId: string;
 }
 
