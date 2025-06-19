@@ -39,7 +39,7 @@ const AIConfidenceBadge: React.FC<AIConfidenceBadgeProps> = ({ confidence, class
     <Badge 
       variant="outline" 
       className={cn(
-        'text-xs font-medium px-2 py-0.5',
+        'text-xs font-medium px-3 py-1.5',
         getConfidenceStyles(),
         className
       )}
