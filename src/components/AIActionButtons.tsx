@@ -23,22 +23,22 @@ const AIActionButtons: React.FC<AIActionButtonsProps> = ({
   }
 
   return (
-    <div className={cn('flex items-center space-x-1', className)}>
+    <div className={cn('flex items-center space-x-2', className)}>
       <Button
         size="sm"
         variant="ghost"
         onClick={onAccept}
-        className="h-6 w-6 p-0 text-green-600 hover:text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:text-green-300 dark:hover:bg-green-950"
+        className="h-8 w-8 p-0 sm:h-6 sm:w-6 text-green-600 hover:text-green-700 hover:bg-green-50 dark:text-green-400 dark:hover:text-green-300 dark:hover:bg-green-950"
       >
-        <Check className="h-3 w-3" />
+        <Check className="h-4 w-4 sm:h-3 sm:w-3" />
       </Button>
       <Button
         size="sm"
         variant="ghost"
         onClick={onReject}
-        className="h-6 w-6 p-0 text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950"
+        className="h-8 w-8 p-0 sm:h-6 sm:w-6 text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-950"
       >
-        <X className="h-3 w-3" />
+        <X className="h-4 w-4 sm:h-3 sm:w-3" />
       </Button>
     </div>
   );
