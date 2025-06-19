@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react';
 import { Transaction } from '@/types/financial';
 import { allTransactions } from '@/data/transactions';
@@ -10,11 +11,11 @@ export const useTransactions = () => {
   // Initialize transactions with AI suggestions and confidence levels
   useEffect(() => {
     const transactionsWithAI = allTransactions.map((transaction, index) => {
-      // Make most transactions AI categorized (instead of just first 5)
-      if (index < 12) {
-        // Distribute confidence levels more evenly
-        const confidenceLevel = index < 3 ? 'high' : 
-                               index < 8 ? 'medium' : 'low';
+      // Make most transactions AI categorized (20 out of 27 total)
+      if (index < 20) {
+        // Distribute confidence levels more realistically
+        const confidenceLevel = index < 6 ? 'high' : 
+                               index < 14 ? 'medium' : 'low';
         
         const aiSuggestedCategory = transaction.category || getSmartCategory(transaction.merchant);
         
@@ -50,12 +51,15 @@ export const useTransactions = () => {
 
   const getSmartCategory = (merchant: string): string => {
     const merchantLower = merchant.toLowerCase();
-    if (merchantLower.includes('grocery') || merchantLower.includes('metro')) return 'Shopping';
-    if (merchantLower.includes('gas') || merchantLower.includes('petro')) return 'Transportation';  
+    if (merchantLower.includes('grocery') || merchantLower.includes('metro') || merchantLower.includes('loblaws')) return 'Shopping';
+    if (merchantLower.includes('gas') || merchantLower.includes('petro') || merchantLower.includes('esso') || merchantLower.includes('shell')) return 'Transportation';  
     if (merchantLower.includes('drug') || merchantLower.includes('pharmacy')) return 'Healthcare';
-    if (merchantLower.includes('restaurant') || merchantLower.includes('coffee')) return 'Meals & Entertainment';
-    if (merchantLower.includes('adobe') || merchantLower.includes('software')) return 'Business';
-    if (merchantLower.includes('home') || merchantLower.includes('depot')) return 'Home & Garden';
+    if (merchantLower.includes('restaurant') || merchantLower.includes('coffee') || merchantLower.includes('starbucks') || merchantLower.includes('subway') || merchantLower.includes('pizza') || merchantLower.includes('mcdonalds') || merchantLower.includes('tim hortons') || merchantLower.includes('harvey')) return 'Meals & Entertainment';
+    if (merchantLower.includes('adobe') || merchantLower.includes('software') || merchantLower.includes('best buy')) return 'Business';
+    if (merchantLower.includes('home') || merchantLower.includes('depot') || merchantLower.includes('rona')) return 'Home & Garden';
+    if (merchantLower.includes('dollarama') || merchantLower.includes('walmart') || merchantLower.includes('costco') || merchantLower.includes('lcbo') || merchantLower.includes('beer store')) return 'Shopping';
+    if (merchantLower.includes('cineplex')) return 'Meals & Entertainment';
+    if (merchantLower.includes('london drugs')) return 'Healthcare';
     return 'Shopping';
   };
 
