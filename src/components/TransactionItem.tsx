@@ -87,42 +87,45 @@ const TransactionItem = ({
       getBorderRadius(),
       getAIIndicatorStyles()
     )}>
-      <div className="flex items-center justify-between">
-        <div className="flex-1">
-          <div className="flex items-center justify-between mb-3">
-            <h3 className="font-medium text-foreground text-base">{transaction.merchant}</h3>
-            <span className={cn(
-              "font-semibold text-base",
-              transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-foreground'
-            )}>
-              {formatAmount(transaction.amount, transaction.type)}
-            </span>
+      <div className="space-y-4">
+        {/* Header: Merchant and Amount */}
+        <div className="flex items-start justify-between">
+          <h3 className="font-medium text-foreground text-base pr-4">{transaction.merchant}</h3>
+          <span className={cn(
+            "font-semibold text-base shrink-0",
+            transaction.type === 'income' ? 'text-green-600 dark:text-green-400' : 'text-foreground'
+          )}>
+            {formatAmount(transaction.amount, transaction.type)}
+          </span>
+        </div>
+        
+        {/* Transaction Details */}
+        <div className="flex items-center space-x-3 text-sm text-muted-foreground">
+          <span>{formatDate(transaction.date)}</span>
+          <span>•</span>
+          <span>{transaction.paymentMethod}</span>
+        </div>
+        
+        {/* Category Selector */}
+        <div className="flex items-center justify-between gap-3">
+          <div className="flex-1 min-w-0">
+            <CategorySelector
+              currentCategory={transaction.category}
+              aiSuggestedCategory={transaction.aiSuggestedCategory}
+              isAISuggested={transaction.isAISuggested}
+              onCategoryChange={handleCategoryChange}
+            />
           </div>
           
-          <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-3">
-              <span className="text-sm text-muted-foreground">{formatDate(transaction.date)}</span>
-              <span className="text-sm text-muted-foreground">•</span>
-              <span className="text-sm text-muted-foreground">{transaction.paymentMethod}</span>
-            </div>
-            
-            <div className="flex items-center space-x-2">
-              <CategorySelector
-                currentCategory={transaction.category}
-                aiSuggestedCategory={transaction.aiSuggestedCategory}
-                isAISuggested={transaction.isAISuggested}
-                onCategoryChange={handleCategoryChange}
-              />
-              
-              <AIStatusIndicator
-                aiStatus={transaction.aiStatus || 'manual'}
-                aiConfidence={transaction.aiConfidence}
-                aiReasoning={transaction.aiReasoning}
-                aiSuggestedCategory={transaction.aiSuggestedCategory}
-                onAccept={handleAccept}
-                onReject={handleReject}
-              />
-            </div>
+          <div className="shrink-0">
+            <AIStatusIndicator
+              aiStatus={transaction.aiStatus || 'manual'}
+              aiConfidence={transaction.aiConfidence}
+              aiReasoning={transaction.aiReasoning}
+              aiSuggestedCategory={transaction.aiSuggestedCategory}
+              onAccept={handleAccept}
+              onReject={handleReject}
+            />
           </div>
         </div>
       </div>
