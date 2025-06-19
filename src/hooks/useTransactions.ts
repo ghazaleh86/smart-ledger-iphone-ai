@@ -10,10 +10,11 @@ export const useTransactions = () => {
   // Initialize transactions with AI suggestions and confidence levels
   useEffect(() => {
     const transactionsWithAI = allTransactions.map((transaction, index) => {
-      if (index < 5) {
-        // Assign different confidence levels for variety
-        const confidenceLevel = index === 0 || index === 1 ? 'high' : 
-                               index === 2 || index === 3 ? 'medium' : 'low';
+      // Make most transactions AI categorized (instead of just first 5)
+      if (index < 12) {
+        // Distribute confidence levels more evenly
+        const confidenceLevel = index < 3 ? 'high' : 
+                               index < 8 ? 'medium' : 'low';
         
         const aiSuggestedCategory = transaction.category || getSmartCategory(transaction.merchant);
         
@@ -53,6 +54,8 @@ export const useTransactions = () => {
     if (merchantLower.includes('gas') || merchantLower.includes('petro')) return 'Transportation';  
     if (merchantLower.includes('drug') || merchantLower.includes('pharmacy')) return 'Healthcare';
     if (merchantLower.includes('restaurant') || merchantLower.includes('coffee')) return 'Meals & Entertainment';
+    if (merchantLower.includes('adobe') || merchantLower.includes('software')) return 'Business';
+    if (merchantLower.includes('home') || merchantLower.includes('depot')) return 'Home & Garden';
     return 'Shopping';
   };
 
