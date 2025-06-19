@@ -26,11 +26,14 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
   const selectedAccountData = accounts.find(acc => acc.id === selectedAccount);
 
   const insights = [
-    "🎯 You're on track to save $500 more than last month!",
-    "💰 Emergency fund goal is 67% complete - keep going!",
-    "📈 Savings rate increased by 15% this quarter",
-    "🏆 You've saved $1,200 toward your vacation goal",
-    "✨ On pace to reach your annual savings target early!"
+    "📈 Monthly revenue up 18% - your marketing efforts are paying off!",
+    "💼 Operating expenses down 12% from last quarter - great cost management!",
+    "🎯 You're ahead of your quarterly cash flow targets by $15,000",
+    "⚡ Invoice processing time improved by 23% with recent workflow changes",
+    "🏆 Customer acquisition costs decreased 8% while retention increased",
+    "💰 Your profit margins are 15% above industry average - excellent work!",
+    "📊 Accounts receivable aging improved significantly this month",
+    "🚀 Revenue per customer increased 22% compared to last year"
   ];
 
   const randomInsight = insights[Math.floor(Math.random() * insights.length)];
@@ -63,7 +66,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
             ))}
           </SelectContent>
         </Select>
-        <div className="text-xs text-muted-foreground mb-2 mt-8 uppercase tracking-wide font-medium">NET BALANCE</div>
+        <div className="text-xs text-muted-foreground mb-2 mt-8 uppercase tracking-wide font-medium">ACCOUNT BALANCE</div>
         <div className="text-3xl font-semibold text-foreground">
           ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
         </div>
@@ -111,7 +114,7 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
         </div>
         
         <div className="text-right">
-          <div className="text-xs text-muted-foreground mb-2 uppercase tracking-wide font-medium">NET BALANCE</div>
+          <div className="text-xs text-muted-foreground mb-2 uppercase tracking-wide font-medium">ACCOUNT BALANCE</div>
           <div className="text-3xl font-semibold text-foreground">
             ${selectedAccountData?.balance.toLocaleString('en-US', { minimumFractionDigits: 2 })}
           </div>
