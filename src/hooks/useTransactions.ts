@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Transaction } from '@/types/financial';
 import { allTransactions } from '@/data/transactions';
@@ -16,10 +15,25 @@ export const useTransactions = () => {
         const confidenceLevel = index === 0 || index === 1 ? 'high' : 
                                index === 2 || index === 3 ? 'medium' : 'low';
         
+        const aiSuggestedCategory = transaction.category || getSmartCategory(transaction.merchant);
+        
+        // Auto-apply high confidence suggestions
+        if (confidenceLevel === 'high') {
+          return {
+            ...transaction,
+            category: aiSuggestedCategory,
+            isAISuggested: false,
+            aiSuggestedCategory,
+            aiConfidence: confidenceLevel as 'high' | 'medium' | 'low',
+            aiReasoning: getAIReasoning(transaction.merchant, confidenceLevel as 'high' | 'medium' | 'low'),
+            aiStatus: 'accepted' as const
+          };
+        }
+        
         return {
           ...transaction,
           isAISuggested: true,
-          aiSuggestedCategory: transaction.category || getSmartCategory(transaction.merchant),
+          aiSuggestedCategory,
           aiConfidence: confidenceLevel as 'high' | 'medium' | 'low',
           aiReasoning: getAIReasoning(transaction.merchant, confidenceLevel as 'high' | 'medium' | 'low'),
           aiStatus: 'suggested' as const
