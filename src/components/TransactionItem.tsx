@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import CategorySelector from './CategorySelector';
@@ -106,27 +105,26 @@ const TransactionItem = ({
           <span>{transaction.paymentMethod}</span>
         </div>
         
-        {/* Category and AI Status Row - consistent alignment */}
-        <div className="flex items-center justify-between gap-4">
-          <div className="flex-1 min-w-0">
-            <CategorySelector
-              currentCategory={transaction.category}
-              aiSuggestedCategory={transaction.aiSuggestedCategory}
-              isAISuggested={transaction.isAISuggested}
-              onCategoryChange={handleCategoryChange}
-            />
-          </div>
-          
-          <div className="shrink-0 flex items-center">
-            <AIStatusIndicator
-              aiStatus={transaction.aiStatus || 'manual'}
-              aiConfidence={transaction.aiConfidence}
-              aiReasoning={transaction.aiReasoning}
-              aiSuggestedCategory={transaction.aiSuggestedCategory}
-              onAccept={handleAccept}
-              onReject={handleReject}
-            />
-          </div>
+        {/* Category Selector - full width */}
+        <div className="w-full">
+          <CategorySelector
+            currentCategory={transaction.category}
+            aiSuggestedCategory={transaction.aiSuggestedCategory}
+            isAISuggested={transaction.isAISuggested}
+            onCategoryChange={handleCategoryChange}
+          />
+        </div>
+        
+        {/* AI Status Row - separate row to prevent overlapping */}
+        <div className="flex items-center justify-end">
+          <AIStatusIndicator
+            aiStatus={transaction.aiStatus || 'manual'}
+            aiConfidence={transaction.aiConfidence}
+            aiReasoning={transaction.aiReasoning}
+            aiSuggestedCategory={transaction.aiSuggestedCategory}
+            onAccept={handleAccept}
+            onReject={handleReject}
+          />
         </div>
       </div>
     </div>
