@@ -39,12 +39,12 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
       <div className="bg-card shadow-sm border border-border rounded-lg overflow-hidden">
         {/* Desktop Header */}
         <div className="bg-muted px-8 py-6 border-b border-border">
-          <div className="grid grid-cols-12 gap-4 text-sm font-semibold text-muted-foreground">
+          <div className="grid grid-cols-12 lg:grid-cols-12 gap-4 text-sm font-semibold text-muted-foreground">
             <div className="col-span-1">Date</div>
-            <div className="col-span-3">Description</div>
-            <div className="col-span-2">Category</div>
-            <div className="col-span-3">Payment Method</div>
-            <div className="col-span-2">AI Status</div>
+            <div className="col-span-3 lg:col-span-3">Description</div>
+            <div className="col-span-3 lg:col-span-2">Category</div>
+            <div className="col-span-2 lg:col-span-3">Payment Method</div>
+            <div className="col-span-2 lg:col-span-2">AI Status</div>
             <div className="col-span-1 text-right">Amount</div>
           </div>
         </div>
@@ -59,14 +59,14 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                 getRowStyles(transaction)
               )}
             >
-              <div className="grid grid-cols-12 gap-4 items-center">
+              <div className="grid grid-cols-12 lg:grid-cols-12 gap-4 items-center">
                 <div className="col-span-1 text-sm text-muted-foreground">
                   {new Date(transaction.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-3 lg:col-span-3">
                   <div className="font-medium text-foreground truncate pr-2">{transaction.merchant}</div>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-3 lg:col-span-2">
                   <CategorySelector
                     currentCategory={transaction.category}
                     aiSuggestedCategory={transaction.aiSuggestedCategory}
@@ -74,12 +74,12 @@ const TransactionTable: React.FC<TransactionTableProps> = ({
                     onCategoryChange={(category) => onCategorize(transaction.id, category)}
                   />
                 </div>
-                <div className="col-span-3">
+                <div className="col-span-2 lg:col-span-3">
                   <div className="text-sm text-muted-foreground truncate pr-2">
                     {transaction.paymentMethod}
                   </div>
                 </div>
-                <div className="col-span-2">
+                <div className="col-span-2 lg:col-span-2">
                   <AIStatusIndicator
                     aiStatus={transaction.aiStatus || 'manual'}
                     aiConfidence={transaction.aiConfidence}
