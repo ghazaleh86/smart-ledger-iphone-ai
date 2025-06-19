@@ -106,8 +106,8 @@ const AccountSelector = ({ accounts, selectedAccount, onAccountChange }: Account
               </SelectContent>
             </Select>
           </div>
-          <div className="text-sm text-foreground font-medium max-w-md">
-            <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950/30 dark:via-purple-950/30 dark:to-pink-950/30 border border-blue-200/50 dark:border-blue-800/30 rounded-lg px-4 py-3 shadow-sm">
+          <div className="text-sm text-foreground font-medium max-w-2xl">
+            <div className="bg-gradient-to-r from-blue-50 via-purple-50 to-pink-50 dark:from-blue-950/30 dark:via-purple-950/30 dark:to-pink-950/30 border border-blue-200/50 dark:border-blue-800/30 rounded-lg px-4 py-3 shadow-sm whitespace-nowrap">
               {randomInsight}
             </div>
           </div>
