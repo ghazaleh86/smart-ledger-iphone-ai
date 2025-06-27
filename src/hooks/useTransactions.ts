@@ -42,9 +42,17 @@ export const useTransactions = () => {
           aiStatus: 'suggested' as const
         };
       }
+      
+      // For remaining transactions (indices 20-26), also add AI suggestions
+      const aiSuggestedCategory = getSmartCategory(transaction.merchant);
       return {
         ...transaction,
-        aiStatus: 'manual' as const
+        category: undefined, // Clear any existing category so AI suggestion shows
+        isAISuggested: true,
+        aiSuggestedCategory,
+        aiConfidence: 'low' as 'high' | 'medium' | 'low',
+        aiReasoning: getAIReasoning(transaction.merchant, 'low'),
+        aiStatus: 'suggested' as const
       };
     });
     setTransactions(transactionsWithAI);
