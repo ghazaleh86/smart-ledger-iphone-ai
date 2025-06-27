@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from 'react';
 import { Transaction } from '@/types/financial';
 import { allTransactions } from '@/data/transactions';
@@ -32,8 +31,10 @@ export const useTransactions = () => {
           };
         }
         
+        // For medium and low confidence, show as suggestions
         return {
           ...transaction,
+          category: undefined, // Clear any existing category so AI suggestion shows
           isAISuggested: true,
           aiSuggestedCategory,
           aiConfidence: confidenceLevel as 'high' | 'medium' | 'low',
