@@ -1,4 +1,3 @@
-
 import React from 'react';
 import {
   Select,
@@ -49,7 +48,7 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
     return colors[category || ''] || 'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700';
   };
 
-  // Determine what to display and which styles to use
+  // Determine what to display - prioritize currentCategory, then aiSuggestedCategory if AI suggested
   const displayCategory = currentCategory || (isAISuggested ? aiSuggestedCategory : undefined);
   const categoryToStyle = displayCategory;
   
@@ -65,13 +64,15 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
     <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
       <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(categoryToStyle)} ${getAISuggestedStyles()} hover:opacity-80 focus:ring-1 focus:ring-ring w-[140px] min-w-[140px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
         <SelectValue placeholder="Categorize">
-          {displayCategory && (
+          {displayCategory ? (
             <span className="flex items-center">
               {displayCategory}
               {isAISuggested && !currentCategory && (
                 <span className="ml-1 text-blue-600 dark:text-blue-400 text-xs">✨</span>
               )}
             </span>
+          ) : (
+            "Categorize"
           )}
         </SelectValue>
       </SelectTrigger>
