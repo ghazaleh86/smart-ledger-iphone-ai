@@ -16,7 +16,7 @@ export const useTransactions = () => {
         const confidenceLevel = index < 6 ? 'high' : 
                                index < 14 ? 'medium' : 'low';
         
-        const aiSuggestedCategory = transaction.category || getSmartCategory(transaction.merchant);
+        const aiSuggestedCategory = getSmartCategory(transaction.merchant);
         
         // Auto-apply high confidence suggestions
         if (confidenceLevel === 'high') {
@@ -32,7 +32,7 @@ export const useTransactions = () => {
         }
         
         // For medium and low confidence, show as suggestions
-        return {
+        const processedTransaction = {
           ...transaction,
           category: undefined, // Clear any existing category so AI suggestion shows
           isAISuggested: true,
@@ -41,11 +41,23 @@ export const useTransactions = () => {
           aiReasoning: getAIReasoning(transaction.merchant, confidenceLevel as 'high' | 'medium' | 'low'),
           aiStatus: 'suggested' as const
         };
+        
+        // Debug logging for problematic transactions
+        if (transaction.merchant.includes('METRO') || transaction.merchant.includes('TIM HORTONS') || transaction.merchant.includes('PETRO')) {
+          console.log(`Processing ${transaction.merchant}:`, {
+            aiSuggestedCategory,
+            isAISuggested: true,
+            confidence: confidenceLevel,
+            originalCategory: transaction.category
+          });
+        }
+        
+        return processedTransaction;
       }
       
       // For remaining transactions (indices 20-26), also add AI suggestions
       const aiSuggestedCategory = getSmartCategory(transaction.merchant);
-      return {
+      const processedTransaction = {
         ...transaction,
         category: undefined, // Clear any existing category so AI suggestion shows
         isAISuggested: true,
@@ -54,8 +66,30 @@ export const useTransactions = () => {
         aiReasoning: getAIReasoning(transaction.merchant, 'low'),
         aiStatus: 'suggested' as const
       };
+      
+      // Debug logging for problematic transactions
+      if (transaction.merchant.includes('METRO') || transaction.merchant.includes('TIM HORTONS') || transaction.merchant.includes('PETRO')) {
+        console.log(`Processing ${transaction.merchant}:`, {
+          aiSuggestedCategory,
+          isAISuggested: true,
+          confidence: 'low',
+          originalCategory: transaction.category
+        });
+      }
+      
+      return processedTransaction;
     });
+    
     setTransactions(transactionsWithAI);
+    
+    // Log all transactions for debugging
+    console.log('All processed transactions:', transactionsWithAI.map(t => ({
+      merchant: t.merchant,
+      category: t.category,
+      aiSuggestedCategory: t.aiSuggestedCategory,
+      isAISuggested: t.isAISuggested,
+      aiConfidence: t.aiConfidence
+    })));
   }, []);
 
   const getSmartCategory = (merchant: string): string => {

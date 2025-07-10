@@ -31,6 +31,16 @@ const categories = [
 ];
 
 const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested, onCategoryChange }: CategorySelectorProps) => {
+  // Debug logging for problematic cases
+  if (isAISuggested && !currentCategory && aiSuggestedCategory) {
+    console.log('CategorySelector debug:', {
+      currentCategory,
+      aiSuggestedCategory,
+      isAISuggested,
+      shouldShowAI: true
+    });
+  }
+
   const getCategoryColor = (category?: string) => {
     const colors: Record<string, string> = {
       'Meals & Entertainment': 'bg-orange-100 dark:bg-orange-950/50 text-orange-800 dark:text-orange-200 border-orange-300 dark:border-orange-800',
@@ -68,7 +78,7 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
           {displayCategory ? (
             <span className="flex items-center">
               {displayCategory}
-              {isAISuggested && !currentCategory && (
+              {isAISuggested && !currentCategory && aiSuggestedCategory && (
                 <span className="ml-1 text-blue-600 dark:text-blue-400 text-xs">✨</span>
               )}
             </span>
