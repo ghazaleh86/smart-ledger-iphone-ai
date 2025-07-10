@@ -1,3 +1,4 @@
+
 import React from 'react';
 import {
   Select,
@@ -48,8 +49,8 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
     return colors[category || ''] || 'bg-gray-100 dark:bg-gray-800/50 text-gray-700 dark:text-gray-300 border-gray-300 dark:border-gray-700';
   };
 
-  // Determine what to display - prioritize currentCategory, then aiSuggestedCategory if AI suggested
-  const displayCategory = currentCategory || (isAISuggested ? aiSuggestedCategory : undefined);
+  // Display the current category if set, otherwise show AI suggestion if available
+  const displayCategory = currentCategory || aiSuggestedCategory;
   const categoryToStyle = displayCategory;
   
   // Add AI suggestion styling if this is an AI suggested category that hasn't been manually set
