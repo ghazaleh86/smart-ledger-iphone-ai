@@ -71,8 +71,11 @@ const CategorySelector = ({ currentCategory, aiSuggestedCategory, isAISuggested,
     return '';
   };
 
+  // Use the AI suggested category as the Select value when no manual category is set
+  const selectValue = currentCategory || (isAISuggested && aiSuggestedCategory ? aiSuggestedCategory : '') || '';
+
   return (
-    <Select value={currentCategory || ''} onValueChange={onCategoryChange}>
+    <Select value={selectValue} onValueChange={onCategoryChange}>
       <SelectTrigger className={`px-3 py-1.5 rounded-md text-sm font-medium border ${getCategoryColor(categoryToStyle)} ${getAISuggestedStyles()} hover:opacity-80 focus:ring-1 focus:ring-ring w-[140px] min-w-[140px] flex-shrink-0 !justify-start [&>span]:text-left [&>span]:w-full [&>span]:justify-start`}>
         <SelectValue placeholder="Categorize">
           {displayCategory ? (
